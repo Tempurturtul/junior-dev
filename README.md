@@ -6,4 +6,4 @@ My home site, meant to contain the following:
 - About section to provide insight into my background.
 - Blog to share my confused ramblings.
 
-Built with simple unminified HTML, CSS, and JavaScript for your source viewing pleasure.
+Built with clean and simple HTML, CSS, and JavaScript.
