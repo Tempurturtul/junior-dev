@@ -2,15 +2,15 @@
   "private": true,
   "devDependencies": {
     "browser-sync": "^2.13.0",
-    "eslint": "^2.11.1",
-    "eslint-config-google": "^0.5.0",
-    "stylelint": "^6.5.1",
-    "stylelint-config-standard": "^8.0.0",
+    "eslint": "^2.13.0",
+    "eslint-config-google": "^0.6.0",
+    "stylelint": "^6.6.0",
+    "stylelint-config-standard": "^9.0.0",
     "watch": "^0.18.0"
   },
   "scripts": {
-    "lint:js": "eslint \"src/**/*.js\"",
-    "lint:css": "stylelint \"src/**/*.css\"",
+    "lint:js": "eslint \"src/**/*.js\"; exit 0",
+    "lint:css": "stylelint \"src/**/*.css\"; exit 0",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:watch": "watch 'npm run lint' src",
     "serve": "browser-sync start --server 'src' --files 'src'",
@@ -21,6 +21,7 @@
     "extends": "google"
   },
   "stylelint": {
-    "extends": "stylelint-config-standard"
+    "extends": "stylelint-config-standard",
+    "ignoreFiles": "src/styles/normalize.css"
   }
 }
