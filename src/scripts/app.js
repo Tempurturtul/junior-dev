@@ -9,13 +9,161 @@
 
   function init() {
     var mainController = new app.controllers.MainController();
-    window.addEventListener('hashchange', mainController.setView(window.location.hash));
+    mainController.init();
   }
 })();
 
 /******************************************************************************
 * STAGING (Will be moved to separate files.)
 ******************************************************************************/
+
+// Router.js
+(function() {
+  'use strict';
+
+  var app = window.app = window.app || {};
+  app.Router = Router;
+
+  /**
+   * A minimal hash router.
+   */
+  function Router() {
+    var self = this;
+    var routes = [];
+    var suspended = true;
+
+    self.registerRoute = registerRoute;
+    self.unregisterRoute = unregisterRoute;
+    self.suspend = suspend;
+    self.unsuspend = unsuspend;
+    self.start = start;
+
+
+    /***************************************
+    * Exposed methods.
+    ***************************************/
+
+    function registerRoute(route, handler) {}
+
+    function unregisterRoute(route) {}
+
+    function suspend() {}
+
+    function unsuspend(andCheckRoute) {}
+
+    function start() {
+      unsuspend(true);
+    }
+
+    /***************************************
+    * Private methods.
+    ***************************************/
+
+    /**
+     * Parses a location hash to retrieve route and params properties, where
+     * params is an object with key/value pairs extracted from a query string.
+     * @param {string} locationHash - The location hash to parse.
+     * @returns {object} - The parsed results, containing `route` and
+     * `params` properties.
+     */
+    function parseLocationHash(locationHash) {
+      // A regular expression capturing the route and query string.
+      // Example:
+      //   #/(route/somewhere)(?foo=1)
+      var re = /#\/?([^\?\n]+)(\?.+)?/;
+      var results = re.exec(locationHash) || [];
+
+      var route = results[1] || '';
+      var queryStr = results[2] || '';
+      var params = parseQueryStr(queryStr);
+
+      return {
+        route: route,
+        params: params
+      };
+    }
+
+    /**
+     * Parses a query string to retrieve keys and values. Comma-separated
+     * values are concatenated into arrays, and keys with missing values are
+     * assigned the null value.
+     * @param {string} str - The query string to parse.
+     * @returns {object} - The parsed results, containing a key/value pair for
+     * each defined key.
+     */
+    function parseQueryStr(str) {
+      // Example query string format:
+      //    ?tags=js&dates=010116,311216
+
+      // Enforce the argument type.
+      if (typeof str !== 'string') {
+        throw new TypeError('The first argument to _parseQueryStr must be a ' +
+                            'string.');
+      }
+
+      var parsed = str;
+
+      // Trim the preceding '?' if present.
+      if (parsed[0] === '?') {
+        parsed = parsed.slice(1);
+      }
+
+      // Split into an array of key/value pairs.
+      parsed = parsed.split('&');
+
+      // Transform the array.
+      parsed = parsed
+        // Filter out empty entries. (Handles the edge-cases: '?foo=bar&&baz=qux' and '?'.)
+        .filter(function(pair) {
+          // (I'm being explicit here; could just return pair.)
+          return pair.length !== 0;
+        })
+        // Reduce to an object with each pair string as a key/value pair.
+        .reduce(function(acc, curr) {
+          // Split the current pair string into a key and value.
+          curr = curr.split('=');
+          var key = curr[0];
+          var val = curr[1] || null;
+
+          // If the value contains comma separated entries...
+          if (/,/.test(val)) {
+            // Convert the value to an array.
+            val = val.split(',');
+          }
+
+          // Handle duplicate keys.
+          if (acc[key]) {
+            var prevVal = acc[key];
+
+            // If both values are arrays, concatenate them.
+            if (Array.isArray(prevVal) && Array.isArray(val)) {
+              val = prevVal.concat(val);
+            }
+            // If one value is an array, append or prepend to the array.
+            else if (Array.isArray(prevVal) && !Array.isArray(val)) {
+              val = prevVal.push(val);
+            }
+            else if (!Array.isArray(prevVal) && Array.isArray(val)) {
+              val = val.unshift(prevVal);
+            }
+            // If neither are arrays, create a new array.
+            else {
+              val = [prevVal, val];
+            }
+          }
+
+          // Add the key/value pair to the accumulated results.
+          acc[key] = val;
+
+          return acc;
+        }, {});
+
+      return parsed;
+    }
+
+  }
+})();
+
 
 /***********************
 * Models
@@ -73,16 +221,31 @@
     var blogController;
     var homeController;
     var portfolioController;
-    // Defined routes. (A preceding colon indicates a key/value pair.)
+    // Router, assigned on initialization.
+    var router;
+    // Routes to define. (A preceding colon indicates a key/value pair to be passed as a parameter.)
     var routes = [
-      '',
-      'blog',
-      'blog/:post',
-      'home',
-      'portfolio'
+      {
+        route: '',
+        handler: homeController.setView
+      },
+      {
+        route: 'blog',
+        handler: blogController.setView
+      },
+      {
+        route: 'blog/:post',
+        handler: blogController.setView
+      },
+      {
+        route: 'home',
+        handler: homeController.setView
+      },
+      {
+        route: 'portfolio',
+        handler: portfolioController.setView
+      }
     ];
-
-    self.setView = setView;
 
     init();
 
@@ -91,13 +254,6 @@
     * Exposed methods.
     ***************************************/
 
-    /**
-     * Sets the view based on the route and query string in the location hash.
-     * @param {string} locationHash - The location hash used to set the view.
-     */
-    function setView(locationHash) {
-
-    }
 
 
     /***************************************
@@ -111,85 +267,15 @@
       blogController = new app.controllers.blogController(self);
       homeController = new app.controllers.homeController(self);
       portfolioController = new app.controllers.portfolioController(self);
-    }
+      router = new app.Router();
 
-    /**
-     * Parses a query string to retrieve keys and values. Comma-separated
-     * values are concatenated into arrays, and keys with missing values are
-     * assigned the null value.
-     * @param {string} str - The query string to parse.
-     * @returns {object} - The parsed results, containing a key/value pair for
-     * each defined key.
-     */
-    function parseQueryStr(str) {
-      // Example query string format:
-      //    ?tags=js&dates=010116,311216
+      // Register the routes.
+      routes.forEach(function(entry) {
+        router.registerRoute(entry.route, entry.handler);
+      });
 
-      // Enforce the argument type.
-      if (typeof str !== 'string') {
-        throw new TypeError('The first argument to _parseQueryStr must be a ' +
-                            'string.');
-      }
-
-      var result = str;
-
-      // Trim the preceding '?' if present.
-      if (result[0] === '?') {
-        result = result.slice(1);
-      }
-
-      // Split into an array of key/value pairs.
-      result = result.split('&');
-
-      // Transform the array.
-      result = result
-        // Filter out empty entries. (Handles the edge-cases: '?foo=bar&&baz=qux' and '?'.)
-        .filter(function(pair) {
-          // (I'm being explicit here; could just return pair.)
-          return pair.length !== 0;
-        })
-        // Map the strings to objects.
-        .map(function(pair) {
-          var obj = {};
-
-          pair = pair.split('=');
-          var key = pair[0];
-          var value = pair[1] || null;
-
-          // If value contains comma separated entries...
-          if (/,/.test(value)) {
-            // Convert value to an array.
-            value = value.split(',');
-          }
-
-          obj[key] = value;
-
-          return obj;
-        });
-
-      return result;
-    }
-
-    /**
-     * Parses a location hash to retrieve route and query string properties.
-     * @param {string} locationHash - The location hash to parse.
-     * @returns {object} - The parsed results, containing `route` and
-     * `queryStr` properties.
-     */
-    function parseLocationHash(locationHash) {
-      // A regular expression capturing the route and query string.
-      // Example:
-      //   #/(route/somewhere)(?foo=1)
-      var re = /#\/?([^\?\n]+)(\?.+)?/;
-      var results = re.exec(locationHash) || [];
-
-      var route = results[1] || '';
-      var queryStr = results[2] || '';
-
-      return {
-        route: route,
-        queryStr: queryStr
-      };
+      // Start the router (handles the current route).
+      router.start();
     }
 
   }

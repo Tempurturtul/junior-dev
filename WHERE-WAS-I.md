@@ -1,5 +1,5 @@
 # Where Was I?
 
-Just finished defining routes in the main controller.
+Moved existing router logic into `app.Router`.
 
-Next up is mapping routes to methods.
+Considering moving router initialization currently in main controller.
