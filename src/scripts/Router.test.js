@@ -18,8 +18,6 @@ function tests(err, window) {
     throw new Error('Virtual DOM creation failed.');
   }
 
-  var document = window.document;
-
   test('Router\'s global variables', function(t) {
     t.ok(window.app, 'There should be a global app variable.');
     t.ok(window.app.Router, 'There should be a global app.Router variable.');
@@ -27,27 +25,22 @@ function tests(err, window) {
   });
 
   test.skip('Router.registerRoute', function(t) {
-
     t.end();
   });
 
   test.skip('Router.unregisterRoute', function(t) {
-
     t.end();
   });
 
   test.skip('Router.suspendRoute', function(t) {
-
     t.end();
   });
 
   test.skip('Router.unsuspendRoute', function(t) {
-
     t.end();
   });
 
   test.skip('Router.start', function(t) {
-
     t.end();
   });
 
