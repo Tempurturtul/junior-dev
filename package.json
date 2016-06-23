@@ -4,8 +4,11 @@
     "browser-sync": "^2.13.0",
     "eslint": "^2.13.0",
     "eslint-config-google": "^0.6.0",
+    "faucet": "0.0.1",
+    "jsdom": "^9.2.1",
     "stylelint": "^6.6.0",
     "stylelint-config-standard": "^9.0.0",
+    "tape": "^4.6.0",
     "watch": "^0.18.0"
   },
   "scripts": {
@@ -14,7 +17,8 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:watch": "watch 'npm run lint' src",
     "serve": "browser-sync start --server 'src' --files 'src'",
-    "prestart": "npm run lint",
+    "test": "tape 'src/**/*.test.js' | faucet; exit 0",
+    "test:watch": "watch 'npm run test' src",
     "start": "npm run lint:watch & npm run serve"
   },
   "eslintConfig": {
