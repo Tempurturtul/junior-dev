@@ -1,5 +1,5 @@
 # Where Was I?
 
-Moved existing router logic into `app.Router`.
+Just moved Router to its own file.
 
-Considering moving router initialization currently in main controller.
+Poking around in `introduce-tests` branch.
