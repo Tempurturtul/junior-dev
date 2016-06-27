@@ -1,3 +1,3 @@
 # Where Was I?
 
-Just moved Router to its own file and started tests.
+Just finished up Router logic. Time to test.
