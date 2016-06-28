@@ -14,8 +14,8 @@
     var routes = [];
     var suspended = true;
 
-    self.registerRoute = registerRoute;
-    self.unregisterRoute = unregisterRoute;
+    self.register = register;
+    self.unregister = unregister;
     self.suspend = suspend;
     self.unsuspend = unsuspend;
     self.start = start;
@@ -37,7 +37,7 @@
      * @param {function} handler - The method invoked when the route is
      * visited.
      */
-    function registerRoute(route, handler) {
+    function register(route, handler) {
       // Check that a valid route was passed.
       if (route[0] === '#' ||
           route[0] === '/' ||
@@ -56,7 +56,7 @@
       // Register the route.
       routes.push({
         route: route,
-        hander: handler
+        handler: handler
       });
     }
 
@@ -64,7 +64,7 @@
      * Unregisters the route.
      * @param {string} route - The route to unregister.
      */
-    function unregisterRoute(route) {
+    function unregister(route) {
       routes = routes.filter(function(entry) {
         return entry.route !== route;
       });
@@ -91,10 +91,12 @@
     }
 
     /**
-     * Starts the router. An alias for Router.unsuspend(true).
+     * An alias for Router.unsuspend.
+     * @param {bool} [andCheckRoute] - Whether or not to check the current
+     * route.
      */
-    function start() {
-      unsuspend(true);
+    function start(andCheckRoute) {
+      unsuspend(andCheckRoute);
     }
 
     /*
@@ -107,7 +109,32 @@
      * Initializes the router.
      */
     function init() {
-      window.addEventListener('hashchange', handleRoute);
+      if ('onhashchange' in window) {
+        window.addEventListener('hashchange', handleRoute);
+      } else {
+        // Fallback for hashchange event.
+        // Credit: https://developer.mozilla.org/en-US/docs/Web/Events/hashchange
+        var oldURL = window.location.href;
+        var oldHash = window.location.hash;
+
+        window.setInterval(function() {
+          var newURL = location.href;
+          var newHash = location.hash;
+
+          if (newHash !== oldHash) {
+            var e = {
+              type: 'hashchange',
+              oldURL: oldURL,
+              newURL: newURL
+            };
+
+            handleRoute(e);
+
+            oldURL = newURL;
+            oldHash = newHash;
+          }
+        }, 100);
+      }
     }
 
     /**
@@ -136,7 +163,7 @@
       // For each registered route...
       for (i = 0; i < len; i++) {
         // Check for a match while considering route parameterization.
-        matchData = routeMatch(routes[i], routeData.route);
+        matchData = routeMatch(routes[i].route, routeData.route);
         // If there is a match, add it to the matches array.
         if (matchData) {
           // Store and update the parameters for this route with any

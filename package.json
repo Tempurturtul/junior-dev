@@ -5,6 +5,7 @@
     "eslint": "^2.13.0",
     "eslint-config-google": "^0.6.0",
     "faucet": "0.0.1",
+    "fs": "0.0.2",
     "jsdom": "^9.2.1",
     "stylelint": "^6.6.0",
     "stylelint-config-standard": "^9.0.0",
