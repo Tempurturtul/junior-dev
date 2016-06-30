@@ -1,3 +1,5 @@
 # Where Was I?
 
-Just finished router tests.
+Finished router and model tests.
+
+Time for some more functionality.
