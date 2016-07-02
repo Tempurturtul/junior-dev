@@ -20,18 +20,18 @@ test('portfolio pieces only require a title', function(t) {
   .then(function(window) {
     var data = {
       title: 'A title.'
-    }
-    var piece;
+    };
+    var error = null;
 
     try {
-      piece = new window.app.models.PortfolioPiece(data);
-    } catch(err) {
-      t.fail('failed to create a portfolio piece with only a title');
-      window.close();
-      t.end();
+      // eslint-disable-next-line
+      new window.app.models.PortfolioPiece(data);
+    } catch (err) {
+      error = err;
     }
 
-    t.pass('successfully created a portfolio piece with minimal data');
+    t.equal(error, null,
+      'successfully created a portfolio piece with minimal data');
     window.close();
     t.end();
   });
@@ -46,7 +46,7 @@ test('portfolio pieces can contain optional data', function(t) {
       sourceURL: 'src/url',
       images: [],
       description: 'A description.'
-    }
+    };
     var piece = new window.app.models.PortfolioPiece(data);
 
     t.equal(piece.liveURL, 'live/url', 'contains a live url');

@@ -85,7 +85,7 @@ test('router unregisters routes', function(t) {
     .then(function() {
       router.unregister('blog');
       return navigateAround(window, [
-        '/#/blog',
+        '/#/blog'
       ]);
     })
     .then(function() {
@@ -141,14 +141,14 @@ test('router suspends/unsuspends when instructed', function(t) {
       // Suspend the router.
       router.suspend();
       return navigateAround(window, [
-        '/#/fail',
+        '/#/fail'
       ]);
     })
     .then(function() {
       // Unsuspend the router.
       router.unsuspend();
       return navigateAround(window, [
-        '/#/count',  // counter === 2
+        '/#/count'  // counter === 2
       ]);
     })
     .then(function() {
@@ -210,8 +210,10 @@ test('router handles parameterized routes', function(t) {
       '/#/blog/063016/hello-world'
     ])
     .then(function() {
-      t.equal(date, '063016', 'retrieved date string from parameterized route');
-      t.equal(post, 'hello-world', 'retrieved post string from parameterized route');
+      t.equal(date, '063016',
+        'retrieved date string from parameterized route');
+      t.equal(post, 'hello-world',
+        'retrieved post string from parameterized route');
       window.close();
       t.end();
     });
@@ -239,9 +241,12 @@ test('router handles query strings', function(t) {
       '/#/blog?date=063016&post=hello-world&tags=html,css,js'
     ])
     .then(function() {
-      t.equal(date, '063016', 'retrieved date string from query string');
-      t.equal(post, 'hello-world', 'retrieved post string from query string');
-      t.deepEqual(tags, ['html', 'css', 'js'], 'retrieved tags array from query string');
+      t.equal(date, '063016',
+        'retrieved date string from query string');
+      t.equal(post, 'hello-world',
+        'retrieved post string from query string');
+      t.deepEqual(tags, ['html', 'css', 'js'],
+        'retrieved tags array from query string');
       window.close();
       t.end();
     });
@@ -258,7 +263,7 @@ test('router handles query string keys without values', function(t) {
     router.register('blog', function(params) {
       if (params) {
         foo = params.foo;
-        qux = params.qux
+        qux = params.qux;
       }
     });
     router.start();
@@ -275,7 +280,7 @@ test('router handles query string keys without values', function(t) {
   });
 });
 
-test('router handles combined query strings and parameterized routes', function(t) {
+test('router handles both query strs and param routes', function(t) {
   setupVDOM([Router])
   .then(function(window) {
     var router = new window.app.Router();
@@ -296,9 +301,12 @@ test('router handles combined query strings and parameterized routes', function(
       '/#/blog/063016?tags=html,css,js&post=hello-world'
     ])
     .then(function() {
-      t.equal(date, '063016', 'retrieved date string from route parameterization');
-      t.equal(post, 'hello-world', 'retrieved post string from query string');
-      t.deepEqual(tags, ['html', 'css', 'js'], 'retrieved tags array from query string');
+      t.equal(date, '063016',
+        'retrieved date string from route parameterization');
+      t.equal(post, 'hello-world',
+        'retrieved post string from query string');
+      t.deepEqual(tags, ['html', 'css', 'js'],
+        'retrieved tags array from query string');
       window.close();
       t.end();
     });
