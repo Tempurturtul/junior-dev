@@ -31,7 +31,16 @@
      * Gets portfolio pieces.
      * @return {PortfolioPiece[]} - An array of portfolio pieces.
      */
-    function getPortfolioPieces() {}
+    function getPortfolioPieces() {
+      var pieces = mainController.getStoredData('portfolioPieces');
+
+      pieces = pieces
+        .map(function(piece) {
+          return new app.models.PortfolioPiece(piece);
+        });
+
+      return pieces;
+    }
 
     /**
      * Sets the view.

@@ -12,11 +12,13 @@
    */
   function MainController() {
     var self = this;
+    var store = app._store;
     // Child controllers. (Assigned during initialization.)
     var aboutController;
     var blogController;
     var portfolioController;
 
+    self.getStoredData = getStoredData;
     self.setAboutView = setAboutView;
     self.setBlogView = setBlogView;
     self.setPortfolioView = setPortfolioView;
@@ -28,6 +30,20 @@
     * Exposed methods.
     ****************************************
     */
+
+    /**
+     * Gets stored data.
+     * @param {string} [key] - The key to use when getting data. If
+     * undefined, gets all data.
+     * @return {*} - The data.
+     */
+    function getStoredData(key) {
+      if (key) {
+        return store[key];
+      }
+
+      return store;
+    }
 
     /**
      * Sets the about view.

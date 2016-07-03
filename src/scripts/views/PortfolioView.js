@@ -45,19 +45,56 @@
      * Initializes the portfolio view.
      */
     function init() {
-      htmlTemplate = refreshTemplate();
+      refresh();
     }
 
     /**
-     * Refreshes the HTML template's content.
+     * Refreshes the view (but does not render).
      */
-    function refreshTemplate() {
-      var template = document.getElementById('portfolio-template').innerHTML;
-      var portfolioPieces = portfolioController.getPortfolioPieces();
+    function refresh() {
+      var pieces = portfolioController.getPortfolioPieces();
 
-      portfolioPieces.forEach(function(piece) {
-        console.log(piece);
-      });
+      pieces = pieces
+        .map(function(piece) {
+          return formatPieceTemplate(piece);
+        })
+        .join('');
+
+      htmlTemplate = document.getElementById('portfolio-template').innerHTML;
+      htmlTemplate = htmlTemplate.replace('{portfolio-pieces}', pieces);
+    }
+
+    /**
+     * Formats a piece template with data from a portfolio piece.
+     * @param {PortfolioPiece} piece - The portfolio piece used to format
+     * the template.
+     * @return {string} - The formatted template.
+     */
+    function formatPieceTemplate(piece) {
+      var pieceTemplate = document
+                            .getElementById('portfolio-piece-template')
+                            .innerHTML;
+
+      pieceTemplate = pieceTemplate
+        .replace('{title}', piece.title)
+        .replace('{img-src}', piece.image.static)
+        .replace('{img-srcset}', formatImgSrcset(piece.image.responsive))
+        .replace('{img-description}', piece.image.alt)
+        .replace('{github-link}', piece.sourceURL)
+        .replace('{description}', piece.description);
+
+      return pieceTemplate;
+
+      /**
+       * Formats an object with image data into a srcset string.
+       * @param {object[]} data - The image data.
+       * @param {string} data.url - The URL for one of the images.
+       * @param {string} data.width - The width of one of the images.
+       * @return {string} - The srcset string.
+       */
+      function formatImgSrcset(data) {
+
+      }
     }
   }
 })();
