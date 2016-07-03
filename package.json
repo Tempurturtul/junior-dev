@@ -29,7 +29,6 @@
     }
   },
   "stylelint": {
-    "extends": "stylelint-config-standard",
-    "ignoreFiles": "src/styles/normalize.css"
+    "extends": "stylelint-config-standard"
   }
 }
