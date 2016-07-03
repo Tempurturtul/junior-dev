@@ -329,7 +329,7 @@
       var passedPieces = passed.split('/');
       // Trim an empty string at the end if present.
       // (Handles the edge-case: 'blog/'.)
-      if (passedPieces[passedPieces.length - 1] === '') {
+      if (passedPieces.length > 1 && passedPieces[passedPieces.length - 1] === '') {
         passedPieces = passedPieces.slice(0, passedPieces.length - 1);
       }
 
@@ -351,7 +351,7 @@
           continue;
         }
 
-        // If the piece is paramterized update the params and score
+        // If the piece is parameterized update the params and score
         // values, then proceed to the next piece.
         if (registeredPieces[i][0] === ':') {
           key = registeredPieces[i].slice(1);

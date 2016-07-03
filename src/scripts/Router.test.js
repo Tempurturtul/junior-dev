@@ -191,6 +191,28 @@ test('router checks current route when instructed', function(t) {
   });
 });
 
+test('router handles empty string routes', function(t) {
+  setupVDOM([Router])
+  .then(function(window) {
+    var router = new window.app.Router();
+    var passed = false;
+
+    router.register('', function(params) {
+      passed = true;
+    });
+    router.start(true);
+
+    navigateAround(window, [
+      '/#'
+    ])
+    .then(function() {
+      t.ok(passed, 'router handled the empty string route');
+      window.close();
+      t.end();
+    });
+  });
+});
+
 test('router handles parameterized routes', function(t) {
   setupVDOM([Router])
   .then(function(window) {
