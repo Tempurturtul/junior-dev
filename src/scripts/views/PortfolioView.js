@@ -13,7 +13,7 @@
    */
   function PortfolioView(portfolioController) {
     var self = this;
-    var htmlTemplate = document.getElementById('portfolio-template').innerHTML;
+    var htmlTemplate;
 
     self.render = render;
 
@@ -44,6 +44,20 @@
     /**
      * Initializes the portfolio view.
      */
-    function init() {}
+    function init() {
+      htmlTemplate = refreshTemplate();
+    }
+
+    /**
+     * Refreshes the HTML template's content.
+     */
+    function refreshTemplate() {
+      var template = document.getElementById('portfolio-template').innerHTML;
+      var portfolioPieces = portfolioController.getPortfolioPieces();
+
+      portfolioPieces.forEach(function(piece) {
+        console.log(piece);
+      });
+    }
   }
 })();

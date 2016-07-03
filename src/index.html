@@ -15,6 +15,7 @@
 
     <!-- Scripts -->
     <script async src="scripts/Router.js"></script>
+    <script async src="scripts/store/store.js"></script>
     <script async src="scripts/models/Post.js"></script>
     <script async src="scripts/models/PortfolioPiece.js"></script>
     <script async src="scripts/views/AboutView.js"></script>
@@ -38,13 +39,12 @@
   </head>
 
   <body>
-    <!-- Container block. -->
-    <div class="container">
-      <div class="container__secondary-content">
+    <!-- Shell block. -->
+    <div class="shell">
+      <div class="shell__secondary-content">
         <!-- Header block. -->
         <header class="header">
-          <!-- Page Title block. -->
-          <h1 class="page-title">Low Level Dev</h1>
+          <h1 class="header__title">Low Level Dev</h1>
           <!-- Nav block. -->
           <nav class="nav">
             <ul class="nav__list">
@@ -56,42 +56,57 @@
         </header>
       </div>
 
-      <div class="container__primary-content">
+      <div class="shell__primary-content">
         <!-- Main block. -->
         <main class="main">
         </main>
       </div>
 
-      <div class="container__secondary-content">
+      <div class="shell__secondary-content">
         <!-- Footer block. -->
         <footer class="footer">
-          <small>
-            <a class="footer__link" href="https://github.com/Tempurturtul/home" target="_blank">Hosted on GitHub.</a>
+          <!-- Low Emphasis block. -->
+          <small class="low-emphasis">
+            <a class="low-emphasis__link" href="https://github.com/Tempurturtul/home" target="_blank">Hosted on GitHub.</a>
           </small>
         </footer>
       </div>
     </div>
 
-    <!-- Home template. -->
+    <!-- About template. -->
     <script type="text/html" id="about-template">
-      <section>
-        <h1>Welcome</h1>
-        <p></p>
+      <!-- Section block. -->
+      <section class="section">
+        <h1 class="section__title">A Dedicated Developer</h1>
       </section>
     </script>
 
     <!-- Blog template. -->
     <script type="text/html" id="blog-template">
-      <section>
-        <h1>Blog</h1>
+      <!-- Section block. -->
+      <section class="section">
+        <h1 class="section__title">Dev's Blog</h1>
       </section>
     </script>
 
     <!-- Portfolio template. -->
     <script type="text/html" id="portfolio-template">
-      <section>
-        <h1>Portfolio</h1>
+      <!-- Section block. -->
+      <section class="section">
+        <h1 class="section__title">Featured Work</h1>
+        <div class="portfolio-pieces"></div>
       </section>
+    </script>
+
+    <!-- Portfolio Piece template. -->
+    <script type="text/html" id="portfolio-piece-template">
+      <!-- Portfolio Piece block. -->
+      <article class="portfolio-piece">
+        <h1 class="portfolio-piece__title">{title}</h1>
+        <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
+        <a class="portfolio-piece__link" href="{github-link}">GitHub</a>
+        <p class="portfolio-piece__description">{description}</p>
+      </article>
     </script>
   </body>
 </html>

@@ -13,7 +13,8 @@
    */
   function BlogController(mainController) {
     var self = this;
-    var blogView = new app.views.BlogView(self);
+    // Assigned during initialization.
+    var blogView;
 
     self.setView = setView;
 
@@ -43,6 +44,8 @@
     /**
      * Initializes the blog controller.
      */
-    function init() {}
+    function init() {
+      blogView = new app.views.BlogView(self);
+    }
   }
 })();

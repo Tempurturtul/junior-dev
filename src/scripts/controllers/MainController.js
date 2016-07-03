@@ -12,10 +12,10 @@
    */
   function MainController() {
     var self = this;
-    // Child controllers.
-    var aboutController = new app.controllers.AboutController(self);
-    var blogController = new app.controllers.BlogController(self);
-    var portfolioController = new app.controllers.PortfolioController(self);
+    // Child controllers. (Assigned during initialization.)
+    var aboutController;
+    var blogController;
+    var portfolioController;
 
     self.setAboutView = setAboutView;
     self.setBlogView = setBlogView;
@@ -65,6 +65,10 @@
     /**
      * Initializes the main controller.
      */
-    function init() {}
+    function init() {
+      aboutController = new app.controllers.AboutController(self);
+      blogController = new app.controllers.BlogController(self);
+      portfolioController = new app.controllers.PortfolioController(self);
+    }
   }
 })();

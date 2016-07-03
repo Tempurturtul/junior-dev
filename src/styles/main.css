@@ -1,27 +1,27 @@
 html,
 body {
-  box-sizing: border-box;
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
 /**************************************
-  Container
+  Shell
 **************************************/
 
-.container {
+.shell {
   display: flex;
   flex-direction: column;
+  margin: 0 8px;
   min-height: 100%;
   overflow: hidden;
 }
 
-.container__primary-content {
+.shell__primary-content {
   flex: 1 1 auto;
 }
 
-.container__secondary-content {
+.shell__secondary-content {
   flex: 0 0 auto;
 }
 
@@ -29,32 +29,33 @@ body {
   Header
 **************************************/
 
-.header {}
+.header {
+  border-bottom: solid #222 1px;
+  margin: 3px 0;
+}
 
-/**************************************
-  Page-Title
-**************************************/
-
-.page-title {
+.header__title {
+  color: #222;
+  font-size: 2em;
   margin: 5px;
   text-align: center;
-  font-family: serif;
-  color: #222;
 }
 
 /**************************************
   Nav
 **************************************/
 
-.nav {}
+.nav {
+  margin: 5px;
+}
 
 .nav__list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav__list-entry {
@@ -67,9 +68,9 @@ body {
 }
 
 .nav__link {
-  text-decoration: none;
   color: #222;
   display: block;
+  text-decoration: none;
 }
 
 .nav__link:hover {
@@ -80,7 +81,9 @@ body {
   Main
 **************************************/
 
-.main {}
+.main {
+  margin: 5px;
+}
 
 /**************************************
   Footer
@@ -88,15 +91,38 @@ body {
 
 .footer {
   border-top: solid 1px #222;
-  margin: 3px 8px;
+  margin: 3px 0;
   text-align: right;
 }
 
-.footer__link {
-  text-decoration: none;
-  color: #222;
+/**************************************
+  Low Emphasis
+**************************************/
+
+.low-emphasis {
+  font-size: 0.8em;
 }
 
-.footer__link:hover {
+.low-emphasis__link {
+  color: #222;
+  text-decoration: none;
+}
+
+.low-emphasis__link:hover {
   color: #d00;
+}
+
+/**************************************
+  Section
+**************************************/
+
+.section {
+  margin: 5px;
+}
+
+.section__title {
+  color: #222;
+  font-size: 1.4em;
+  margin: 5px;
+  text-align: center;
 }

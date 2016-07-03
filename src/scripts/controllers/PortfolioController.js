@@ -13,8 +13,10 @@
    */
   function PortfolioController(mainController) {
     var self = this;
-    var portfolioView = new app.views.PortfolioView(self);
+    // Assigned during initialization.
+    var portfolioView;
 
+    self.getPortfolioPieces = getPortfolioPieces;
     self.setView = setView;
 
     init();
@@ -24,6 +26,12 @@
     * Exposed methods.
     ****************************************
     */
+
+    /**
+     * Gets portfolio pieces.
+     * @return {PortfolioPiece[]} - An array of portfolio pieces.
+     */
+    function getPortfolioPieces() {}
 
     /**
      * Sets the view.
@@ -43,6 +51,8 @@
     /**
      * Initializes the portfolio controller.
      */
-    function init() {}
+    function init() {
+      portfolioView = new app.views.PortfolioView(self);
+    }
   }
 })();

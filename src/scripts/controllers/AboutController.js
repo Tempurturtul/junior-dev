@@ -13,7 +13,8 @@
    */
   function AboutController(mainController) {
     var self = this;
-    var aboutView = new app.views.AboutView(self);
+    // Assigned during initialization.
+    var aboutView;
 
     self.setView = setView;
 
@@ -43,6 +44,8 @@
     /**
      * Initializes the about controller.
      */
-    function init() {}
+    function init() {
+      aboutView = new app.views.AboutView(self);
+    }
   }
 })();
