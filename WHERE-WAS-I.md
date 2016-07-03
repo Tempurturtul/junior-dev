@@ -1,6 +1,3 @@
 # Where Was I?
 
-Tweaked styling.
-Added templates.
-Fixed controller initializations.
-Added store.
+Working on portfolio view.
