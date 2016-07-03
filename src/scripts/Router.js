@@ -329,7 +329,8 @@
       var passedPieces = passed.split('/');
       // Trim an empty string at the end if present.
       // (Handles the edge-case: 'blog/'.)
-      if (passedPieces.length > 1 && passedPieces[passedPieces.length - 1] === '') {
+      if (passedPieces.length > 1 &&
+          passedPieces[passedPieces.length - 1] === '') {
         passedPieces = passedPieces.slice(0, passedPieces.length - 1);
       }
 
