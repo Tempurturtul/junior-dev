@@ -1,19 +1,19 @@
-// BlogView.js
+// AboutView.js
 (function() {
   'use strict';
 
   var app = window.app = window.app || {};
   app.views = app.views || {};
-  app.views.BlogView = BlogView;
+  app.views.AboutView = AboutView;
 
   /**
-   * Creates a new Blog View.
+   * Creates a new About View.
    * @constructor
-   * @param {BlogController} blogController - The view's controller.
+   * @param {AboutController} aboutController - The view's controller.
    */
-  function BlogView(blogController) {
+  function AboutView(aboutController) {
     var self = this;
-    var htmlTemplate = document.getElementById('blog-template').innerHTML;
+    var htmlTemplate = document.getElementById('about-template').innerHTML;
 
     self.render = render;
 
@@ -42,7 +42,7 @@
     */
 
     /**
-     * Initializes the blog view.
+     * Initializes the about view.
      */
     function init() {}
   }

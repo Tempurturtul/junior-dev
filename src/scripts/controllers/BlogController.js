@@ -31,7 +31,7 @@
      * parameterized route.
      */
     function setView(params) {
-      console.log(params);
+      blogView.render();
     }
 
     /*

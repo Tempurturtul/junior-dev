@@ -13,12 +13,12 @@
   function MainController() {
     var self = this;
     // Child controllers.
+    var aboutController = new app.controllers.AboutController(self);
     var blogController = new app.controllers.BlogController(self);
-    var homeController = new app.controllers.HomeController(self);
     var portfolioController = new app.controllers.PortfolioController(self);
 
+    self.setAboutView = setAboutView;
     self.setBlogView = setBlogView;
-    self.setHomeView = setHomeView;
     self.setPortfolioView = setPortfolioView;
 
     init();
@@ -30,21 +30,21 @@
     */
 
     /**
+     * Sets the about view.
+     * @param {object} params - Parameters from a query string and/or
+     * parameterized route.
+     */
+    function setAboutView(params) {
+      aboutController.setView(params);
+    }
+
+    /**
      * Sets the blog view.
      * @param {object} params - Parameters from a query string and/or
      * parameterized route.
      */
     function setBlogView(params) {
       blogController.setView(params);
-    }
-
-    /**
-     * Sets the home view.
-     * @param {object} params - Parameters from a query string and/or
-     * parameterized route.
-     */
-    function setHomeView(params) {
-      homeController.setView(params);
     }
 
     /**

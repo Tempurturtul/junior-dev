@@ -15,10 +15,10 @@
     var router = new app.Router();
     // Routes to define. (A preceding colon indicates a key/value pair to be passed as a parameter.)
     var routes = [
-      {route: '', handler: mainController.setBlogView},
+      {route: '', handler: mainController.setAboutView},
+      {route: 'about', handler: mainController.setAboutView},
       {route: 'blog', handler: mainController.setBlogView},
       {route: 'blog/:post', handler: mainController.setBlogView},
-      {route: 'home', handler: mainController.setHomeView},
       {route: 'portfolio', handler: mainController.setPortfolioView}
     ];
 

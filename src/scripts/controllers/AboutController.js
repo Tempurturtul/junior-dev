@@ -1,19 +1,19 @@
-// HomeController.js
+// AboutController.js
 (function() {
   'use strict';
 
   var app = window.app = window.app || {};
   app.controllers = app.controllers || {};
-  app.controllers.HomeController = HomeController;
+  app.controllers.AboutController = AboutController;
 
   /**
-   * Creates a new Home Controller.
+   * Creates a new About Controller.
    * @constructor
    * @param {MainController} mainController - The parent controller.
    */
-  function HomeController(mainController) {
+  function AboutController(mainController) {
     var self = this;
-    var homeView = new app.views.HomeView(self);
+    var aboutView = new app.views.AboutView(self);
 
     self.setView = setView;
 
@@ -31,7 +31,7 @@
      * parameterized route.
      */
     function setView(params) {
-      console.log(params);
+      aboutView.render();
     }
 
     /*
@@ -41,7 +41,7 @@
     */
 
     /**
-     * Initializes the home controller.
+     * Initializes the about controller.
      */
     function init() {}
   }

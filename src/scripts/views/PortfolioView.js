@@ -13,6 +13,9 @@
    */
   function PortfolioView(portfolioController) {
     var self = this;
+    var htmlTemplate = document.getElementById('portfolio-template').innerHTML;
+
+    self.render = render;
 
     init();
 
@@ -21,6 +24,16 @@
     * Exposed methods.
     ****************************************
     */
+
+    /**
+     * Renders HTML to the document.
+     */
+    function render() {
+      // Get the element in which to render content.
+      var el = document.querySelector('.main');
+      // Set the element's content.
+      el.innerHTML = htmlTemplate;
+    }
 
     /*
     ****************************************
