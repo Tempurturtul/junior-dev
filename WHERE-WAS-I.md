@@ -1,3 +1,7 @@
 # Where Was I?
 
-Working on portfolio view.
+Styled up About and Portfolio.
+
+Next:
+  - Tests
+  - Blog
