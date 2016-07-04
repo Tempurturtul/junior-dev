@@ -16,6 +16,7 @@
     var htmlTemplate;
 
     self.render = render;
+    self.refresh = refresh;
 
     init();
 
@@ -35,19 +36,6 @@
       el.innerHTML = htmlTemplate;
     }
 
-    /*
-    ****************************************
-    * Private methods.
-    ****************************************
-    */
-
-    /**
-     * Initializes the portfolio view.
-     */
-    function init() {
-      refresh();
-    }
-
     /**
      * Refreshes the view (but does not render).
      */
@@ -64,6 +52,19 @@
       htmlTemplate = htmlTemplate.replace('{portfolio-pieces}', pieces);
     }
 
+    /*
+    ****************************************
+    * Private methods.
+    ****************************************
+    */
+
+    /**
+     * Initializes the portfolio view.
+     */
+    function init() {
+      refresh();
+    }
+
     /**
      * Formats a piece template with data from a portfolio piece.
      * @param {PortfolioPiece} piece - The portfolio piece used to format
@@ -71,19 +72,36 @@
      * @return {string} - The formatted template.
      */
     function formatPieceTemplate(piece) {
-      var pieceTemplate = document
-                            .getElementById('portfolio-piece-template')
-                            .innerHTML;
+      var template = document
+                       .getElementById('portfolio-piece-template')
+                       .innerHTML;
+      var placeholderImgURL = 'images/placeholder.png';
+      var placeholderImgAlt = 'Image unavailable.';
 
-      pieceTemplate = pieceTemplate
+      // Formate piece template.
+      template = template
         .replace('{title}', piece.title)
-        .replace('{img-src}', piece.image.static)
-        .replace('{img-srcset}', formatImgSrcset(piece.image.responsive))
-        .replace('{img-description}', piece.image.alt)
-        .replace('{github-link}', piece.sourceURL)
-        .replace('{description}', piece.description);
+        .replace('{description}', piece.description)
+        .replace('{source-url}', piece.sourceURL)
+        .replace('{live-url-open}', piece.liveURL ?
+                                    '<a ' +
+                                        'class="portfolio-piece__live-link" ' +
+                                        'href="' + piece.liveURL + '">' :
+                                    '')
+        .replace('{live-url-close}', piece.liveURL ?
+                                     '</a>' :
+                                     '')
+        .replace('{img-src}', piece.image && piece.image.static ?
+                              piece.image.static :
+                              placeholderImgURL)
+        .replace('{img-srcset}', piece.image && piece.image.responsive ?
+                                 formatImgSrcset(piece.image.responsive) :
+                                 '')
+        .replace('{img-description}', piece.image && piece.image.alt ?
+                                      piece.image.alt :
+                                      placeholderImgAlt);
 
-      return pieceTemplate;
+      return template;
 
       /**
        * Formats an object with image data into a srcset string.
@@ -93,7 +111,17 @@
        * @return {string} - The srcset string.
        */
       function formatImgSrcset(data) {
+        return data.reduce(function(acc, curr) {
+          var set = curr.url + ' ' + curr.width;
 
+          if (acc === '') {
+            return set;
+          }
+
+          acc += ', ' + set;
+
+          return acc;
+        }, '');
       }
     }
   }

@@ -94,7 +94,7 @@
       <!-- Section block. -->
       <section class="section">
         <h1 class="section__title">Featured Work</h1>
-        <div>{portfolio-pieces}</div>
+        {portfolio-pieces}
       </section>
     </script>
 
@@ -103,10 +103,14 @@
       <!-- Portfolio Piece block. -->
       <article class="portfolio-piece">
         <h1 class="portfolio-piece__title">{title}</h1>
+        <!-- live-url-open has class portfolio-piece__live-link -->
+        {live-url-open}
         <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
-        <a class="portfolio-piece__link" href="{github-link}">GitHub</a>
+        {live-url-close}
+        <a class="portfolio-piece__source-link" href="{source-url}">GitHub</a>
         <p class="portfolio-piece__description">{description}</p>
       </article>
     </script>
+
   </body>
 </html>

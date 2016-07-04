@@ -15,7 +15,7 @@ test('post model exists', function(t) {
   });
 });
 
-test('post only requires a title, content, and data', function(t) {
+test('post only requires a title, content, and date', function(t) {
   setupVDOM([Post])
   .then(function(window) {
     var data = {
