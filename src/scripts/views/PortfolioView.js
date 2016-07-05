@@ -15,8 +15,8 @@
     var self = this;
     var htmlTemplate;
 
-    self.render = render;
     self.refresh = refresh;
+    self.render = render;
 
     init();
 
@@ -27,22 +27,13 @@
     */
 
     /**
-     * Renders HTML to the document.
-     */
-    function render() {
-      // Get the element in which to render content.
-      var el = document.querySelector('.main');
-      // Set the element's content.
-      el.innerHTML = htmlTemplate;
-    }
-
-    /**
      * Refreshes the view (but does not render).
+     * @param {object} data - Data used to refresh the view.
+     * @param {PortfolioPiece[]} data.portfolioPieces - Portfolio pieces to
+     * display in the view.
      */
-    function refresh() {
-      var pieces = portfolioController.getPortfolioPieces();
-
-      pieces = pieces
+    function refresh(data) {
+      var pieces = data.portfolioPieces
         .map(function(piece) {
           return formatPieceTemplate(piece);
         })
@@ -50,6 +41,16 @@
 
       htmlTemplate = document.getElementById('portfolio-template').innerHTML;
       htmlTemplate = htmlTemplate.replace('{portfolio-pieces}', pieces);
+    }
+
+    /**
+     * Renders HTML to the document.
+     */
+    function render() {
+      // Get the element in which to render content.
+      var el = document.querySelector('.main');
+      // Set the element's content.
+      el.innerHTML = htmlTemplate;
     }
 
     /*
@@ -62,7 +63,10 @@
      * Initializes the portfolio view.
      */
     function init() {
-      refresh();
+      var data = {
+        portfolioPieces: portfolioController.getPortfolioPieces();
+      };
+      refresh(data);
     }
 
     /**
