@@ -11,3 +11,5 @@ Why? Well this is my homepage, where I hope to attract people who might be inter
 I'm also making an effort to avoid third-party libraries in favor of rolling my own code. Normally this would be foolish (it might even turn out to be foolish here), since my code definitely has a greater likelihood of failure than library code that's been tested and worked on by a multitude of very talented people. But by rolling my own code I hope to offer valuable insight into my abilities as a developer.
 
 So far I've established my own basic Model-View-Controller pattern and built in some simple hash-based routing. I have further plans to establish methods for converting these blog posts to semantic HTML, and for applying dates and topic tags to them. Hopefully I'll have succeeded in those efforts by the time you read this.
+
+*Tags: getting hired, this site, milestone*

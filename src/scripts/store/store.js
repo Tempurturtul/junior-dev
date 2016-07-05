@@ -18,7 +18,7 @@
         liveURL: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-neighborhood-map/',
         image: {
           static: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-portfolio/content/img/neighborhood-map-600x600.dd92c598.png',
-          description: 'The application in use.'
+          description: 'Preview of the project during use.'
         }
       }
     ]
