@@ -13,8 +13,9 @@
    */
   function BlogView(blogController) {
     var self = this;
-    var htmlTemplate = document.getElementById('blog-template').innerHTML;
+    var htmlTemplate;
 
+    self.refresh = refresh;
     self.render = render;
 
     init();
@@ -24,6 +25,22 @@
     * Exposed methods.
     ****************************************
     */
+
+    /**
+     * Refreshes the view (but does not render).
+     * @param {object} data - Data used to refresh the view.
+     * @param {Post[]} data.posts - Posts to display in the view.
+     */
+    function refresh(data) {
+      var posts = data.posts
+        .map(function(post) {
+          return formatPostTemplate(post);
+        })
+        .join('');
+
+      htmlTemplate = document.getElementById('blog-template').innerHTML;
+      htmlTemplate = htmlTemplate.replace('{posts}', posts);
+    }
 
     /**
      * Renders HTML to the document.
@@ -44,6 +61,29 @@
     /**
      * Initializes the blog view.
      */
-    function init() {}
+    function init() {
+      var data = {
+        posts: blogController.getPosts()
+      }
+      refresh(data);
+    }
+
+    /**
+     * Formats a post template with data from a post.
+     * @param {Post} post - The post used to format the template.
+     * @return {string} - The formatted template.
+     */
+    function formatPostTemplate(post) {
+      var template = document.getElementById('post-template').innerHTML;
+
+      // Formate piece template.
+      template = template
+        .replace('{title}', post.title)
+        .replace('{content}', post.content)
+        .replace('{date}', post.date.toLocaleString())
+        .replace('{tags}', post.tags ? post.tags.join(', ') : '');
+
+      return template;
+    }
   }
 })();
