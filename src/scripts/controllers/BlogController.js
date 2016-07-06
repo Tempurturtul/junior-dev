@@ -93,7 +93,18 @@
      * parameterized route.
      */
     function setView(params) {
-      blogView.refresh(params);
+      var filterOpts = {
+        tags: params.tags || null,
+        dates: {
+          start: params.daterange ? params.daterange[0] : null,
+          end: params.daterange ? params.daterange[1] : null,
+        }
+      };
+      var data = {
+        posts: getPosts(filterOpts)
+      };
+
+      blogView.refresh(data);
       blogView.render();
     }
 

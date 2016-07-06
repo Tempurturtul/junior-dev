@@ -80,7 +80,13 @@
       template = template
         .replace('{title}', post.title)
         .replace('{content}', post.content)
-        .replace('{date}', post.date.toLocaleString())
+        .replace('{date}', post.date.toLocaleDateString())
+        .replace('{iso-date}', post.date.toISOString())
+        .replace('{subtitle}', post.subtitle ?
+                               '<p class="post__subtitle">' +
+                               post.subtitle +
+                               '</p>'
+                               : '')
         .replace('{tags}', post.tags ? post.tags.join(', ') : '');
 
       return template;

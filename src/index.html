@@ -99,7 +99,16 @@
     <script type="text/html" id="post-template">
       <!-- Post block. -->
       <article class="post">
-        <!-- TODO -->
+        <h1 class="post__title">{title}</h1>
+        <!-- subtitle has class post__subtitle -->
+        {subtitle}
+        <p class="post__date">Last modified: <time datetime="{iso-date}">{date}</time></p>
+        <div class="post__content">
+          {content}
+        </div>
+        <footer class="post__footer">
+          <span class="post__tags">tags: {tags}</span>
+        </footer>
       </article>
     </script>
 
