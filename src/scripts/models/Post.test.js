@@ -46,10 +46,12 @@ test('post can contain optional data', function(t) {
       title: 'A title.',
       content: 'Some content.',
       date: new Date(),
+      subtitle: 'A subtitle.',
       tags: ['html', 'css', 'js']
     };
     var post = new window.app.models.Post(data);
 
+    t.equal(post.subtitle, 'A subtitle.', 'contains a subtitle');
     t.deepEqual(post.tags, ['html', 'css', 'js'], 'contains tags');
     window.close();
     t.end();

@@ -4,7 +4,20 @@
 
   var app = window.app = window.app || {};
   app._store = {
-    blogPosts: [],
+    blogPosts: [
+      {
+        title: 'Min',
+        date: new Date(),
+        content: '<p>I\'m a little teapot.</p>'
+      },
+      {
+        title: 'Max',
+        subtitle: '-imum',
+        date: new Date('2011-09-25'),
+        content: '<p><em>Ooooh...</em> so pretty.</p>',
+        tags: ['js', 'css', 'html']
+      }
+    ],
     portfolioPieces: [
       {
         title: 'Home',
