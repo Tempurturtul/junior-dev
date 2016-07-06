@@ -64,7 +64,7 @@
      */
     function init() {
       var data = {
-        portfolioPieces: portfolioController.getPortfolioPieces();
+        portfolioPieces: portfolioController.getPortfolioPieces()
       };
       refresh(data);
     }
@@ -106,27 +106,27 @@
                                       placeholderImgAlt);
 
       return template;
+    }
 
-      /**
-       * Formats an object with image data into a srcset string.
-       * @param {object[]} data - The image data.
-       * @param {string} data.url - The URL for one of the images.
-       * @param {string} data.width - The width of one of the images.
-       * @return {string} - The srcset string.
-       */
-      function formatImgSrcset(data) {
-        return data.reduce(function(acc, curr) {
-          var set = curr.url + ' ' + curr.width;
+    /**
+     * Formats an object with image data into a srcset string.
+     * @param {object[]} data - The image data.
+     * @param {string} data.url - The URL for one of the images.
+     * @param {string} data.width - The width of one of the images.
+     * @return {string} - The srcset string.
+     */
+    function formatImgSrcset(data) {
+      return data.reduce(function(acc, curr) {
+        var set = curr.url + ' ' + curr.width;
 
-          if (acc === '') {
-            return set;
-          }
+        if (acc === '') {
+          return set;
+        }
 
-          acc += ', ' + set;
+        acc += ', ' + set;
 
-          return acc;
-        }, '');
-      }
+        return acc;
+      }, '');
     }
   }
 })();
