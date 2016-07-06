@@ -97,7 +97,7 @@
         tags: params.tags || null,
         dates: {
           start: params.daterange ? params.daterange[0] : null,
-          end: params.daterange ? params.daterange[1] : null,
+          end: params.daterange ? params.daterange[1] : null
         }
       };
       var data = {

@@ -64,7 +64,7 @@
     function init() {
       var data = {
         posts: blogController.getPosts()
-      }
+      };
       refresh(data);
     }
 
@@ -85,8 +85,8 @@
         .replace('{subtitle}', post.subtitle ?
                                '<p class="post__subtitle">' +
                                post.subtitle +
-                               '</p>'
-                               : '')
+                               '</p>' :
+                               '')
         .replace('{tags}', post.tags ? post.tags.join(', ') : '');
 
       return template;
