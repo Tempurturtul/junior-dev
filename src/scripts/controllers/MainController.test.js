@@ -5,7 +5,7 @@ var setupVDOM = require(path.join(process.cwd(), 'test-utils/utils.js')).setupVD
 var fs = require('fs');
 var MainController = fs.readFileSync('src/scripts/controllers/MainController.js');
 
-test('main controller exists', function(t) {
+test('main controller exists on window', function(t) {
   setupVDOM([MainController])
   .then(function(window) {
     t.ok(window.app.controllers.MainController,

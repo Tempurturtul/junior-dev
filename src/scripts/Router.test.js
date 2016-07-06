@@ -6,7 +6,7 @@ var navigateAround = testUtils.navigateAround;
 var fs = require('fs');
 var Router = fs.readFileSync('src/scripts/Router.js');
 
-test('router exists', function(t) {
+test('router exists on window', function(t) {
   setupVDOM([Router])
   .then(function(window) {
     t.ok(window.app.Router, 'window.app.Router variable exists');

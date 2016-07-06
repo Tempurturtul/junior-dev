@@ -5,7 +5,7 @@ var setupVDOM = testUtils.setupVDOM;
 var fs = require('fs');
 var PortfolioPiece = fs.readFileSync('src/scripts/models/PortfolioPiece.js');
 
-test('portfolio piece model exists', function(t) {
+test('portfolio piece model exists on window', function(t) {
   setupVDOM([PortfolioPiece])
   .then(function(window) {
     t.ok(window.app.models.PortfolioPiece,

@@ -5,7 +5,7 @@ var setupVDOM = testUtils.setupVDOM;
 var fs = require('fs');
 var Post = fs.readFileSync('src/scripts/models/Post.js');
 
-test('post model exists', function(t) {
+test('post model exists on window', function(t) {
   setupVDOM([Post])
   .then(function(window) {
     t.ok(window.app.models.Post,
