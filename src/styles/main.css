@@ -191,6 +191,7 @@ body {
 
 .flex-grid {
   display: flex;
+  justify-content: center;
 }
 
 /**************************************
