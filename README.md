@@ -10,15 +10,20 @@ Includes a personal blog and portfolio.
 
 - Install [Node](https://nodejs.org/en/).
 - Clone this repository and navigate to it.
+  
   ```
   git clone https://github.com/Tempurturtul/home.git
   cd home/
   ```
+
 - Install dependencies.
+
   ```
   npm i
   ```
+
 - Use npm scripts to test, lint, and serve.
+
   ```
   # Lint, serve, and watch for changes.
   npm start
