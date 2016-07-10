@@ -15,9 +15,16 @@
     var self = this;
     // Assigned during initialization.
     var blogView;
+    var searchData = {
+      text: '',
+      tags: '',
+      dates: []
+    };
 
+    self.getPostID = getPostID;
     self.getPosts = getPosts;
     self.setView = setView;
+    self.search = search;
 
     init();
 
@@ -28,8 +35,20 @@
     */
 
     /**
+     * Gets the ID (based on title) for a blog post.
+     * @param {Post} post - A blog post.
+     * @return {string} - The blog post's ID.
+     */
+    function getPostID(post) {
+      return post.title.replace(/\s/g, '-').toLowerCase();
+    }
+
+    /**
      * Gets blog posts.
      * @param {object} [filterOpts] - Filter options.
+     * @param {string} [filterOpts.post] - A specific post to filter by.
+     * @param {string} [filterOpts.text] - Generic string to filter by. Could
+     * strictly match tags or loosely match titles.
      * @param {string[]} [filterOpts.tags] - Tags to filter by.
      * @param {object} [filterOpts.dates] - Dates to filter by.
      * @param {Date} [filterOpts.dates.start] - Start date to filter by.
@@ -47,6 +66,37 @@
 
       // Filter posts.
       if (filterOpts) {
+        // Filter by specific post.
+        if (filterOpts.post) {
+          posts = posts
+            .filter(function(post) {
+              return getPostID(post) === filterOpts.post;
+            });
+        }
+
+        // Filter by text.
+        if (filterOpts.text) {
+          posts = posts
+            .filter(function(post) {
+              var re = new RegExp(filterOpts.text, 'i');
+
+              if (re.test(post.title)) {
+                return true;
+              }
+              if (re.test(post.subtitle)) {
+                return true;
+              }
+              if (re.test(post.tags)) {
+                return true;
+              }
+              if (re.test(post.content)) {
+                return true;
+              }
+
+              return false;
+            });
+        }
+
         // Filter by tags.
         if (filterOpts.tags) {
           posts = posts
@@ -94,10 +144,12 @@
      */
     function setView(params) {
       var filterOpts = {
+        post: params.post || null,
+        text: params.text || null,
         tags: params.tags || null,
         dates: {
-          start: params.daterange ? params.daterange[0] : null,
-          end: params.daterange ? params.daterange[1] : null
+          start: params.dates ? params.dates[0] : null,
+          end: params.dates ? params.dates[1] : null
         }
       };
       var data = {
@@ -106,6 +158,23 @@
 
       blogView.refresh(data);
       blogView.render();
+    }
+
+    /**
+     * Searches for posts matching given search query data.
+     * @param {object} data - The search query data.
+     * @param {string} data.text - Text that may appear anywhere in post.
+     * @param {string} data.maxAge - Max age of posts.
+     */
+    function search(data) {
+      if (data.text) {
+        searchData.text = data.text;
+      }
+      if (data.maxAge) {
+        // TODO
+      }
+
+      mainController.setQueryString(searchData);
     }
 
     /*

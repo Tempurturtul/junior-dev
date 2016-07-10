@@ -22,6 +22,7 @@
     self.setAboutView = setAboutView;
     self.setBlogView = setBlogView;
     self.setPortfolioView = setPortfolioView;
+    self.setQueryString = setQueryString;
 
     init();
 
@@ -70,6 +71,40 @@
      */
     function setPortfolioView(params) {
       portfolioController.setView(params);
+    }
+
+    /**
+     * Sets the query string to contain the given data.
+     * @param {object} data - The keys and values in the query string.
+     */
+    function setQueryString(data) {
+      var url = window.location.href.split('?')[0];
+      var queryStr = '';
+
+      for (var prop in data) {
+        // Exclude inherited properties.
+        if (data.hasOwnProperty(prop)) {
+
+          // Add '?' for first property only, otherwise add '&'.
+          if (queryStr) {
+            queryStr += '&';
+          } else {
+            queryStr += '?';
+          }
+
+          // Convert array values to comma-separated strings.
+          if (Array.isArray(data[prop])) {
+            data[prop] = data[prop].join(',');
+          }
+
+          // Ignore null values and empty strings.
+          if (data[prop] !== (null || '')) {
+            queryStr += prop + '=' + data[prop];
+          }
+        }
+      }
+
+      window.location.href = url + queryStr;
     }
 
     /*

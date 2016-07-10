@@ -50,6 +50,31 @@
       var el = document.querySelector('.main');
       // Set the element's content.
       el.innerHTML = htmlTemplate;
+
+      // Add event listeners.
+      var searchForm = document.getElementsByClassName('blog-search')[0];
+      var searchBar = document.getElementsByClassName('blog-search__search-bar')[0];
+      var timeOptions = document.getElementsByClassName('blog-search__time-options')[0];
+
+      // Prevent form submission from reloading the page.
+      searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+      });
+
+      // Update query string on search bar input.
+      searchBar.addEventListener('input', function(e) {
+        // TODO: Sanitize input?
+        blogController.search({
+          text: e.target.value
+        });
+      });
+
+      // Update query string on time options change.
+      timeOptions.addEventListener('change', function(e) {
+        blogController.search({
+          maxAge: e.target.value
+        });
+      });
     }
 
     /*
@@ -78,6 +103,7 @@
 
       // Formate piece template.
       template = template
+        .replace('{post-id}', blogController.getPostID(post))
         .replace('{title}', post.title)
         .replace('{content}', post.content)
         .replace('{date}', post.date.toLocaleDateString())

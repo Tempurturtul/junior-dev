@@ -200,6 +200,10 @@ a:hover {
   text-align: center;
 }
 
+.post__link {
+  text-decoration: none;
+}
+
 .post__subtitle {
   font-weight: bold;
   margin-top: 5px;
