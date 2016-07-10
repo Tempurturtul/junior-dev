@@ -17,7 +17,7 @@ a {
 }
 
 a:hover {
-  color: #d00;
+  color: #d33;
 }
 
 /**************************************
@@ -166,6 +166,27 @@ a:hover {
 }
 
 /**************************************
+  Blog Search
+**************************************/
+
+.blog-search {
+  margin: 10px 8px;
+  text-align: center;
+}
+
+.blog-search__search-bar {
+  margin: 2px;
+}
+
+.blog-search__time-options {
+  margin: 2px;
+}
+
+.blog-search__time-option {
+
+}
+
+/**************************************
   Post
 **************************************/
 
@@ -241,7 +262,7 @@ a:hover {
 
 /* Change image's border color on hover only if a live-link is present. */
 .portfolio-piece__live-link:hover > .portfolio-piece__image {
-  border-color: #d00;
+  border-color: #d33;
 }
 
 .portfolio-piece__source-link {
