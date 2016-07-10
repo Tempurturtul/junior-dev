@@ -97,19 +97,22 @@
 
     <!-- Post template. -->
     <script type="text/html" id="post-template">
-      <!-- Post block. -->
-      <article class="post">
-        <h1 class="post__title">{title}</h1>
-        <!-- subtitle has class post__subtitle -->
-        {subtitle}
-        <p class="post__date">Last modified: <time datetime="{iso-date}">{date}</time></p>
-        <div class="post__content">
-          {content}
-        </div>
-        <footer class="post__footer">
-          <span class="post__tags">tags: {tags}</span>
-        </footer>
-      </article>
+      <!-- Card block. -->
+      <div class="card">
+        <!-- Post block. -->
+        <article class="post">
+          <h1 class="post__title">{title}</h1>
+          <!-- subtitle has class post__subtitle -->
+          {subtitle}
+          <p class="post__date">Last modified: <time datetime="{iso-date}">{date}</time></p>
+          <div class="post__content">
+            {content}
+          </div>
+          <footer class="post__footer">
+            <span class="post__tags">tags: {tags}</span>
+          </footer>
+        </article>
+      </div>
     </script>
 
     <!-- Portfolio template. -->
@@ -125,16 +128,19 @@
 
     <!-- Portfolio Piece template. -->
     <script type="text/html" id="portfolio-piece-template">
-      <!-- Portfolio Piece block. -->
-      <article class="portfolio-piece">
-        <h1 class="portfolio-piece__title">{title}</h1>
-        <!-- live-url-open has class portfolio-piece__live-link -->
-        {live-url-open}
-        <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
-        {live-url-close}
-        <a class="portfolio-piece__source-link" href="{source-url}">GitHub</a>
-        <p class="portfolio-piece__description">{description}</p>
-      </article>
+      <!-- Card block. -->
+      <div class="card">
+        <!-- Portfolio Piece block. -->
+        <article class="portfolio-piece">
+          <h1 class="portfolio-piece__title">{title}</h1>
+          <!-- live-url-open has class portfolio-piece__live-link -->
+          {live-url-open}
+          <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
+          {live-url-close}
+          <a class="portfolio-piece__source-link" href="{source-url}">GitHub</a>
+          <p class="portfolio-piece__description">{description}</p>
+        </article>
+      </div>
     </script>
 
   </body>
