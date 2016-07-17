@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="styles/main.css">
 
     <!-- Scripts -->
+    <script async src="scripts/utils/past.js"></script>
     <script async src="scripts/Router.js"></script>
     <script async src="scripts/store/store.js"></script>
     <script async src="scripts/models/Post.js"></script>
@@ -93,15 +94,18 @@
         <h1 class="section__title">Learner's Blog</h1>
         <!-- Blog Search block. -->
         <form class="blog-search">
-          <input class="blog-search__search-bar" type="search" placeholder="Search">
+          <input class="blog-search__search-bar" type="search" placeholder="Search" value="{search-text}">
           <select class="blog-search__time-options">
-            <option class="blog-search__time-option" value="week">Last Week</option>
-            <option class="blog-search__time-option" value="month">Last Month</option>
-            <option class="blog-search__time-option" value="year">Last Year</option>
-            <option class="blog-search__time-option" value="all" selected>All Time</option>
+            <option class="blog-search__time-option" value="week" selected="{search-week}">Last Week</option>
+            <option class="blog-search__time-option" value="month" selected="{search-month}">Last Month</option>
+            <option class="blog-search__time-option" value="year" selected="{search-year}">Last Year</option>
+            <option class="blog-search__time-option" value="all" selected="{search-all}">All Time</option>
           </select>
         </form>
-        {posts}
+        <!-- Blog Posts block. -->
+        <div class="blog-posts">
+          <!-- Formatted post templates inserted here. -->
+        </div>
       </section>
     </script>
 

@@ -15,16 +15,16 @@
     var self = this;
     // Assigned during initialization.
     var blogView;
-    var searchData = {
+    var postFilters = {
       text: '',
-      tags: '',
-      dates: []
+      maxAge: 'all'
     };
 
+    self.getPostFilters = getPostFilters;
     self.getPostID = getPostID;
     self.getPosts = getPosts;
     self.setView = setView;
-    self.search = search;
+    self.updatePostFilters = updatePostFilters;
 
     init();
 
@@ -33,6 +33,14 @@
     * Exposed methods.
     ****************************************
     */
+
+    /**
+     * Gets the current post filters.
+     * @return {object} - The post filters.
+     */
+    function getPostFilters() {
+      return postFilters;
+    }
 
     /**
      * Gets the ID (based on title) for a blog post.
@@ -45,17 +53,9 @@
 
     /**
      * Gets blog posts.
-     * @param {object} [filterOpts] - Filter options.
-     * @param {string} [filterOpts.post] - A specific post to filter by.
-     * @param {string} [filterOpts.text] - Generic string to filter by. Could
-     * strictly match tags or loosely match titles.
-     * @param {string[]} [filterOpts.tags] - Tags to filter by.
-     * @param {object} [filterOpts.dates] - Dates to filter by.
-     * @param {Date} [filterOpts.dates.start] - Start date to filter by.
-     * @param {Date} [filterOpts.dates.end] - End date to filter by.
      * @return {Post[]} - An array of blog posts.
      */
-    function getPosts(filterOpts) {
+    function getPosts() {
       var posts = mainController.getStoredData('blogPosts');
 
       // Convert raw data to Post instances.
@@ -64,74 +64,36 @@
           return new app.models.Post(post);
         });
 
-      // Filter posts.
-      if (filterOpts) {
-        // Filter by specific post.
-        if (filterOpts.post) {
-          posts = posts
-            .filter(function(post) {
-              return getPostID(post) === filterOpts.post;
-            });
-        }
+      // Filter by text.
+      if (postFilters.text) {
+        posts = posts
+          .filter(function(post) {
+            var re = new RegExp(postFilters.text, 'i');
 
-        // Filter by text.
-        if (filterOpts.text) {
-          posts = posts
-            .filter(function(post) {
-              var re = new RegExp(filterOpts.text, 'i');
-
-              if (re.test(post.title)) {
-                return true;
-              }
-              if (re.test(post.subtitle)) {
-                return true;
-              }
-              if (re.test(post.tags)) {
-                return true;
-              }
-              if (re.test(post.content)) {
-                return true;
-              }
-
-              return false;
-            });
-        }
-
-        // Filter by tags.
-        if (filterOpts.tags) {
-          posts = posts
-            .filter(function(post) {
-              // For each tag in filter options...
-              filterOpts.tags.forEach(function(tag) {
-                // If the post doesn't contain the tag, filter it out.
-                if (post.tags.indexOf(tag) === -1) {
-                  return false;
-                }
-              });
-
-              // The post contains all the tags, include it.
+            if (re.test(post.title)) {
               return true;
-            });
-        }
+            }
+            if (re.test(post.subtitle)) {
+              return true;
+            }
+            if (re.test(post.tags)) {
+              return true;
+            }
+            if (re.test(post.content)) {
+              return true;
+            }
 
-        // Filter by date range (inclusive).
-        if (filterOpts.dates) {
-          // Filter by start date.
-          if (filterOpts.dates.start) {
-            posts = posts
-              .filter(function(post) {
-                return post.date >= filterOpts.dates.start;
-              });
-          }
+            return false;
+          });
+      }
 
-          // Filter by end date.
-          if (filterOpts.dates.end) {
-            posts = posts
-              .filter(function(post) {
-                return post.date <= filterOpts.dates.start;
-              });
-          }
-        }
+      // Filter by max age.
+      if (postFilters.maxAge !== 'all') {
+        var startDate = Date.past(postFilters.maxAge);
+        posts = posts
+          .filter(function(post) {
+            return post.date >= startDate;
+          });
       }
 
       return posts;
@@ -143,38 +105,20 @@
      * parameterized route.
      */
     function setView(params) {
-      var filterOpts = {
-        post: params.post || null,
-        text: params.text || null,
-        tags: params.tags || null,
-        dates: {
-          start: params.dates ? params.dates[0] : null,
-          end: params.dates ? params.dates[1] : null
-        }
-      };
-      var data = {
-        posts: getPosts(filterOpts)
-      };
-
-      blogView.refresh(data);
+      updatePostFilters(params);
       blogView.render();
     }
 
     /**
-     * Searches for posts matching given search query data.
-     * @param {object} data - The search query data.
-     * @param {string} data.text - Text that may appear anywhere in post.
-     * @param {string} data.maxAge - Max age of posts.
+     * Updates post filters.
+     * @param {object} data - New post filter data.
      */
-    function search(data) {
-      if (data.text) {
-        searchData.text = data.text;
+    function updatePostFilters(data) {
+      for (var prop in data) {
+        if (postFilters.hasOwnProperty(prop)) {
+          postFilters[prop] = data[prop];
+        }
       }
-      if (data.maxAge) {
-        // TODO
-      }
-
-      mainController.setQueryString(searchData);
     }
 
     /*

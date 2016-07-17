@@ -13,10 +13,14 @@
    */
   function BlogView(blogController) {
     var self = this;
-    var htmlTemplate;
+    var containerElem = document.querySelector('.main');
+    var blogTemplate = document.getElementById('blog-template').innerHTML;
+    var postTemplate = document.getElementById('post-template').innerHTML;
+    // Initialized on render.
+    var postContainerElem;
 
-    self.refresh = refresh;
     self.render = render;
+    self.renderPosts = renderPosts;
 
     init();
 
@@ -27,54 +31,63 @@
     */
 
     /**
-     * Refreshes the view (but does not render).
-     * @param {object} data - Data used to refresh the view.
-     * @param {Post[]} data.posts - Posts to display in the view.
-     */
-    function refresh(data) {
-      var posts = data.posts
-        .map(function(post) {
-          return formatPostTemplate(post);
-        })
-        .join('');
-
-      htmlTemplate = document.getElementById('blog-template').innerHTML;
-      htmlTemplate = htmlTemplate.replace('{posts}', posts);
-    }
-
-    /**
      * Renders HTML to the document.
      */
     function render() {
-      // Get the element in which to render content.
-      var el = document.querySelector('.main');
-      // Set the element's content.
-      el.innerHTML = htmlTemplate;
+      // Get the post filters in order to properly initialize the search form.
+      var postFilters = blogController.getPostFilters();
+      // Format the blog template.
+      var formattedBlogTemplate = blogTemplate
+        .replace('{search-text}', postFilters.text)
+        .replace('{search-week}', postFilters.maxAge === 'week')
+        .replace('{search-month}', postFilters.maxAge === 'month')
+        .replace('{search-year}', postFilters.maxAge === 'year')
+        .replace('{search-all}', postFilters.maxAge === 'all');
+
+      // Set the container element's inner HTML to the formatted blog template.
+      containerElem.innerHTML = formattedBlogTemplate;
+      // Get a reference to the blog post's container element.
+      postContainerElem = document.querySelector('.blog-posts');
 
       // Add event listeners.
-      var searchForm = document.getElementsByClassName('blog-search')[0];
-      var searchBar = document.getElementsByClassName('blog-search__search-bar')[0];
-      var timeOptions = document.getElementsByClassName('blog-search__time-options')[0];
-
+      var searchForm = document.querySelector('.blog-search');
+      var searchBar = document.querySelector('.blog-search__search-bar');
+      var timeOptions = document.querySelector('.blog-search__time-options');
       // Prevent form submission from reloading the page.
       searchForm.addEventListener('submit', function(e) {
         e.preventDefault();
       });
-
-      // Update query string on search bar input.
+      // Update post filters on search bar input.
       searchBar.addEventListener('input', function(e) {
-        // TODO: Sanitize input?
-        blogController.search({
-          text: e.target.value
-        });
+        blogController.updatePostFilters({text: e.target.value});
+        renderPosts();
+      });
+      // Update post filters on time options change.
+      timeOptions.addEventListener('change', function(e) {
+        blogController.updatePostFilters({maxAge: e.target.value});
+        renderPosts();
       });
 
-      // Update query string on time options change.
-      timeOptions.addEventListener('change', function(e) {
-        blogController.search({
-          maxAge: e.target.value
-        });
-      });
+      // Render posts.
+      renderPosts();
+    }
+
+    /**
+     * Renders posts.
+     */
+    function renderPosts() {
+      // Get posts to be rendered.
+      var posts = blogController.getPosts();
+
+      // Convert posts into formatted post templates, then join them into a
+      // single HTML string.
+      posts = posts.map(function(post) {
+        return formatPostTemplate(post);
+      }).join('');
+
+      // Set the blog posts' container element's inner HTML to the formatted
+      // blog post templates.
+      postContainerElem.innerHTML = posts;
     }
 
     /*
@@ -86,12 +99,7 @@
     /**
      * Initializes the blog view.
      */
-    function init() {
-      var data = {
-        posts: blogController.getPosts()
-      };
-      refresh(data);
-    }
+    function init() {}
 
     /**
      * Formats a post template with data from a post.
@@ -99,10 +107,8 @@
      * @return {string} - The formatted template.
      */
     function formatPostTemplate(post) {
-      var template = document.getElementById('post-template').innerHTML;
-
-      // Formate piece template.
-      template = template
+      // Format post template.
+      var formattedPostTemplate = postTemplate
         .replace('{post-id}', blogController.getPostID(post))
         .replace('{title}', post.title)
         .replace('{content}', post.content)
@@ -115,7 +121,7 @@
                                '')
         .replace('{tags}', post.tags ? post.tags.join(', ') : '');
 
-      return template;
+      return formattedPostTemplate;
     }
   }
 })();
