@@ -84,7 +84,6 @@
       for (var prop in data) {
         // Exclude inherited properties.
         if (data.hasOwnProperty(prop)) {
-
           // Add '?' for first property only, otherwise add '&'.
           if (queryStr) {
             queryStr += '&';
