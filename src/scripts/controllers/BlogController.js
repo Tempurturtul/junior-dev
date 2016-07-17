@@ -57,6 +57,7 @@
      * @return {Post[]} - An array of blog posts.
      */
     function getPosts() {
+      // Get raw data.
       var posts = mainController.getStoredData('blogPosts');
 
       // Convert raw data to Post instances.
@@ -65,46 +66,8 @@
           return new app.models.Post(post);
         });
 
-      // Check for filtering by post ID.
-      // (No need to filter by anything else if post ID is used.)
-      if (postFilters.post) {
-        posts = posts
-          .filter(function(post) {
-            return postFilters.post === getPostID(post);
-          });
-      } else {
-        // Filter by text.
-        if (postFilters.text) {
-          posts = posts
-            .filter(function(post) {
-              var re = new RegExp(postFilters.text, 'i');
-
-              if (re.test(post.title)) {
-                return true;
-              }
-              if (re.test(post.subtitle)) {
-                return true;
-              }
-              if (re.test(post.tags)) {
-                return true;
-              }
-              if (re.test(post.content)) {
-                return true;
-              }
-
-              return false;
-            });
-        }
-
-        // Filter by max age.
-        if (postFilters.maxAge !== 'all') {
-          var startDate = Date.past(postFilters.maxAge);
-          posts = posts
-            .filter(function(post) {
-              return post.date >= startDate;
-            });
-        }
-      }
+      // Filter posts.
+      posts = filterPosts(posts, postFilters);
 
       return posts;
     }
@@ -152,6 +115,78 @@
      */
     function init() {
       blogView = new app.views.BlogView(self);
+    }
+
+    /**
+     * Filters posts.
+     * @param {Post[]} posts - Posts to filter.
+     * @param {object} filters - Filters to apply.
+     * @param {string} filters.post - A particular post ID.
+     * @param {string} filters.text - Text to search posts for.
+     * @param {string} filters.maxAge - Maximum age of a post.
+     * @return {Post[]} - Filtered posts.
+     */
+    function filterPosts(posts, filters) {
+      // Check for filtering by post ID.
+      // (No need to filter by anything else if post ID is used.)
+      if (filters.post) {
+        posts = posts
+          .filter(function(post) {
+            return filters.post === getPostID(post);
+          });
+      } else {
+        // Filter by text. (Must match all space-separated strings.)
+        if (filters.text) {
+          var strs = filters.text.split(' ');
+          var strsLen = strs.length;
+
+          posts = posts
+            .filter(function(post) {
+              // Get the post's content minus any HTML markup in order to
+              // search it without interference.
+
+              // First, encode any escaped angle braces to avoid removing them.
+              var htmlFreeContent = post.content
+                .replace(/\\</g, '&lt;')
+                .replace(/\\>/g, '&gt;');
+              // Next, strip all HTML markup.
+              htmlFreeContent = htmlFreeContent
+                .replace(/<[^>]+>/g, '');
+              // Finally, decode angle braces to original form (minus escapes).
+              htmlFreeContent = htmlFreeContent
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>');
+
+              // For each space separated string...
+              for (var i = 0; i < strsLen; i++) {
+                // If the string doesn't exist in the post's title, content,
+                // or subtitle...
+                if (post.title.indexOf(strs[i]) === -1 &&
+                    htmlFreeContent.indexOf(strs[i]) === -1 &&
+                    (!post.subtitle ||
+                      post.subtitle.indexOf(strs[i]) === -1)) {
+                  // Exclude the post.
+                  return false;
+                }
+              }
+
+              // Otherwise, each string does exist somewhere in the post,
+              // therefore include the post.
+              return true;
+            });
+        }
+
+        // Filter by max age.
+        if (filters.maxAge !== 'all') {
+          var startDate = Date.past(filters.maxAge);
+          posts = posts
+            .filter(function(post) {
+              return post.date >= startDate;
+            });
+        }
+      }
+
+      return posts;
     }
   }
 })();
