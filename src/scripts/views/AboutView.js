@@ -13,7 +13,8 @@
    */
   function AboutView(aboutController) {
     var self = this;
-    var htmlTemplate = document.getElementById('about-template').innerHTML;
+    var containerElem = document.querySelector('.main');
+    var aboutTemplate = document.getElementById('about-template').innerHTML;
 
     self.render = render;
 
@@ -29,10 +30,7 @@
      * Renders HTML to the document.
      */
     function render() {
-      // Get the element in which to render content.
-      var el = document.querySelector('.main');
-      // Set the element's content.
-      el.innerHTML = htmlTemplate;
+      containerElem.innerHTML = aboutTemplate;
     }
 
     /*

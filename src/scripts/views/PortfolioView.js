@@ -13,9 +13,12 @@
    */
   function PortfolioView(portfolioController) {
     var self = this;
-    var htmlTemplate;
+    var containerElem = document.querySelector('.main');
+    var portfolioTemplate = document.getElementById('portfolio-template')
+                              .innerHTML;
+    var pieceTemplate = document.getElementById('portfolio-piece-template')
+                          .innerHTML;
 
-    self.refresh = refresh;
     self.render = render;
 
     init();
@@ -27,30 +30,17 @@
     */
 
     /**
-     * Refreshes the view (but does not render).
-     * @param {object} data - Data used to refresh the view.
-     * @param {PortfolioPiece[]} data.portfolioPieces - Portfolio pieces to
-     * display in the view.
-     */
-    function refresh(data) {
-      var pieces = data.portfolioPieces
-        .map(function(piece) {
-          return formatPieceTemplate(piece);
-        })
-        .join('');
-
-      htmlTemplate = document.getElementById('portfolio-template').innerHTML;
-      htmlTemplate = htmlTemplate.replace('{portfolio-pieces}', pieces);
-    }
-
-    /**
      * Renders HTML to the document.
      */
     function render() {
-      // Get the element in which to render content.
-      var el = document.querySelector('.main');
-      // Set the element's content.
-      el.innerHTML = htmlTemplate;
+      var pieces = portfolioController.getPortfolioPieces();
+      pieces = pieces.map(function(piece) {
+        return formatPieceTemplate(piece);
+      }).join('');
+
+      var formattedPortfolioTemplate = portfolioTemplate
+        .replace('{portfolio-pieces}', pieces);
+      containerElem.innerHTML = formattedPortfolioTemplate;
     }
 
     /*
@@ -62,12 +52,7 @@
     /**
      * Initializes the portfolio view.
      */
-    function init() {
-      var data = {
-        portfolioPieces: portfolioController.getPortfolioPieces()
-      };
-      refresh(data);
-    }
+    function init() {}
 
     /**
      * Formats a piece template with data from a portfolio piece.
@@ -76,14 +61,11 @@
      * @return {string} - The formatted template.
      */
     function formatPieceTemplate(piece) {
-      var template = document
-                       .getElementById('portfolio-piece-template')
-                       .innerHTML;
       var placeholderImgURL = 'images/placeholder.png';
       var placeholderImgAlt = 'Image unavailable.';
 
       // Formate piece template.
-      template = template
+      var formattedPieceTemplate = pieceTemplate
         .replace('{title}', piece.title)
         .replace('{description}', piece.description)
         .replace('{source-url}', piece.sourceURL)
@@ -105,7 +87,7 @@
                                       piece.image.alt :
                                       placeholderImgAlt);
 
-      return template;
+      return formattedPieceTemplate;
     }
 
     /**
