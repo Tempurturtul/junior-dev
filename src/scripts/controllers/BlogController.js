@@ -160,9 +160,10 @@
               // For each space separated string...
               for (var i = 0; i < strsLen; i++) {
                 // If the string doesn't exist in the post's title, content,
-                // or subtitle...
+                // tags (exact match), or subtitle...
                 if (post.title.indexOf(strs[i]) === -1 &&
                     htmlFreeContent.indexOf(strs[i]) === -1 &&
+                    post.tags.indexOf(strs[i]) === -1 &&
                     (!post.subtitle ||
                       post.subtitle.indexOf(strs[i]) === -1)) {
                   // Exclude the post.
