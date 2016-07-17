@@ -16,6 +16,7 @@
     // Assigned during initialization.
     var blogView;
     var postFilters = {
+      post: null,
       text: '',
       maxAge: 'all'
     };
@@ -64,36 +65,45 @@
           return new app.models.Post(post);
         });
 
-      // Filter by text.
-      if (postFilters.text) {
+      // Check for filtering by post ID.
+      // (No need to filter by anything else if post ID is used.)
+      if (postFilters.post) {
         posts = posts
           .filter(function(post) {
-            var re = new RegExp(postFilters.text, 'i');
-
-            if (re.test(post.title)) {
-              return true;
-            }
-            if (re.test(post.subtitle)) {
-              return true;
-            }
-            if (re.test(post.tags)) {
-              return true;
-            }
-            if (re.test(post.content)) {
-              return true;
-            }
-
-            return false;
+            return postFilters.post === getPostID(post);
           });
-      }
+      } else {
+        // Filter by text.
+        if (postFilters.text) {
+          posts = posts
+            .filter(function(post) {
+              var re = new RegExp(postFilters.text, 'i');
 
-      // Filter by max age.
-      if (postFilters.maxAge !== 'all') {
-        var startDate = Date.past(postFilters.maxAge);
-        posts = posts
-          .filter(function(post) {
-            return post.date >= startDate;
-          });
+              if (re.test(post.title)) {
+                return true;
+              }
+              if (re.test(post.subtitle)) {
+                return true;
+              }
+              if (re.test(post.tags)) {
+                return true;
+              }
+              if (re.test(post.content)) {
+                return true;
+              }
+
+              return false;
+            });
+        }
+
+        // Filter by max age.
+        if (postFilters.maxAge !== 'all') {
+          var startDate = Date.past(postFilters.maxAge);
+          posts = posts
+            .filter(function(post) {
+              return post.date >= startDate;
+            });
+        }
       }
 
       return posts;
@@ -106,7 +116,14 @@
      */
     function setView(params) {
       updatePostFilters(params);
-      blogView.render();
+
+      var opts = {};
+      // Handle post param (indicating viewing of a single specific post).
+      if (params.post) {
+        opts.hideSearch = true;
+      }
+
+      blogView.render(opts);
     }
 
     /**
@@ -114,6 +131,9 @@
      * @param {object} data - New post filter data.
      */
     function updatePostFilters(data) {
+      // Reset postFilters.post, since we do not want it to persist implicitly.
+      postFilters.post = null;
+
       for (var prop in data) {
         if (postFilters.hasOwnProperty(prop)) {
           postFilters[prop] = data[prop];

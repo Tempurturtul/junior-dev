@@ -32,8 +32,10 @@
 
     /**
      * Renders HTML to the document.
+     * @param {object} [opts] - Rendering options.
+     * @param {bool} [opts.hideSearch] - Hides the search form.
      */
-    function render() {
+    function render(opts) {
       // Get the post filters in order to properly initialize the search form.
       var postFilters = blogController.getPostFilters();
       // Format the blog template.
@@ -43,6 +45,15 @@
         .replace('{search-month}', postFilters.maxAge === 'month')
         .replace('{search-year}', postFilters.maxAge === 'year')
         .replace('{search-all}', postFilters.maxAge === 'all');
+
+      // Handle hideSearch option.
+      var hideSearch = '';
+      if (opts && opts.hideSearch) {
+        hideSearch = 'hidden';
+      }
+
+      formattedBlogTemplate = formattedBlogTemplate
+        .replace('{hide-search}', hideSearch);
 
       // Set the container element's inner HTML to the formatted blog template.
       containerElem.innerHTML = formattedBlogTemplate;
