@@ -41,10 +41,14 @@
       // Format the blog template.
       var formattedBlogTemplate = blogTemplate
         .replace('{search-text}', postFilters.text)
-        .replace('{search-week}', postFilters.maxAge === 'week')
-        .replace('{search-month}', postFilters.maxAge === 'month')
-        .replace('{search-year}', postFilters.maxAge === 'year')
-        .replace('{search-all}', postFilters.maxAge === 'all');
+        .replace('{search-week}', postFilters.maxAge === 'week' ?
+          'selected' : '')
+        .replace('{search-month}', postFilters.maxAge === 'month' ?
+          'selected' : '')
+        .replace('{search-year}', postFilters.maxAge === 'year' ?
+          'selected' : '')
+        .replace('{search-all}', postFilters.maxAge === 'all' ?
+          'selected' : '');
 
       // Handle hideSearch option.
       var hideSearch = '';

@@ -96,10 +96,10 @@
         <form class="blog-search" {hide-search}>
           <input class="blog-search__search-bar" type="search" placeholder="Search" value="{search-text}">
           <select class="blog-search__time-options">
-            <option class="blog-search__time-option" value="week" selected="{search-week}">Last Week</option>
-            <option class="blog-search__time-option" value="month" selected="{search-month}">Last Month</option>
-            <option class="blog-search__time-option" value="year" selected="{search-year}">Last Year</option>
-            <option class="blog-search__time-option" value="all" selected="{search-all}">All Time</option>
+            <option class="blog-search__time-option" value="week" {search-week}>Last Week</option>
+            <option class="blog-search__time-option" value="month" {search-month}>Last Month</option>
+            <option class="blog-search__time-option" value="year" {search-year}>Last Year</option>
+            <option class="blog-search__time-option" value="all" {search-all}>All Time</option>
           </select>
         </form>
         <!-- Blog Posts block. -->
