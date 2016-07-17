@@ -2,7 +2,7 @@
 
 ***A work in progress.***
 
-Home page built with clean and simple HTML, CSS, and JavaScript.
+Home page built with vanilla HTML, CSS, and JavaScript.
 
 Includes a personal blog and portfolio.
 
@@ -10,7 +10,7 @@ Includes a personal blog and portfolio.
 
 - Install [Node](https://nodejs.org/en/).
 - Clone this repository and navigate to it.
-  
+
   ```
   git clone https://github.com/Tempurturtul/home.git
   cd home/
@@ -34,3 +34,12 @@ Includes a personal blog and portfolio.
   # Run tests and watch for changes.
   npm run test:watch
   ```
+
+## TODO
+
+- Click tags to filter by them.
+- Styling.
+- Test.
+- ...?
+- Add content.
+- Publish.
