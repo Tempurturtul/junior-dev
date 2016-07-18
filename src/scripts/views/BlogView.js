@@ -150,12 +150,11 @@
 
     /**
      * Handles search bar input event by updating blog controller's post
-     * filters using the new search bar value, then refreshing the blog posts.
+     * filters using the new search bar value.
      * @param {Event} e - The input event.
      */
     function handleSearchBarInput(e) {
       blogController.updatePostFilters({text: e.target.value});
-      renderPosts();
     }
 
     /**
@@ -175,19 +174,15 @@
       }
       // Update the post filters.
       blogController.updatePostFilters({tags: tags});
-      // Re-render the posts.
-      renderPosts();
     }
 
     /**
      * Handles time options change event by updating blog controller's post
-     * filters using the newly selected time options value, then refreshing
-     * the blog posts.
+     * filters using the newly selected time options value.
      * @param {Event} e - The input event.
      */
     function handleTimeOptionsChange(e) {
       blogController.updatePostFilters({maxAge: e.target.value});
-      renderPosts();
     }
   }
 })();

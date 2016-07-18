@@ -79,7 +79,7 @@
      * parameterized route.
      */
     function setView(params) {
-      updatePostFilters(params);
+      updatePostFilters(params, false);
 
       var opts = {};
       // Handle post param (indicating viewing of a single specific post).
@@ -91,10 +91,16 @@
     }
 
     /**
-     * Updates post filters.
+     * Updates post filters and optionally re-renders posts (default).
      * @param {object} data - New post filter data.
+     * @param {bool} [render=true] - Re-render posts.
      */
-    function updatePostFilters(data) {
+    function updatePostFilters(data, render) {
+      // Handle default value for render.
+      if (render === undefined) {
+        render = true;
+      }
+
       // Reset postFilters.post, since we do not want it to persist implicitly.
       postFilters.post = null;
 
@@ -102,6 +108,10 @@
         if (postFilters.hasOwnProperty(prop)) {
           postFilters[prop] = data[prop];
         }
+      }
+
+      if (render) {
+        blogView.renderPosts();
       }
     }
 
