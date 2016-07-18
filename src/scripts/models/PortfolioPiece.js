@@ -12,6 +12,7 @@
    * @param {object} data - Data representing the portfolio piece.
    * @param {string} data.title - The title of the piece.
    * @param {string} data.description - A description of the piece.
+   * @param {string[]} data.tags - Tags for the piece.
    * @param {string} data.sourceURL - A URL to the piece's source code.
    * @param {string} [data.liveURL] - A URL to a live version of the piece.
    * @param {object} [data.image] - Data for an image of the piece.
@@ -27,6 +28,7 @@
   function PortfolioPiece(data) {
     this.title = data.title;
     this.description = data.description;
+    this.tags = data.tags;
     this.sourceURL = data.sourceURL;
     this.liveURL = data.liveURL || null;
     this.image = data.image || null;

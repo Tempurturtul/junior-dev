@@ -15,8 +15,11 @@
     var self = this;
     // Assigned during initialization.
     var portfolioView;
+    var filteredTags = [];
 
+    self.getFilteredTags = getFilteredTags;
     self.getPortfolioPieces = getPortfolioPieces;
+    self.setFilteredTags = setFilteredTags;
     self.setView = setView;
 
     init();
@@ -26,6 +29,14 @@
     * Exposed methods.
     ****************************************
     */
+
+    /**
+    * Gets the filtered tags.
+    * @return {string[]} - The filtered tags.
+     */
+    function getFilteredTags() {
+      return filteredTags;
+    }
 
     /**
      * Gets portfolio pieces.
@@ -39,7 +50,18 @@
           return new app.models.PortfolioPiece(piece);
         });
 
+      pieces = filterPieces(pieces, filteredTags);
+
       return pieces;
+    }
+
+    /**
+     * Sets the filtered tags.
+     * @param {string[]} tags - The new tags.
+     */
+    function setFilteredTags(tags) {
+      filteredTags = tags;
+      portfolioView.renderPieces();
     }
 
     /**
@@ -62,6 +84,29 @@
      */
     function init() {
       portfolioView = new app.views.PortfolioView(self);
+    }
+
+    /**
+     * Filters pieces.
+     * @param {Pieces[]} pieces - Pieces to filter.
+     * @param {string[]} tags - Tags to filter by.
+     * @return {Pieces[]} - Filtered pieces.
+     */
+    function filterPieces(pieces, tags) {
+      var i;
+      var tagsLen = tags.length;
+
+      return pieces.filter(function(piece) {
+        // For each filtered tag...
+        for (i = 0; i < tagsLen; i++) {
+          // If the piece doesn't contain the tag, exclude the piece.
+          if (piece.tags.indexOf(tags[i]) === -1) {
+            return false;
+          }
+        }
+
+        return true;
+      });
     }
   }
 })();

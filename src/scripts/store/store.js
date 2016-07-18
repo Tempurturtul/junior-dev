@@ -29,11 +29,13 @@
       {
         title: 'Home',
         description: 'Personal homepage featuring my blog and portfolio. Built with semantic HTML, modular CSS, and vanilla JavaScript (no third-party code used). Includes JSDoc comments throughout, BEM methodology for CSS, a thoroughly tested hash router, an MVC design pattern, build scripts via npm, testing (incomplete) with tape and jsdom, and modularization of code using IIFEs.',
+        tags: ['js', 'css', 'html', 'single-page application', 'testing', 'tape', 'jsdom', 'npm', 'bem', 'jsdoc'],
         sourceURL: 'https://github.com/Tempurturtul/home'
       },
       {
         title: 'Neighborhood Map',
         description: 'A single-page web application built using Knockout that displays a Google Map of an area, along with various user-defined map markers. Users can filter and organize map markers in a list with user-created (and optionally nested) folders. Clicking on a map marker displays additional information about the location retrieved from the Google, Flickr, Foursquare, and Wikipedia APIs.',
+        tags: [],
         sourceURL: 'https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-neighborhood-map',
         liveURL: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-neighborhood-map/',
         image: {

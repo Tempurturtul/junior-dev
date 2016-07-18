@@ -15,13 +15,14 @@ test('portfolio piece model exists on window', function(t) {
   });
 });
 
-test('portfolio pieces only require a title, description, and sourceURL',
+test('portfolio pieces only require a title, description, tags, and sourceURL',
   function(t) {
     setupVDOM([PortfolioPiece])
     .then(function(window) {
       var data = {
         title: 'A title.',
         description: 'A description.',
+        tags: [],
         sourceURL: 'src/url'
       };
       var error = null;
@@ -47,6 +48,7 @@ test('portfolio pieces can contain optional data', function(t) {
     var data = {
       title: 'A title.',
       description: 'A description.',
+      tags: [],
       sourceURL: 'src/url',
       // Remaining optional.
       liveURL: 'live/url',

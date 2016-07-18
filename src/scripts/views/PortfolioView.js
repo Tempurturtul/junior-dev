@@ -18,8 +18,11 @@
                               .innerHTML;
     var pieceTemplate = document.getElementById('portfolio-piece-template')
                           .innerHTML;
+    // Initialized on render.
+    var pieceContainerElem;
 
     self.render = render;
+    self.renderPieces = renderPieces;
 
     init();
 
@@ -33,14 +36,38 @@
      * Renders HTML to the document.
      */
     function render() {
+      containerElem.innerHTML = portfolioTemplate;
+      pieceContainerElem = document.querySelector('.portfolio-pieces');
+      renderPieces();
+    }
+
+    /**
+     * Renders portfolio pieces.
+     */
+    function renderPieces() {
       var pieces = portfolioController.getPortfolioPieces();
+      var filteredTags = portfolioController.getFilteredTags();
+
+      // Convert pieces to a single string of formatted piece templates.
       pieces = pieces.map(function(piece) {
         return formatPieceTemplate(piece);
       }).join('');
 
-      var formattedPortfolioTemplate = portfolioTemplate
-        .replace('{portfolio-pieces}', pieces);
-      containerElem.innerHTML = formattedPortfolioTemplate;
+      pieceContainerElem.innerHTML = pieces;
+
+      // Add event listeners.
+      var tags = document.getElementsByClassName('portfolio-piece__tag');
+      var len = tags.length;
+      // For each tag...
+      for (var i = 0; i < len; i++) {
+        // Add the handleTagClick event listener.
+        tags[i].addEventListener('click', handleTagClick);
+        // Add the --active modifier if the tag is present in the filtered
+        // tags.
+        if (filteredTags.indexOf(tags[i].textContent) !== -1) {
+          tags[i].classList.add('portfolio-piece__tag--active');
+        }
+      }
     }
 
     /*
@@ -85,7 +112,10 @@
                                  '')
         .replace('{img-description}', piece.image && piece.image.alt ?
                                       piece.image.alt :
-                                      placeholderImgAlt);
+                                      placeholderImgAlt)
+        .replace('{tags}', piece.tags.map(function(tag) {
+          return '<span class="portfolio-piece__tag">' + tag + '</span>';
+        }).join(', '));
 
       return formattedPieceTemplate;
     }
@@ -109,6 +139,25 @@
 
         return acc;
       }, '');
+    }
+
+    /**
+     * Handles tag click event by updating the portfolio controller's
+     * filtered tags.
+     * @param {Event} e - The click event.
+     */
+    function handleTagClick(e) {
+      var clickedTag = e.target.textContent;
+      // Get filtered tags.
+      var filteredTags = portfolioController.getFilteredTags();
+      // Add or remove the clicked tag from the filtered tags.
+      if (filteredTags.indexOf(clickedTag) === -1) {
+        filteredTags.push(clickedTag);
+      } else {
+        filteredTags.splice(filteredTags.indexOf(clickedTag), 1);
+      }
+      // Update the filtered tags.
+      portfolioController.setFilteredTags(filteredTags);
     }
   }
 })();

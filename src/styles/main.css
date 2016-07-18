@@ -253,10 +253,10 @@ a:hover {
 }
 
 /**************************************
-  Flex Grid
+  Portfolio Pieces
 **************************************/
 
-.flex-grid {
+.portfolio-pieces {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -301,4 +301,29 @@ a:hover {
   margin: 10px 0;
   max-width: 300px;
   text-indent: 2em;
+}
+
+.portfolio-piece__footer {
+  border-top: solid 1px #222;
+  font-size: 0.9em;
+  padding-top: 5px;
+  width: 100%;
+}
+
+.portfolio-piece__tags {
+  font-style: italic;
+}
+
+.portfolio-piece__tag {
+
+}
+
+.portfolio-piece__tag:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.portfolio-piece__tag--active {
+  color: #000;
+  font-weight: bold;
 }
