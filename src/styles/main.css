@@ -187,6 +187,14 @@ a:hover {
 }
 
 /**************************************
+  Blog Posts
+**************************************/
+
+.blog-posts {
+
+}
+
+/**************************************
   Post
 **************************************/
 
@@ -228,6 +236,20 @@ a:hover {
 
 .post__tags {
   font-style: italic;
+}
+
+.post__tag {
+
+}
+
+.post__tag:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.post__tag--active {
+  color: #000;
+  font-weight: bold;
 }
 
 /**************************************

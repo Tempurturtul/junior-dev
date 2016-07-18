@@ -18,7 +18,8 @@
     var postFilters = {
       post: null,
       text: '',
-      maxAge: 'all'
+      maxAge: 'all',
+      tags: []
     };
 
     self.getPostFilters = getPostFilters;
@@ -124,9 +125,12 @@
      * @param {string} filters.post - A particular post ID.
      * @param {string} filters.text - Text to search posts for.
      * @param {string} filters.maxAge - Maximum age of a post.
+     * @param {string[]} filters.tags - Post tags that must be present.
      * @return {Post[]} - Filtered posts.
      */
     function filterPosts(posts, filters) {
+      var i;
+
       // Check for filtering by post ID.
       // (No need to filter by anything else if post ID is used.)
       if (filters.post) {
@@ -158,7 +162,7 @@
                 .replace(/&gt;/g, '>');
 
               // For each space separated string...
-              for (var i = 0; i < strsLen; i++) {
+              for (i = 0; i < strsLen; i++) {
                 // If the string doesn't exist in the post's title, content,
                 // tags (exact match), or subtitle...
                 if (post.title.indexOf(strs[i]) === -1 &&
@@ -183,6 +187,23 @@
           posts = posts
             .filter(function(post) {
               return post.date >= startDate;
+            });
+        }
+
+        // Filter by tags.
+        if (filters.tags.length) {
+          var tagsLen = filters.tags.length;
+          posts = posts
+            .filter(function(post) {
+              // For each filter tag...
+              for (i = 0; i < tagsLen; i++) {
+                // If the tag doesn't exist in the post, exclude the post.
+                if (post.tags.indexOf(filters.tags[i]) === -1) {
+                  return false;
+                }
+              }
+
+              return true;
             });
         }
       }
