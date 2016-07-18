@@ -37,7 +37,6 @@ Includes a personal blog and portfolio.
 
 ## TODO
 
-- Click tags to filter by them.
 - Styling.
 - Test.
 - ...?
