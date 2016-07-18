@@ -28,7 +28,7 @@
     portfolioPieces: [
       {
         title: 'Home',
-        description: 'Single-page app, built with semantic HTML, modular CSS, and documented & tested JavaScript.',
+        description: 'Personal homepage featuring my blog and portfolio. Built with semantic HTML, modular CSS, and vanilla JavaScript (no third-party code used). Includes JSDoc comments throughout, BEM methodology for CSS, a thoroughly tested hash router, an MVC design pattern, build scripts via npm, testing (incomplete) with tape and jsdom, and modularization of code using IIFEs.',
         sourceURL: 'https://github.com/Tempurturtul/home'
       },
       {
