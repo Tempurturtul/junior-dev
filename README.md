@@ -37,6 +37,8 @@ Includes a personal blog and portfolio.
 
 ## TODO
 
+- Reuse tags styling? (DRY)
+- Reuse controller/view logic between portfolio and blog? (DRY)
 - Add content.
 - Publish.
 - Test.

@@ -239,7 +239,8 @@ a:hover {
 }
 
 .post__tag {
-
+  font-variant: small-caps;
+  white-space: nowrap;
 }
 
 .post__tag:hover {
@@ -315,7 +316,8 @@ a:hover {
 }
 
 .portfolio-piece__tag {
-
+  font-variant: small-caps;
+  white-space: nowrap;
 }
 
 .portfolio-piece__tag:hover {
