@@ -16,6 +16,13 @@
         date: new Date('2011-09-25'),
         content: '<p><em>Ooooh...</em> so pretty.</p>',
         tags: ['js', 'css', 'html']
+      },
+      {
+        title: 'Max Dos',
+        subtitle: 'Again!',
+        date: new Date('2011-09-30'),
+        content: '<p><em>Ooooh...</em> so pretty. <em>Dos!</em></p>',
+        tags: ['js', 'css', 'html', 'dos']
       }
     ],
     portfolioPieces: [
