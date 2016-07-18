@@ -61,7 +61,7 @@
      * @return {string} - The formatted template.
      */
     function formatPieceTemplate(piece) {
-      var placeholderImgURL = 'images/placeholder.png';
+      var placeholderImgURL = 'images/placeholder-300.png';
       var placeholderImgAlt = 'Image unavailable.';
 
       // Formate piece template.
