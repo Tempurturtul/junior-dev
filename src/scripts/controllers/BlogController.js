@@ -141,35 +141,41 @@
       } else {
         // Filter by text. (Must match all space-separated strings.)
         if (filters.text) {
-          var strs = filters.text.split(' ');
+          // Convert filters.text to lower case and extract space-separated
+          // strings.
+          var strs = filters.text.toLowerCase().split(' ');
           var strsLen = strs.length;
 
           posts = posts
             .filter(function(post) {
+              // Get the post's title and subtitle, and convert them to
+              // lower case.
+              var title = post.title.toLowerCase();
+              var subtitle = post.subtitle ? post.subtitle.toLowerCase() : '';
               // Get the post's content minus any HTML markup in order to
-              // search it without interference.
-
+              // search it without interference, then convert it to lower case.
               // First, encode any escaped angle braces to avoid removing them.
-              var htmlFreeContent = post.content
+              var content = post.content
                 .replace(/\\</g, '&lt;')
                 .replace(/\\>/g, '&gt;');
               // Next, strip all HTML markup.
-              htmlFreeContent = htmlFreeContent
+              content = content
                 .replace(/<[^>]+>/g, '');
               // Finally, decode angle braces to original form (minus escapes).
-              htmlFreeContent = htmlFreeContent
+              content = content
                 .replace(/&lt;/g, '<')
                 .replace(/&gt;/g, '>');
+              // Then just remember to convert to lower case.
+              content = content.toLowerCase();
 
               // For each space separated string...
               for (i = 0; i < strsLen; i++) {
-                // If the string doesn't exist in the post's title, content,
-                // tags (exact match), or subtitle...
-                if (post.title.indexOf(strs[i]) === -1 &&
-                    htmlFreeContent.indexOf(strs[i]) === -1 &&
+                // If the string doesn't exist in the post's title, subtitle,
+                // tags (exactly matching), or content...
+                if (title.indexOf(strs[i]) === -1 &&
+                    subtitle.indexOf(strs[i]) === -1 &&
                     post.tags.indexOf(strs[i]) === -1 &&
-                    (!post.subtitle ||
-                      post.subtitle.indexOf(strs[i]) === -1)) {
+                    content.indexOf(strs[i]) === -1) {
                   // Exclude the post.
                   return false;
                 }
