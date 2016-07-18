@@ -37,8 +37,6 @@ Includes a personal blog and portfolio.
 
 ## TODO
 
-- Styling.
-- Test.
-- ...?
 - Add content.
 - Publish.
+- Test.
