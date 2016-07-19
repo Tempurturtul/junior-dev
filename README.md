@@ -41,6 +41,7 @@ Includes a personal blog and portfolio.
 
 - Reuse controller/view logic between portfolio and blog? (DRY)
 - Add content.
+- Cross-browser styling.
 
 **After going live:**
 
