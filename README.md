@@ -44,3 +44,4 @@ Includes a personal blog and portfolio.
 - Add content.
 - Publish.
 - Test.
+- Refactor CSS.
