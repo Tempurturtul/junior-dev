@@ -56,7 +56,7 @@
       pieceContainerElem.innerHTML = pieces;
 
       // Add event listeners.
-      var tags = document.getElementsByClassName('portfolio-piece__tag');
+      var tags = document.getElementsByClassName('tag');
       var len = tags.length;
       // For each tag...
       for (var i = 0; i < len; i++) {
@@ -65,7 +65,7 @@
         // Add the --active modifier if the tag is present in the filtered
         // tags.
         if (filteredTags.indexOf(tags[i].textContent) !== -1) {
-          tags[i].classList.add('portfolio-piece__tag--active');
+          tags[i].classList.add('tag--active');
         }
       }
     }
@@ -114,7 +114,7 @@
                                       piece.image.alt :
                                       placeholderImgAlt)
         .replace('{tags}', piece.tags.map(function(tag) {
-          return '<span class="portfolio-piece__tag">' + tag + '</span>';
+          return '<span class="tag">' + tag + '</span>';
         }).join(', '));
 
       return formattedPieceTemplate;

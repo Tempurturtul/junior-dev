@@ -101,7 +101,7 @@
       postContainerElem.innerHTML = posts;
 
       // Add event listeners.
-      var tags = document.getElementsByClassName('post__tag');
+      var tags = document.getElementsByClassName('tag');
       var len = tags.length;
       // For each tag...
       for (var i = 0; i < len; i++) {
@@ -109,7 +109,7 @@
         tags[i].addEventListener('click', handleTagClick);
         // Add the --active modifier if the tag is present in the filters.
         if (postFilters.tags.indexOf(tags[i].textContent) !== -1) {
-          tags[i].classList.add('post__tag--active');
+          tags[i].classList.add('tag--active');
         }
       }
     }
@@ -141,7 +141,7 @@
         .replace('{subtitle}', post.subtitle ? post.subtitle : '')
         .replace('{tags}', post.tags ?
           post.tags.map(function(tag) {
-            return '<span class="post__tag">' + tag + '</span>';
+            return '<span class="tag">' + tag + '</span>';
           }).join(', ') :
           '');
 
