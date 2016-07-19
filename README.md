@@ -37,11 +37,18 @@ Includes a personal blog and portfolio.
 
 ## TODO
 
+**Before going live:**
+
 - Reuse controller/view logic between portfolio and blog? (DRY)
+- Add content.
+
+**After going live:**
+
+- Add missing tests.
+- Refactor CSS.
+
+**Wishlist features:**
+
 - Indicate page in nav.
 - Sticky nav.
 - Tag pool.
-- Add content.
-- Publish.
-- Test.
-- Refactor CSS.
