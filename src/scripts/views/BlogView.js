@@ -101,7 +101,7 @@
       postContainerElem.innerHTML = posts;
 
       // Add event listeners.
-      var tags = document.getElementsByClassName('tag');
+      var tags = document.getElementsByClassName('post__tag');
       var len = tags.length;
       // For each tag...
       for (var i = 0; i < len; i++) {
@@ -141,7 +141,7 @@
         .replace('{subtitle}', post.subtitle ? post.subtitle : '')
         .replace('{tags}', post.tags ?
           post.tags.map(function(tag) {
-            return '<span class="tag">' + tag + '</span>';
+            return '<span class="post__tag tag">' + tag + '</span>';
           }).join(', ') :
           '');
 

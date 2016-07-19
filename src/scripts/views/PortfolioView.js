@@ -56,7 +56,7 @@
       pieceContainerElem.innerHTML = pieces;
 
       // Add event listeners.
-      var tags = document.getElementsByClassName('tag');
+      var tags = document.getElementsByClassName('portfolio-piece__tag');
       var len = tags.length;
       // For each tag...
       for (var i = 0; i < len; i++) {
@@ -114,7 +114,7 @@
                                       piece.image.alt :
                                       placeholderImgAlt)
         .replace('{tags}', piece.tags.map(function(tag) {
-          return '<span class="tag">' + tag + '</span>';
+          return '<span class="portfolio-piece__tag tag">' + tag + '</span>';
         }).join(', '));
 
       return formattedPieceTemplate;

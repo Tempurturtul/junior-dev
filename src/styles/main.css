@@ -234,6 +234,10 @@ body {
 
 }
 
+.post__tag {
+
+}
+
 /**************************************
   Italic
 **************************************/
@@ -309,4 +313,8 @@ body {
 .portfolio-piece__description {
   margin: 10px 0;
   max-width: 300px;
+}
+
+.portfolio-piece__tag {
+
 }
