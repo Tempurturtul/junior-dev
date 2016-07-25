@@ -9,18 +9,21 @@
   /**
    * Creates a new Post.
    * @constructor
-   * @param {object} data - Data representing the post.
-   * @param {string} data.title - The title of the post.
-   * @param {string} data.content - The post's content.
-   * @param {Date} data.date - The post's last updated date.
+   * @param {object} [data] - Data representing the post.
+   * @param {string} [data.title] - The title of the post.
    * @param {string} [data.subtitle] - The subtitle of the post.
+   * @param {Date} [data.date] - The post's last updated date.
+   * @param {string} [data.content] - The post's content.
    * @param {string[]} [data.tags] - The post's tags.
    */
   function Post(data) {
+    // Initialize data in the event that none is given.
+    data = data || {};
+
     this.title = data.title;
-    this.content = data.content;
+    this.subtitle = data.subtitle;
     this.date = data.date;
-    this.subtitle = data.subtitle || null;
-    this.tags = data.tags || [];
+    this.content = data.content;
+    this.tags = data.tags;
   }
 })();

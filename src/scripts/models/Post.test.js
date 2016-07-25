@@ -15,19 +15,14 @@ test('post model exists on window', function(t) {
   });
 });
 
-test('post only requires a title, content, and date', function(t) {
+test('post can be created with minimal data', function(t) {
   setupVDOM([Post])
   .then(function(window) {
-    var data = {
-      title: 'A title.',
-      content: 'Some content.',
-      date: new Date()
-    };
     var error = null;
 
     try {
       // eslint-disable-next-line
-      new window.app.models.Post(data);
+      new window.app.models.Post();
     } catch (err) {
       error = err;
     }
@@ -44,14 +39,18 @@ test('post can contain optional data', function(t) {
   .then(function(window) {
     var data = {
       title: 'A title.',
-      content: 'Some content.',
-      date: new Date(),
       subtitle: 'A subtitle.',
+      date: new Date('July 7, 1777'),
+      content: 'Some content.',
       tags: ['html', 'css', 'js']
     };
     var post = new window.app.models.Post(data);
+    var isoDate = new Date('July 7, 1777').toISOString();
 
+    t.equal(post.title, 'A title.', 'contains a title');
     t.equal(post.subtitle, 'A subtitle.', 'contains a subtitle');
+    t.equal(post.date.toISOString(), isoDate, 'contains a date')
+    t.equal(post.content, 'Some content.', 'contains content');
     t.deepEqual(post.tags, ['html', 'css', 'js'], 'contains tags');
     window.close();
     t.end();

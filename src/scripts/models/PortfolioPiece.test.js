@@ -15,7 +15,26 @@ test('portfolio piece model exists on window', function(t) {
   });
 });
 
-test('portfolio pieces only require a title, description, tags, and sourceURL',
+test('portfolio pieces can be created with minimal data', function(t) {
+  setupVDOM([PortfolioPiece])
+  .then(function(window) {
+    var error = null;
+
+    try {
+      // eslint-disable-next-line
+      new window.app.models.PortfolioPiece();
+    } catch (err) {
+      error = err;
+    }
+
+    t.equal(error, null,
+      'successfully created a portfolio piece with minimal data');
+    window.close();
+    t.end();
+  });
+});
+
+test('portfolio pieces can contain optional data',
   function(t) {
     setupVDOM([PortfolioPiece])
     .then(function(window) {
@@ -23,55 +42,37 @@ test('portfolio pieces only require a title, description, tags, and sourceURL',
         title: 'A title.',
         description: 'A description.',
         tags: [],
-        sourceURL: 'src/url'
+        sourceURL: 'src/url',
+        liveURL: 'live/url',
+        image: {
+          static: 'img.png',
+          responsive: [
+            {
+              url: 'responsive.png',
+              width: '500px'
+            }
+          ],
+          description: 'An image description.'
+        }
       };
-      var error = null;
+      var piece = new window.app.models.PortfolioPiece(data);
 
-      try {
-        // eslint-disable-next-line
-        new window.app.models.PortfolioPiece(data);
-      } catch (err) {
-        error = err;
-      }
-
-      t.equal(error, null,
-        'successfully created a portfolio piece with minimal data');
-      window.close();
-      t.end();
-    });
-  }
-);
-
-test('portfolio pieces can contain optional data', function(t) {
-  setupVDOM([PortfolioPiece])
-  .then(function(window) {
-    var data = {
-      title: 'A title.',
-      description: 'A description.',
-      tags: [],
-      sourceURL: 'src/url',
-      // Remaining optional.
-      liveURL: 'live/url',
-      image: {
-        static: 'img/url',
+      t.equal(piece.title, 'A title.', 'contains title data');
+      t.equal(piece.description, 'A description.', 'contains description data');
+      t.deepEqual(piece.tags, [], 'contains tags data');
+      t.equal(piece.sourceURL, 'src/url', 'contains source url data');
+      t.equal(piece.liveURL, 'live/url', 'contains live url data');
+      t.deepEqual(piece.image, {
+        static: 'img.png',
         responsive: [
           {
-            url: 'img/url',
+            url: 'responsive.png',
             width: '500px'
           }
         ],
-        description: 'Image description.'
-      }
-    };
-    var piece = new window.app.models.PortfolioPiece(data);
-
-    t.equal(piece.liveURL, 'live/url', 'contains a live url');
-    t.equal(piece.image.static, 'img/url', 'contains a static image');
-    t.deepEqual(piece.image.responsive, [{url: 'img/url', width: '500px'}],
-      'contains a responsive image array');
-    t.equal(piece.image.description, 'Image description.',
-      'contains an image description');
-    window.close();
-    t.end();
-  });
+        description: 'An image description.'
+      }, 'contains image data');
+      window.close();
+      t.end();
+    });
 });
