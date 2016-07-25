@@ -46,11 +46,12 @@
 
     /**
      * Gets the ID (based on title) for a blog post.
+     * NOTE The ID will not be unique if two posts share the same title.
      * @param {Post} post - A blog post.
      * @return {string} - The blog post's ID.
      */
     function getPostID(post) {
-      return post.title.replace(/\s/g, '-').toLowerCase();
+      return post.title ? post.title.replace(/\s/g, '-').toLowerCase() : '';
     }
 
     /**

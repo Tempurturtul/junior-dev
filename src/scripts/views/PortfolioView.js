@@ -93,9 +93,13 @@
 
       // Formate piece template.
       var formattedPieceTemplate = pieceTemplate
-        .replace('{title}', piece.title)
-        .replace('{description}', piece.description)
-        .replace('{source-url}', piece.sourceURL)
+        .replace('{title}', piece.title || '')
+        .replace('{description}', piece.description || '')
+        .replace('{source-url}', piece.sourceURL ?
+                                 '<a ' +
+                                 'class="portfolio-piece__source-link link" ' +
+                                 'href="' + piece.sourceURL + '">GitHub</a>' :
+                                 '')
         .replace('{live-url-open}', piece.liveURL ?
                                     '<a ' +
                                         'class="portfolio-piece__live-link" ' +
@@ -113,9 +117,11 @@
         .replace('{img-description}', piece.image && piece.image.alt ?
                                       piece.image.alt :
                                       placeholderImgAlt)
-        .replace('{tags}', piece.tags.map(function(tag) {
-          return '<span class="portfolio-piece__tag tag">' + tag + '</span>';
-        }).join(', '));
+        .replace('{tags}', piece.tags ?
+          piece.tags.map(function(tag) {
+            return '<span class="portfolio-piece__tag tag">' + tag + '</span>';
+          }).join(', ') :
+          '');
 
       return formattedPieceTemplate;
     }

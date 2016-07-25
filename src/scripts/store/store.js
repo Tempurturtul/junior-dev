@@ -6,6 +6,17 @@
   app._store = {
     blogPosts: [
       {
+
+      },
+      {
+
+      },
+      {
+        title: 'Min',
+        date: new Date(),
+        content: '<p>I\'m a little teapot.</p>'
+      },
+      {
         title: 'Min',
         date: new Date(),
         content: '<p>I\'m a little teapot.</p>'
@@ -26,6 +37,18 @@
       }
     ],
     portfolioPieces: [
+      {
+
+      },
+      {
+
+      },
+      {
+        title: 'Home',
+        description: 'Personal homepage featuring my blog and portfolio. Built with semantic HTML, modular CSS, and vanilla JavaScript (no third-party code used). Includes JSDoc comments throughout, BEM methodology for CSS, a thoroughly tested hash router, an MVC design pattern, build scripts via npm, testing (incomplete) with tape and jsdom, and modularization of code using IIFEs.',
+        tags: ['js', 'css', 'html', 'single-page application', 'testing', 'tape', 'jsdom', 'npm', 'bem', 'jsdoc'],
+        sourceURL: 'https://github.com/Tempurturtul/home'
+      },
       {
         title: 'Home',
         description: 'Personal homepage featuring my blog and portfolio. Built with semantic HTML, modular CSS, and vanilla JavaScript (no third-party code used). Includes JSDoc comments throughout, BEM methodology for CSS, a thoroughly tested hash router, an MVC design pattern, build scripts via npm, testing (incomplete) with tape and jsdom, and modularization of code using IIFEs.',

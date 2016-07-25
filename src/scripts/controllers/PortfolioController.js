@@ -100,7 +100,7 @@
         // For each filtered tag...
         for (i = 0; i < tagsLen; i++) {
           // If the piece doesn't contain the tag, exclude the piece.
-          if (piece.tags.indexOf(tags[i]) === -1) {
+          if (!piece.tags || piece.tags.indexOf(tags[i]) === -1) {
             return false;
           }
         }

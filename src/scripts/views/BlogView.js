@@ -134,11 +134,11 @@
       // Format post template.
       var formattedPostTemplate = postTemplate
         .replace('{post-id}', blogController.getPostID(post))
-        .replace('{title}', post.title)
-        .replace('{content}', post.content)
-        .replace('{date}', post.date.toLocaleDateString())
-        .replace('{iso-date}', post.date.toISOString())
-        .replace('{subtitle}', post.subtitle ? post.subtitle : '')
+        .replace('{title}', post.title || '')
+        .replace('{content}', post.content || '')
+        .replace('{date}', post.date ? post.date.toLocaleDateString() : '')
+        .replace('{iso-date}', post.date ? post.date.toISOString() : '')
+        .replace('{subtitle}', post.subtitle || '')
         .replace('{tags}', post.tags ?
           post.tags.map(function(tag) {
             return '<span class="post__tag tag">' + tag + '</span>';
