@@ -75,4 +75,4 @@ test('portfolio pieces can contain optional data',
       window.close();
       t.end();
     });
-});
+  });

@@ -49,7 +49,7 @@ test('post can contain optional data', function(t) {
 
     t.equal(post.title, 'A title.', 'contains a title');
     t.equal(post.subtitle, 'A subtitle.', 'contains a subtitle');
-    t.equal(post.date.toISOString(), isoDate, 'contains a date')
+    t.equal(post.date.toISOString(), isoDate, 'contains a date');
     t.equal(post.content, 'Some content.', 'contains content');
     t.deepEqual(post.tags, ['html', 'css', 'js'], 'contains tags');
     window.close();
