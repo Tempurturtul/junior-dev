@@ -1,0 +1,11 @@
+{
+  "title": "Project Title",
+  "description": "A description.",
+  "tags": ["foo", "bar"],
+  "sourceURL": "repo/url",
+  "liveURL": "live/url",
+  "image": {
+    "static": "project.png",
+    "description": "The Project Title project."
+  }
+}
