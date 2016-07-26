@@ -161,14 +161,16 @@
             .filter(function(post) {
               // Get the post's title and subtitle, and convert them to
               // lower case.
-              var title = post.title.toLowerCase();
+              var title = post.title ? post.title.toLowerCase() : '';
               var subtitle = post.subtitle ? post.subtitle.toLowerCase() : '';
               // Get the post's content minus any HTML markup in order to
               // search it without interference, then convert it to lower case.
               // First, encode any escaped angle braces to avoid removing them.
-              var content = post.content
-                .replace(/\\</g, '&lt;')
-                .replace(/\\>/g, '&gt;');
+              var content = post.content ?
+                            post.content
+                              .replace(/\\</g, '&lt;')
+                              .replace(/\\>/g, '&gt;') :
+                            '';
               // Next, strip all HTML markup.
               content = content
                 .replace(/<[^>]+>/g, '');
@@ -185,7 +187,7 @@
                 // tags (exactly matching), or content...
                 if (title.indexOf(strs[i]) === -1 &&
                     subtitle.indexOf(strs[i]) === -1 &&
-                    post.tags.indexOf(strs[i]) === -1 &&
+                    (!post.tags || post.tags.indexOf(strs[i]) === -1) &&
                     content.indexOf(strs[i]) === -1) {
                   // Exclude the post.
                   return false;
@@ -203,7 +205,7 @@
           var startDate = Date.past(filters.maxAge);
           posts = posts
             .filter(function(post) {
-              return post.date >= startDate;
+              return post.date ? post.date >= startDate : false;
             });
         }
 
@@ -215,7 +217,7 @@
               // For each filter tag...
               for (i = 0; i < tagsLen; i++) {
                 // If the tag doesn't exist in the post, exclude the post.
-                if (post.tags.indexOf(filters.tags[i]) === -1) {
+                if (!post.tags || post.tags.indexOf(filters.tags[i]) === -1) {
                   return false;
                 }
               }
