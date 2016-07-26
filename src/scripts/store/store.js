@@ -4,119 +4,52 @@
 
   var app = window.app = window.app || {};
   app._store = {
-    blogPosts: [
-      {
-
-      },
-      {
-
-      },
-      {
-        title: 'Min',
-        date: new Date(),
-        content: '<p>I\'m a little teapot.</p>'
-      },
-      {
-        title: 'Min',
-        date: new Date(),
-        content: '<p>I\'m a little teapot.</p>'
-      },
-      {
-        title: 'Max',
-        subtitle: '-imum',
-        date: new Date('2011-09-25'),
-        content: '<p><em>Ooooh...</em> so pretty.</p>',
-        tags: ['js', 'css', 'html']
-      },
-      {
-        title: 'Max Dos',
-        subtitle: 'Again!',
-        date: new Date('2011-09-30'),
-        content: '<p><em>Ooooh...</em> so pretty. <em>Dos!</em></p>',
-        tags: ['js', 'css', 'html', 'dos']
-      }
-    ],
-    portfolioPieces: [
-      {
-
-      },
-      {
-
-      },
-      {
-        title: 'Home',
-        description: 'Personal homepage featuring my blog and portfolio. Built with semantic HTML, modular CSS, and vanilla JavaScript (no third-party code used). Includes JSDoc comments throughout, BEM methodology for CSS, a thoroughly tested hash router, an MVC design pattern, build scripts via npm, testing (incomplete) with tape and jsdom, and modularization of code using IIFEs.',
-        tags: ['js', 'css', 'html', 'single-page application', 'testing', 'tape', 'jsdom', 'npm', 'bem', 'jsdoc'],
-        sourceURL: 'https://github.com/Tempurturtul/home'
-      },
-      {
-        title: 'Home',
-        description: 'Personal homepage featuring my blog and portfolio. Built with semantic HTML, modular CSS, and vanilla JavaScript (no third-party code used). Includes JSDoc comments throughout, BEM methodology for CSS, a thoroughly tested hash router, an MVC design pattern, build scripts via npm, testing (incomplete) with tape and jsdom, and modularization of code using IIFEs.',
-        tags: ['js', 'css', 'html', 'single-page application', 'testing', 'tape', 'jsdom', 'npm', 'bem', 'jsdoc'],
-        sourceURL: 'https://github.com/Tempurturtul/home'
-      },
-      {
-        title: 'Neighborhood Map',
-        description: 'A single-page web application built using Knockout that displays a Google Map of an area, along with various user-defined map markers. Users can filter and organize map markers in a list with user-created (and optionally nested) folders. Clicking on a map marker displays additional information about the location retrieved from the Google, Flickr, Foursquare, and Wikipedia APIs.A single-page web application built using Knockout that displays a Google Map of an area, along with various user-defined map markers. Users can filter and organize map markers in a list with user-created (and optionally nested) folders. Clicking on a map marker displays additional information about the location retrieved from the Google, Flickr, Foursquare, and Wikipedia APIs.A single-page web application built using Knockout that displays a Google Map of an area, along with various user-defined map markers. Users can filter and organize map markers in a list with user-created (and optionally nested) folders. Clicking on a map marker displays additional information about the location retrieved from the Google, Flickr, Foursquare, and Wikipedia APIs.A single-page web application built using Knockout that displays a Google Map of an area, along with various user-defined map markers. Users can filter and organize map markers in a list with user-created (and optionally nested) folders. Clicking on a map marker displays additional information about the location retrieved from the Google, Flickr, Foursquare, and Wikipedia APIs.A single-page web application built using Knockout that displays a Google Map of an area, along with various user-defined map markers. Users can filter and organize map markers in a list with user-created (and optionally nested) folders. Clicking on a map marker displays additional information about the location retrieved from the Google, Flickr, Foursquare, and Wikipedia APIs.',
-        tags: [],
-        sourceURL: 'https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-neighborhood-map',
-        liveURL: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-neighborhood-map/',
-        image: {
-          static: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-portfolio/content/img/neighborhood-map-600x600.dd92c598.png',
-          description: 'Preview of the project during use.'
-        }
-      },
-      {
-        title: 'Home',
-        description: 'Personal homepage featuring my blog and portfolio. Built with semantic HTML, modular CSS, and vanilla JavaScript (no third-party code used). Includes JSDoc comments throughout, BEM methodology for CSS, a thoroughly tested hash router, an MVC design pattern, build scripts via npm, testing (incomplete) with tape and jsdom, and modularization of code using IIFEs.',
-        tags: ['js', 'css', 'html', 'single-page application', 'testing', 'tape', 'jsdom', 'npm', 'bem', 'jsdoc'],
-        sourceURL: 'https://github.com/Tempurturtul/home'
-      },
-      {
-        title: 'Neighborhood Map',
-        description: 'A single-page web application built using Knockout that displays a Google Map of an area, along with various user-defined map markers. Users can filter and organize map markers in a list with user-created (and optionally nested) folders. Clicking on a map marker displays additional information about the location retrieved from the Google, Flickr, Foursquare, and Wikipedia APIs.',
-        tags: [],
-        sourceURL: 'https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-neighborhood-map',
-        liveURL: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-neighborhood-map/',
-        image: {
-          static: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-portfolio/content/img/neighborhood-map-600x600.dd92c598.png',
-          description: 'Preview of the project during use.'
-        }
-      },
-      {
-        title: 'Home',
-        description: 'Personal homepage featuring my blog and portfolio. Built with semantic HTML, modular CSS, and vanilla JavaScript (no third-party code used). Includes JSDoc comments throughout, BEM methodology for CSS, a thoroughly tested hash router, an MVC design pattern, build scripts via npm, testing (incomplete) with tape and jsdom, and modularization of code using IIFEs.',
-        tags: ['js', 'css', 'html', 'single-page application', 'testing', 'tape', 'jsdom', 'npm', 'bem', 'jsdoc'],
-        sourceURL: 'https://github.com/Tempurturtul/home'
-      },
-      {
-        title: 'Neighborhood Map',
-        description: 'A single-page web application built using Knockout that displays a Google Map of an area, along with various user-defined map markers. Users can filter and organize map markers in a list with user-created (and optionally nested) folders. Clicking on a map marker displays additional information about the location retrieved from the Google, Flickr, Foursquare, and Wikipedia APIs.',
-        tags: [],
-        sourceURL: 'https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-neighborhood-map',
-        liveURL: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-neighborhood-map/',
-        image: {
-          static: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-portfolio/content/img/neighborhood-map-600x600.dd92c598.png',
-          description: 'Preview of the project during use.'
-        }
-      },
-      {
-        title: 'Home',
-        description: 'Personal homepage featuring my blog and portfolio. Built with semantic HTML, modular CSS, and vanilla JavaScript (no third-party code used). Includes JSDoc comments throughout, BEM methodology for CSS, a thoroughly tested hash router, an MVC design pattern, build scripts via npm, testing (incomplete) with tape and jsdom, and modularization of code using IIFEs.',
-        tags: ['js', 'css', 'html', 'single-page application', 'testing', 'tape', 'jsdom', 'npm', 'bem', 'jsdoc'],
-        sourceURL: 'https://github.com/Tempurturtul/home'
-      },
-      {
-        title: 'Neighborhood Map',
-        description: 'A single-page web application built using Knockout that displays a Google Map of an area, along with various user-defined map markers. Users can filter and organize map markers in a list with user-created (and optionally nested) folders. Clicking on a map marker displays additional information about the location retrieved from the Google, Flickr, Foursquare, and Wikipedia APIs.',
-        tags: [],
-        sourceURL: 'https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-neighborhood-map',
-        liveURL: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-neighborhood-map/',
-        image: {
-          static: 'https://tempurturtul.github.io/udacity-fend-projects/projects/fend-portfolio/content/img/neighborhood-map-600x600.dd92c598.png',
-          description: 'Preview of the project during use.'
-        }
-      }
-    ]
+    portfolioPieces: [],
+    blogPosts: []
   };
+
+  // Get JSON data for portfolio pieces and pass to updatePortfolioPieces.
+  getFile('scripts/store/portfolioPieces.json', updatePortfolioPieces);
+  // Get JSON data for blog posts and pass to addBlogPosts.
+  // TODO
+
+  /**
+   * Requests the file at the given url and passes the response as text to
+   * the given done callback.
+   * @param {string} url - The url of the file to request.
+   * @callback {function} done - The callback to be passed the response as
+   * text.
+   */
+  function getFile(url, done) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = handleStateChange;
+    xhr.open("GET", url, true);
+    xhr.send();
+
+    /**
+     * Handles the onreadystatechange event by invoking the done callback
+     * with the response as text if the request is complete. Does not check
+     * the status of the request (may pass null to the done callback).
+     */
+    function handleStateChange() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        done(xhr.responseText);
+      }
+    }
+  }
+
+  /**
+   * Parses collection of portfolio piece data and updates the store to
+   * contain the new data.
+   * @param {string|null} data - Collection of portfolio piece data as a JSON
+   * string, or null if no data was retrieved.
+   */
+  function updatePortfolioPieces(data) {
+    if (!data) {
+      return;
+    }
+
+    data = JSON.parse(data);
+    app._store.portfolioPieces = data;
+  }
 })();
