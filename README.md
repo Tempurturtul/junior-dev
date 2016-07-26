@@ -40,8 +40,6 @@ Includes a personal blog and portfolio.
 **Before going live:**
 
 - Add content.
-  - Automate creation of portfolio pieces collection from individual JSON files.
-    1. Add the content of each portfolio piece JSON file to new `store/portfolio-pieces.json` file.
   - Automate creation of blog posts from markdown files.
     1. Automatically extract title, subtitle, content, and tags from each markdown file.
     1. Convert content to HTML.
