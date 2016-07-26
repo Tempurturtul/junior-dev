@@ -21,7 +21,10 @@
     "serve": "browser-sync start --server 'src' --files 'src'",
     "test": "tape 'src/**/*.test.js' | faucet; exit 0",
     "test:watch": "watch 'npm run test' src",
-    "start": "npm run lint:watch & npm run serve"
+    "start": "npm run lint:watch & npm run serve",
+    "build:portfolio": "node build/generatePortfolioPieces.js",
+    "build:blog": "exit 0",
+    "build": "npm run build:portfolio && npm run build:blog"
   },
   "eslintConfig": {
     "extends": "google",
