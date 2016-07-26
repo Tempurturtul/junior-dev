@@ -22,36 +22,31 @@ Includes a personal blog and portfolio.
   npm i
   ```
 
-- Use npm scripts to test, lint, and serve.
+- Use npm scripts to generate files, lint, serve, and test.
 
   ```
+  # Generate JSON files for blog posts and portfolio pieces.
+  npm run generate
+
   # Lint, serve, and watch for changes.
   npm start
 
   # Run tests.
   npm t
-
-  # Run tests and watch for changes.
-  npm run test:watch
   ```
 
 ## TODO
 
 **Before going live:**
 
-- Add content.
-  - Automate creation of blog posts from markdown files.
-    1. Automatically extract title, subtitle, content, and tags from each markdown file.
-    1. Convert content to HTML.
-    1. Create JSON object from extracted/processed data.
-    1. Add each JSON object to new `store/posts.json` file.
-  - Modify `store.js` to pull data from new JSON files.
+- Finish handling of parsed (markdown to HTML) blog post content.
 - Cross-browser styling.
+- Improve blog search bar (Handle: "foo bar" baz).
 
 **After going live:**
 
-- Add missing tests.
 - Refactor CSS.
+- Add missing tests.
 
 **Wishlist features:**
 
@@ -60,3 +55,4 @@ Includes a personal blog and portfolio.
 - Tag pool.
   - Toggle button: All / Any.
   - Multi-select input for tags.
+- Move blog posts and portfolio pieces to a database.
