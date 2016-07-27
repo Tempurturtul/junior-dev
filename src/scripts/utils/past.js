@@ -20,7 +20,7 @@
    * @return {Date} - The past date.
    */
   function past(age) {
-    var re = /^(\d)?\s?(day|week|month|year)\s?$/i;
+    var re = /^(\d+)?\s?(day|week|month|year)s?$/i;
 
     // Check for invalid input.
     if (!re.test(age)) {
