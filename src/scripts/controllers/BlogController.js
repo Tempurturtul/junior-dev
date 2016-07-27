@@ -202,7 +202,7 @@
 
         // Filter by max age.
         if (filters.maxAge !== 'all') {
-          var startDate = Date.past(filters.maxAge);
+          var startDate = app.utils.past(filters.maxAge);
           posts = posts
             .filter(function(post) {
               return post.date ? post.date >= startDate : false;
