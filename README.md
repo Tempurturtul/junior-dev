@@ -39,10 +39,7 @@ Includes a personal blog and portfolio.
 
 **Before going live:**
 
-- Sort blog posts by date.
-  - Provide oldest-first option.
 - Cross-browser styling.
-- Improve blog search bar (Handle: "foo bar" baz).
 
 **After going live:**
 
