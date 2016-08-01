@@ -40,7 +40,7 @@ test('post can contain optional data', function(t) {
     var data = {
       title: 'A title.',
       subtitle: 'A subtitle.',
-      date: new Date('July 7, 1777'),
+      date: 'July 7, 1777',
       content: 'Some content.',
       tags: ['html', 'css', 'js']
     };
