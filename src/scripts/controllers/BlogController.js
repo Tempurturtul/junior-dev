@@ -84,6 +84,10 @@
      * parameterized route.
      */
     function setView(params) {
+      // Ensure params has a post property to avoid implicitly persisting a
+      // specific post filter when navigating from "#/blog/:post" to "#/blog".
+      params.post = params.post || null;
+
       updatePostFilters(params, false);
 
       var opts = {};
@@ -105,9 +109,6 @@
       if (render === undefined) {
         render = true;
       }
-
-      // Reset postFilters.post, since we do not want it to persist implicitly.
-      postFilters.post = null;
 
       for (var prop in data) {
         if (postFilters.hasOwnProperty(prop)) {
