@@ -91,42 +91,8 @@
     function renderPosts() {
       // Get posts to be rendered.
       var posts = blogController.getPosts();
-      // Get the post filters in order to properly initialize tags and sort
-      // posts.
+      // Get the post filters in order to properly initialize tags.
       var postFilters = blogController.getPostFilters();
-
-      // Sort posts by age.
-      posts.sort(function(a, b) {
-        // postFilters.sortOldest determines age ascending or descending.
-        if (postFilters.sortOldest) {
-          // Age Descending
-          if (a.date < b.date) {
-            return -1;
-          }
-          if (a.date > b.date) {
-            return 1;
-          }
-        } else {
-          // Age Ascending
-          if (a.date > b.date) {
-            return -1;
-          }
-          if (a.date < b.date) {
-            return 1;
-          }
-        }
-
-        // Always handle undefined date by placing at beginning.
-        // (Easier to notice and correct.)
-        if (!a.date) {
-          return -1;
-        }
-        if (!b.date) {
-          return 1;
-        }
-
-        return 0;
-      });
 
       // Convert posts into formatted post templates, then join them into a
       // single HTML string.

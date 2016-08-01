@@ -72,6 +72,9 @@
       // Filter posts.
       posts = filterPosts(posts, postFilters);
 
+      // Sort posts.
+      posts = sortPosts(posts, postFilters.sortOldest);
+
       return posts;
     }
 
@@ -170,14 +173,14 @@
           search = search.split(' ')
             .filter(function(str) {
               return str;
-             })
+            })
              .map(function(str) {
                return str.replace('"', '');
              });
 
           // Remove double quotes from double quoted strings.
           dblQuoted = dblQuoted.map(function(str) {
-            return str.substring(1, str.length-1);
+            return str.substring(1, str.length - 1);
           });
 
           // Add double quoted strings back into search text.
@@ -255,6 +258,49 @@
             });
         }
       }
+
+      return posts;
+    }
+
+    /**
+     * Sorts blog posts by age.
+     * @param {Post[]} posts - Posts to sort.
+     * @param {bool} sortOldest - Sort oldest first. If false, sort newest
+     * first.
+     * @return {Post[]} - Sorted posts.
+     */
+    function sortPosts(posts, sortOldest) {
+      posts.sort(function(a, b) {
+        // filters.sortOldest determines age ascending or descending.
+        if (sortOldest) {
+          // Age Descending
+          if (a.date < b.date) {
+            return -1;
+          }
+          if (a.date > b.date) {
+            return 1;
+          }
+        } else {
+          // Age Ascending
+          if (a.date > b.date) {
+            return -1;
+          }
+          if (a.date < b.date) {
+            return 1;
+          }
+        }
+
+        // Always handle undefined date by placing at beginning.
+        // (Easier to notice and correct.)
+        if (!a.date) {
+          return -1;
+        }
+        if (!b.date) {
+          return 1;
+        }
+
+        return 0;
+      });
 
       return posts;
     }
