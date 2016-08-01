@@ -1,0 +1,19 @@
+{
+  "title": "Escape By Water",
+  "date": "January 2016",
+  "description": "A clone of the popular frogger game built using a barebones game engine provided by Udacity. I worked heavily with the HTML5 canvas element in this project, and used JavaScript inheritance, the browser's local storage, and the Web Audio API while implementing various features. The game features a persistent scoreboard, menus, canvas-drawn buttons, and mobile support.",
+  "tags": [
+    "js",
+    "prototypal inheritance",
+    "canvas api",
+    "web audio api",
+    "npm",
+    "gulp"
+  ],
+  "sourceURL": "https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-frogger",
+  "liveURL": "https://tempurturtul.github.io/udacity-fend-projects/projects/fend-frogger/",
+  "image": {
+    "static": "",
+    "description": "The Escape By Water project."
+  }
+}

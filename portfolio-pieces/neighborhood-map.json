@@ -1,0 +1,24 @@
+{
+  "title": "Neighborhood Map",
+  "date": "May 2016",
+  "description": "A single-page web application built using Knockout that displays a Google Map of an area, along with various user-defined map markers. Users can filter and organize map markers in a list with user-created (and optionally nested) folders. Clicking on a map marker displays additional information about the location retrieved from the Google, Flickr, Foursquare, and Wikipedia APIs.",
+  "tags": [
+    "js",
+    "css",
+    "html",
+    "jquery",
+    "knockout.js",
+    "google maps api",
+    "npm",
+    "gulp",
+    "bower",
+    "mvc",
+    "single-page application"
+  ],
+  "sourceURL": "https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-neighborhood-map",
+  "liveURL": "https://tempurturtul.github.io/udacity-fend-projects/projects/fend-neighborhood-map/",
+  "image": {
+    "static": "",
+    "description": "The Neighborhood Map project."
+  }
+}
