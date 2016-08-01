@@ -39,6 +39,7 @@ Includes a personal blog and portfolio.
 
 **Before going live:**
 
+- Add content.
 - Cross-browser styling.
 
 **After going live:**
