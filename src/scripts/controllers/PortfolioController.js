@@ -51,6 +51,7 @@
         });
 
       pieces = filterPieces(pieces, filteredTags);
+      pieces = sortPieces(pieces);
 
       return pieces;
     }
@@ -88,7 +89,7 @@
 
     /**
      * Filters pieces.
-     * @param {Pieces[]} pieces - Pieces to filter.
+     * @param {PortfolioPiece[]} pieces - Pieces to filter.
      * @param {string[]} tags - Tags to filter by.
      * @return {Pieces[]} - Filtered pieces.
      */
@@ -108,5 +109,38 @@
         return true;
       });
     }
+  }
+
+  /**
+   * Sorts portfolio pieces by date.
+   * @param {PortfolioPiece[]} pieces - The pieces to sort.
+   * @return {PortfolioPiece[]} - Sorted pieces.
+   */
+  function sortPieces(pieces) {
+    // Sort by age ascending.
+    pieces.sort(function(a,b) {
+      // If a is younger than b, place it before b.
+      if (a.date > b.date) {
+        return -1;
+      }
+      // If a is older than b, place it after b.
+      if (a.date < b.date) {
+        return 1;
+      }
+
+      // Always handle undefined date by placing at beginning.
+      // (Easier to notice and correct.)
+      if (!a.date) {
+        return -1;
+      }
+      if (!b.date) {
+        return 1;
+      }
+
+      // If a and b are the same age, no change.
+      return 0;
+    });
+
+    return pieces;
   }
 })();
