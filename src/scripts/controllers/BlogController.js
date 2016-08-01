@@ -151,12 +151,40 @@
             return filters.post === getPostID(post);
           });
       } else {
-        // Filter by text. (Must match all space-separated strings.)
+        // Filter by text.
+        // (Must match all double-quoted and space-separated strings.)
         if (filters.text) {
-          // Convert filters.text to lower case and extract space-separated
-          // strings.
-          var strs = filters.text.toLowerCase().split(' ');
-          var strsLen = strs.length;
+          // Convert search text to lower case.
+          var search = filters.text.toLowerCase();
+
+          // Get array of double-quoted strings.
+          var dblQuoted = search.match(/"[^"]*"/g) || [];
+
+          // Remove double quoted strings from search text.
+          dblQuoted.forEach(function(str) {
+            search = search.replace(str, '');
+          });
+
+          // Get space-separated strings from search text and filter out
+          // empty strings and left-over double-quotes.
+          search = search.split(' ')
+            .filter(function(str) {
+              return str;
+             })
+             .map(function(str) {
+               return str.replace('"', '');
+             });
+
+          // Remove double quotes from double quoted strings.
+          dblQuoted = dblQuoted.map(function(str) {
+            return str.substring(1, str.length-1);
+          });
+
+          // Add double quoted strings back into search text.
+          search = search.concat(dblQuoted);
+
+          // Get the length of the search text array.
+          var searchLen = search.length;
 
           posts = posts
             .filter(function(post) {
@@ -182,21 +210,21 @@
               // Then just remember to convert to lower case.
               content = content.toLowerCase();
 
-              // For each space separated string...
-              for (i = 0; i < strsLen; i++) {
+              // For searched string...
+              for (i = 0; i < searchLen; i++) {
                 // If the string doesn't exist in the post's title, subtitle,
                 // tags (exactly matching), or content...
-                if (title.indexOf(strs[i]) === -1 &&
-                    subtitle.indexOf(strs[i]) === -1 &&
-                    (!post.tags || post.tags.indexOf(strs[i]) === -1) &&
-                    content.indexOf(strs[i]) === -1) {
+                if (title.indexOf(search[i]) === -1 &&
+                    subtitle.indexOf(search[i]) === -1 &&
+                    (!post.tags || post.tags.indexOf(search[i]) === -1) &&
+                    content.indexOf(search[i]) === -1) {
                   // Exclude the post.
                   return false;
                 }
               }
 
-              // Otherwise, each string does exist somewhere in the post,
-              // therefore include the post.
+              // Otherwise, each searched string does exist somewhere in the
+              // post, therefore include the post.
               return true;
             });
         }
