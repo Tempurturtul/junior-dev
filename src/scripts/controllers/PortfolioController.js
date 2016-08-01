@@ -118,7 +118,7 @@
    */
   function sortPieces(pieces) {
     // Sort by age ascending.
-    pieces.sort(function(a,b) {
+    pieces.sort(function(a, b) {
       // If a is younger than b, place it before b.
       if (a.date > b.date) {
         return -1;
