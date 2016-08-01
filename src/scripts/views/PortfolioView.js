@@ -93,7 +93,9 @@
 
       // Formate piece template.
       var formattedPieceTemplate = pieceTemplate
-        .replace('{title}', piece.title || '')
+        .replace('{title}', formatPieceTitle(piece.title,
+                                             piece.sourceURL,
+                                             piece.liveURL))
         .replace('{date}', piece.date ? piece.date.toLocaleDateString() : '')
         .replace('{iso-date}', piece.date ? piece.date.toISOString() : '')
         .replace('{description}', piece.description || '')
@@ -126,6 +128,28 @@
           '');
 
       return formattedPieceTemplate;
+    }
+
+    /**
+     * Formats a portfolio piece title by returning the title wrapped in
+     * a link if one of sourceURL or liveURL is defined. If both are
+     * defined, the title is wrapped in the live URL.
+     * @param {string} title - The portfolio piece title.
+     * @param {string} sourceURL - The portfolio piece source URL.
+     * @param {string} liveURL - The portfolio piece live URL.
+     * @return {string} - The formatted title.
+     */
+    function formatPieceTitle(title, sourceURL, liveURL) {
+      // Prefer to wrap in live URL.
+      if (liveURL) {
+        title = '<a class="portfolio-piece__title-link link" ' +
+                    'href="' + liveURL + '">' + title + '</a>';
+      } else if (sourceURL) {
+        title = '<a class="portfolio-piece__title-link link" ' +
+                    'href="' + sourceURL + '">' + title + '</a>';
+      }
+
+      return title;
     }
 
     /**

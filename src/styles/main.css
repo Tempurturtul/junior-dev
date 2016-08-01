@@ -354,6 +354,14 @@ body {
   text-align: center;
 }
 
+.portfolio-piece__title-link {
+
+}
+
+.portfolio-piece__title-link:hover:visited {
+  color: #a33;
+}
+
 .portofolio-piece__date {
   font-size: 0.9em;
   font-weight: bold;
@@ -371,6 +379,12 @@ body {
 .portfolio-piece__live-link:hover > .portfolio-piece__image {
   border-color: #d33;
 }
+
+/* Change image's border color on hover only if a live-link is present. */
+.portfolio-piece__live-link:visited:hover > .portfolio-piece__image {
+  border-color: #a33;
+}
+
 
 .portfolio-piece__source-link {
   color: #d33;

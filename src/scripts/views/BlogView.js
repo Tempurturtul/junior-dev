@@ -40,6 +40,7 @@
       var postFilters = blogController.getPostFilters();
       // Format the blog template.
       var formattedBlogTemplate = blogTemplate
+        .replace('{hide-search}', opts && opts.hideSearch ? 'hidden' : '')
         .replace('{search-text}', postFilters.text)
         .replace('{search-week}', postFilters.maxAge === 'week' ?
           'selected' : '')
@@ -51,15 +52,6 @@
           'selected' : '')
         .replace('{sort-oldest}', postFilters.sortOldest ?
           'checked' : '');
-
-      // Handle hideSearch option.
-      var hideSearch = '';
-      if (opts && opts.hideSearch) {
-        hideSearch = 'hidden';
-      }
-
-      formattedBlogTemplate = formattedBlogTemplate
-        .replace('{hide-search}', hideSearch);
 
       // Set the container element's inner HTML to the formatted blog template.
       containerElem.innerHTML = formattedBlogTemplate;
