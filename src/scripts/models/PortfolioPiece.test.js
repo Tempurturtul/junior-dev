@@ -40,6 +40,7 @@ test('portfolio pieces can contain optional data',
     .then(function(window) {
       var data = {
         title: 'A title.',
+        date: 'July 7, 1777',
         description: 'A description.',
         tags: [],
         sourceURL: 'src/url',
@@ -55,9 +56,12 @@ test('portfolio pieces can contain optional data',
           description: 'An image description.'
         }
       };
+
       var piece = new window.app.models.PortfolioPiece(data);
+      var isoDate = new Date('July 7, 1777').toISOString();
 
       t.equal(piece.title, 'A title.', 'contains title data');
+      t.equal(piece.date.toISOString(), isoDate, 'contains a date');
       t.equal(piece.description, 'A description.', 'contains description data');
       t.deepEqual(piece.tags, [], 'contains tags data');
       t.equal(piece.sourceURL, 'src/url', 'contains source url data');

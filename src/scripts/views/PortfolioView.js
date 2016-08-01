@@ -94,6 +94,8 @@
       // Formate piece template.
       var formattedPieceTemplate = pieceTemplate
         .replace('{title}', piece.title || '')
+        .replace('{date}', piece.date ? piece.date.toLocaleDateString() : '')
+        .replace('{iso-date}', piece.date ? piece.date.toISOString() : '')
         .replace('{description}', piece.description || '')
         .replace('{source-url}', piece.sourceURL ?
                                  '<a ' +

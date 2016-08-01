@@ -1,5 +1,6 @@
 {
   "title": "Project Title",
+  "date": "January 1, 2020",
   "description": "A description.",
   "tags": ["foo", "bar"],
   "sourceURL": "repo/url",

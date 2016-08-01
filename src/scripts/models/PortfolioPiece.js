@@ -11,6 +11,7 @@
    * @constructor
    * @param {object} [data] - Data representing the portfolio piece.
    * @param {string} [data.title] - The title of the piece.
+   * @param {string} [data.date] - The date the piece was completed/published.
    * @param {string} [data.description] - A description of the piece.
    * @param {string[]} [data.tags] - Tags for the piece.
    * @param {string} [data.sourceURL] - A URL to the piece's source code.
@@ -31,6 +32,7 @@
     data.image = data.image || {};
 
     this.title = data.title;
+    this.date = data.date ? new Date(data.date) : undefined;
     this.description = data.description;
     this.tags = data.tags;
     this.sourceURL = data.sourceURL;

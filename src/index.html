@@ -136,7 +136,7 @@
           <footer class="footer">
             <!-- Tags block. -->
             <!-- (Each tag has class post__tag and tag.) -->
-            <div class="tags">tags: {tags}</div>
+            <div class="tags">{tags}</div>
           </footer>
         </article>
       </div>
@@ -161,6 +161,7 @@
         <!-- Portfolio Piece block. -->
         <article class="portfolio-piece">
           <h1 class="portfolio-piece__title">{title}</h1>
+          <time class="portofolio-piece__date" datetime="{iso-date}">{date}</time>
           <!-- live-url-open has class portfolio-piece__live-link and link -->
           {live-url-open}
           <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
@@ -171,7 +172,7 @@
           <footer class="footer">
             <!-- Tags block. -->
             <!-- (Each tag has class portfolio-piece__tag and tag.) -->
-            <div class="tags">tags: {tags}</div>
+            <div class="tags">{tags}</div>
           </footer>
         </article>
       </div>
