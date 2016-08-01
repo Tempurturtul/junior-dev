@@ -19,6 +19,7 @@
       post: null,
       text: '',
       maxAge: 'all',
+      sortOldest: false,
       tags: []
     };
 

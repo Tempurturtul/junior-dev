@@ -39,7 +39,6 @@ Includes a personal blog and portfolio.
 
 **Before going live:**
 
-- Finish handling of parsed (markdown to HTML) blog post content.
 - Sort blog posts by date.
   - Provide oldest-first option.
 - Cross-browser styling.

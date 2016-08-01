@@ -48,7 +48,9 @@
         .replace('{search-year}', postFilters.maxAge === 'year' ?
           'selected' : '')
         .replace('{search-all}', postFilters.maxAge === 'all' ?
-          'selected' : '');
+          'selected' : '')
+        .replace('{sort-oldest}', postFilters.sortOldest ?
+          'checked' : '');
 
       // Handle hideSearch option.
       var hideSearch = '';
@@ -68,6 +70,7 @@
       var searchForm = document.querySelector('.blog-search');
       var searchBar = document.querySelector('.blog-search__search-bar');
       var timeOptions = document.querySelector('.blog-search__time-options');
+      var sortOldest = document.querySelector('.blog-search__sort-oldest');
       // Prevent form submission from reloading the page.
       searchForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -76,6 +79,7 @@
       searchBar.addEventListener('input', handleSearchBarInput);
       // Update post filters on time options change.
       timeOptions.addEventListener('change', handleTimeOptionsChange);
+      sortOldest.addEventListener('change', handleSortOldestChange);
 
       // Render posts.
       renderPosts();
@@ -87,8 +91,42 @@
     function renderPosts() {
       // Get posts to be rendered.
       var posts = blogController.getPosts();
-      // Get the post filters in order to properly initialize tags.
+      // Get the post filters in order to properly initialize tags and sort
+      // posts.
       var postFilters = blogController.getPostFilters();
+
+      // Sort posts by age.
+      posts.sort(function(a, b) {
+        // postFilters.sortOldest determines age ascending or descending.
+        if (postFilters.sortOldest) {
+          // Age Descending
+          if (a.date < b.date) {
+            return -1;
+          }
+          if (a.date > b.date) {
+            return 1;
+          }
+        } else {
+          // Age Ascending
+          if (a.date > b.date) {
+            return -1;
+          }
+          if (a.date < b.date) {
+            return 1;
+          }
+        }
+
+        // Always handle undefined date by placing at beginning.
+        // (Easier to notice and correct.)
+        if (!a.date) {
+          return -1;
+        }
+        if (!b.date) {
+          return 1;
+        }
+
+        return 0;
+      });
 
       // Convert posts into formatted post templates, then join them into a
       // single HTML string.
@@ -183,6 +221,15 @@
      */
     function handleTimeOptionsChange(e) {
       blogController.updatePostFilters({maxAge: e.target.value});
+    }
+
+    /**
+     * Handles sort oldest change event by updating blog controller's post
+     * filters using the sort oldest input's checked value.
+     * @param {Event} e - The input event.
+     */
+    function handleSortOldestChange(e) {
+      blogController.updatePostFilters({sortOldest: e.target.checked});
     }
   }
 })();

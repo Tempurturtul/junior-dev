@@ -195,6 +195,18 @@ body {
 
 }
 
+.blog-search__sort-oldest-label {
+  display: block;
+  font-size: 0.9em;
+  margin: 2px auto;
+  max-width: 150px;
+  padding: 5px;
+}
+
+.blog-search__sort-oldest {
+
+}
+
 /**************************************
   Blog Posts
 **************************************/
