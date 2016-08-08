@@ -1,6 +1,6 @@
 {
   "title": "Twitch Streamers - Angular Refactor",
-  "date": "July 2015",
+  "date": "July 1, 2015",
   "description": "Incomplete but functional refactor of my first web app to use AngularJS. It interfaces with Twitch.tv's API to retrieve and display information on a list of streamers. I learned AngularJS best practices while working on this refactor by following John Papa's Angular Style Guide.",
   "tags": [
     "js",

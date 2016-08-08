@@ -1,6 +1,6 @@
 {
   "title": "Online Resume",
-  "date": "December 2015",
+  "date": "December 1, 2015",
   "description": "My online resume for web development. It dynamically creates page content with data retrieved from a JSON object, allowing me to make quick and easy edits and updates. I utilized CSS transitions, a Polymer element, and Google Maps' API to provide additional functionality. I also expanded my workflow options with this project by learning to use Bower and by refining my usage of Gulp. I refactored the project two months after completing it to use a Model-View-Controller design pattern as part of Udactiy's JavaScript Design Patterns course.",
   "tags": [
     "js",
@@ -17,7 +17,17 @@
   "sourceURL": "https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-resume",
   "liveURL": "https://tempurturtul.github.io/udacity-fend-projects/projects/fend-resume/",
   "image": {
-    "static": "",
+    "static": "images/online-resume-600.png",
+    "responsive": [
+      {
+        "url": "images/online-resume-600.png",
+        "width": "600"
+      },
+      {
+        "url": "images/online-resume-300.png",
+        "width": "300"
+      }
+    ],
     "description": "The Online Resume project."
   }
 }
