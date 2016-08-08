@@ -132,8 +132,19 @@
         .replace('{post-id}', blogController.getPostID(post))
         .replace('{title}', post.title || '')
         .replace('{content}', post.content || '')
-        .replace('{date}', post.date ? post.date.toLocaleDateString() : '')
-        .replace('{iso-date}', post.date ? post.date.toISOString() : '')
+        .replace('{created}', post.created ?
+          post.created.toLocaleDateString() :
+          '')
+        .replace('{created-iso}', post.created ?
+          post.created.toISOString() :
+          '')
+        .replace('{hide-modified}', post.modified ? '' : 'hidden')
+        .replace('{modified}', post.modified ?
+          post.modified.toLocaleDateString() :
+          '')
+        .replace('{modified-iso}', post.modified ?
+          post.modified.toISOString() :
+          '')
         .replace('{subtitle}', post.subtitle || '')
         .replace('{tags}', post.tags ?
           post.tags.map(function(tag) {

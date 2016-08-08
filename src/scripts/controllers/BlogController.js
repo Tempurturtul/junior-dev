@@ -238,7 +238,7 @@
           var startDate = app.utils.past(filters.maxAge);
           posts = posts
             .filter(function(post) {
-              return post.date ? post.date >= startDate : false;
+              return post.created ? post.created >= startDate : false;
             });
         }
 
@@ -275,28 +275,28 @@
         // filters.sortOldest determines age ascending or descending.
         if (sortOldest) {
           // Age Descending
-          if (a.date < b.date) {
+          if (a.created < b.created) {
             return -1;
           }
-          if (a.date > b.date) {
+          if (a.created > b.created) {
             return 1;
           }
         } else {
           // Age Ascending
-          if (a.date > b.date) {
+          if (a.created > b.created) {
             return -1;
           }
-          if (a.date < b.date) {
+          if (a.created < b.created) {
             return 1;
           }
         }
 
-        // Always handle undefined date by placing at beginning.
+        // Always handle undefined created date by placing at beginning.
         // (Easier to notice and correct.)
-        if (!a.date) {
+        if (!a.created) {
           return -1;
         }
-        if (!b.date) {
+        if (!b.created) {
           return 1;
         }
 

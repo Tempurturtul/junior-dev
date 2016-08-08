@@ -12,7 +12,8 @@
    * @param {object} [data] - Data representing the post.
    * @param {string} [data.title] - The title of the post.
    * @param {string} [data.subtitle] - The subtitle of the post.
-   * @param {string} [data.date] - The post's last updated date.
+   * @param {string} [data.created] - The post's creation date.
+   * @param {string} [data.modified] - The post's last modified date.
    * @param {string} [data.content] - The post's content.
    * @param {string[]} [data.tags] - The post's tags.
    */
@@ -22,7 +23,8 @@
 
     this.title = data.title;
     this.subtitle = data.subtitle;
-    this.date = data.date ? new Date(data.date) : undefined;
+    this.created = data.created ? new Date(data.created) : undefined;
+    this.modified = data.modified ? new Date(data.modified) : undefined;
     this.content = data.content;
     this.tags = data.tags;
   }

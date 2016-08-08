@@ -133,7 +133,8 @@
         <article class="post">
           <h1 class="post__title"><a class="post__title-link page-link" href="#/blog/{post-id}">{title}</a></h1>
           <p class="post__subtitle">{subtitle}</p>
-          <p class="post__date">Last modified: <time datetime="{iso-date}">{date}</time></p>
+          <p class="post__created"><time datetime="{created-iso}">{created}</time></p>
+          <p class="post__modified" {hide-modified}>Last modified: <time datetime="{modified-iso}">{modified}</time></p>
           <div class="post__content">
             {content}
           </div>

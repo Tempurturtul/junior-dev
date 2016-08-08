@@ -40,16 +40,20 @@ test('post can contain optional data', function(t) {
     var data = {
       title: 'A title.',
       subtitle: 'A subtitle.',
-      date: 'July 7, 1777',
+      created: 'July 7, 1777',
+      modified: 'December 19, 2999',
       content: 'Some content.',
       tags: ['html', 'css', 'js']
     };
     var post = new window.app.models.Post(data);
-    var isoDate = new Date('July 7, 1777').toISOString();
+    var createdISO = new Date('July 7, 1777').toISOString();
+    var modifiedISO = new Date('December 19, 2999').toISOString();
 
     t.equal(post.title, 'A title.', 'contains a title');
     t.equal(post.subtitle, 'A subtitle.', 'contains a subtitle');
-    t.equal(post.date.toISOString(), isoDate, 'contains a date');
+    t.equal(post.created.toISOString(), createdISO, 'contains a created date');
+    t.equal(post.modified.toISOString(), modifiedISO,
+      'contains a modified date');
     t.equal(post.content, 'Some content.', 'contains content');
     t.deepEqual(post.tags, ['html', 'css', 'js'], 'contains tags');
     window.close();
