@@ -40,19 +40,16 @@ Includes a personal blog and portfolio.
 **Before going live:**
 
 - Add content.
+- Browse blog posts by title / date.
 - Cross-browser styling.
-
-**After going live:**
-
-- Refactor CSS.
-- Add missing tests.
 
 **Wishlist features:**
 
-- Indicate page in nav.
+- Indicate current page in nav.
 - Sticky nav.
 - Tag pool.
   - Toggle button: All / Any.
   - Multi-select input for tags.
 - Implement stickied blog posts.
 - Move blog posts and portfolio pieces to a database.
+- Add missing tests.
