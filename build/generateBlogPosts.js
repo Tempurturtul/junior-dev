@@ -44,28 +44,30 @@ fs.writeFileSync(path.resolve(targetDir, 'posts.json'), jsonData);
 function parsePost(data) {
   var parsed = {};
 
-  // This regexp isolates title (1), subtitle (2), date (3), and combined
-  // content & tags (4).
-  var re = /^(#\s[^\n]+\n\n)?(\*\*[^\*]+\*\*\n\n)?(\*Last\smodified:\s[^\*]+\*\n\n)?([\s\S]+)$/;
+  // This regexp isolates title (1), subtitle (2), created date (3), modified date (4), and combined
+  // content & tags (5).
+  var re = /^(#\s[^\n]+\n\n)?(\*\*[^\*]+\*\*\n\n)?(\*Created:\s[^\*]+\*\n\n)?(\*Last\smodified:\s[^\*]+\*\n\n)?([\s\S]+)$/;
   var results = re.exec(data) || [];
 
   // This regexp only matches if tags are present, and isolates the content (1)
   // and tags (2) from the previous combined result if a match is found.
   var reWithTags = /^([\s\S]*)(\*Tags:\s.+\*\n)$/;
-  var resultsWithTags = reWithTags.exec(results[4]);
+  var resultsWithTags = reWithTags.exec(results[5]);
 
   var title = results[1];
   var subtitle = results[2];
-  var date = results[3];
+  var created = results[3];
+  var modified = results[4];
   // If the regexp reWithTags fails to match, tags aren't present. Therefore,
-  // results[4] contains only post content.
-  var content = resultsWithTags ? resultsWithTags[1] : results[4];
+  // results[5] contains only post content.
+  var content = resultsWithTags ? resultsWithTags[1] : results[5];
   var tags = resultsWithTags ? resultsWithTags[2] : undefined;
 
   // Parse the isolated data.
   parsed.title = title ? title.substring(2, title.length - 2) : null;
   parsed.subtitle = subtitle ? subtitle.substring(2, subtitle.length - 4) : null;
-  parsed.date = date ? new Date(date.substring(16, date.length - 3)) : null;
+  parsed.created = created ? new Date(created.substring(10, created.length - 3)) : null;
+  parsed.modified = modified ? new Date(modified.substring(16, modified.length - 3)) : null;
   parsed.content = content ? converter.makeHtml(content) : null;
   parsed.tags = tags ? tags.substring(7, tags.length - 2).split(', ') : null;
 

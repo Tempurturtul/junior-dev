@@ -2,7 +2,7 @@
 
 **Udacity's Front-End Web Developer Nanodegree.**
 
-*Last modified: July 24, 2016*
+*Created: July 24, 2016*
 
 This review was originally posted on Reddit's /r/learnprogramming and /r/webdev subreddits. The [/r/learnprogramming post](https://www.reddit.com/r/learnprogramming/comments/4m1t70/udacity_nanodegree_review_frontend_web_development/) attracted the attention of Cameron Pittman, creator of the majority of the nanodegree's content. Have a look if you're interested in further insight into the program.
 
