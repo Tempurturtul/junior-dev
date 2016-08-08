@@ -163,6 +163,20 @@ body {
   text-indent: 3em;
 }
 
+.about__link {
+  color: #d33;
+  text-decoration: none;
+}
+
+.about__link:hover {
+  text-decoration: underline;
+}
+
+.about__link:visited {
+  color: #a33;
+}
+
+
 /**************************************
   Card
 **************************************/
