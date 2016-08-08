@@ -90,7 +90,6 @@ body {
   display: block;
 }
 
-
 /**************************************
   Page Link
 **************************************/
@@ -405,7 +404,6 @@ body {
 .portfolio-piece__live-link:visited:hover > .portfolio-piece__image {
   border-color: #a33;
 }
-
 
 .portfolio-piece__source-link {
   font-size: 0.9em;
