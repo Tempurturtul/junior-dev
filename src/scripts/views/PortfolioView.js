@@ -96,7 +96,7 @@
         .replace('{title}', formatPieceTitle(piece.title,
                                              piece.sourceURL,
                                              piece.liveURL))
-        .replace('{date}', piece.date ? piece.date.toLocaleDateString() : '')
+        .replace('{date}', piece.date ? formatPieceDate(piece.date) : '')
         .replace('{iso-date}', piece.date ? piece.date.toISOString() : '')
         .replace('{description}', piece.description || '')
         .replace('{source-url}', piece.sourceURL ?
@@ -118,8 +118,8 @@
         .replace('{img-srcset}', piece.image && piece.image.responsive ?
                                  formatImgSrcset(piece.image.responsive) :
                                  '')
-        .replace('{img-description}', piece.image && piece.image.alt ?
-                                      piece.image.alt :
+        .replace('{img-description}', piece.image && piece.image.description ?
+                                      piece.image.description :
                                       placeholderImgAlt)
         .replace('{tags}', piece.tags ?
           piece.tags.map(function(tag) {
@@ -153,6 +153,31 @@
     }
 
     /**
+     * Formats a portfolio piece date by returning the returning the month
+     * and year as a string. (For example: "January 2015")
+     * @param {Date} date - The portfolio piece date.
+     * @return {string} - The formatted date.
+     */
+    function formatPieceDate(date) {
+      var months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ];
+
+      return months[date.getMonth()] + ' ' + date.getFullYear();
+    }
+
+    /**
      * Formats an object with image data into a srcset string.
      * @param {object[]} data - The image data.
      * @param {string} data.url - The URL for one of the images.
@@ -161,7 +186,7 @@
      */
     function formatImgSrcset(data) {
       return data.reduce(function(acc, curr) {
-        var set = curr.url + ' ' + curr.width;
+        var set = curr.url + ' ' + curr.width + 'w';
 
         if (acc === '') {
           return set;
