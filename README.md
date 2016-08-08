@@ -54,4 +54,5 @@ Includes a personal blog and portfolio.
 - Tag pool.
   - Toggle button: All / Any.
   - Multi-select input for tags.
+- Implement stickied blog posts.
 - Move blog posts and portfolio pieces to a database.
