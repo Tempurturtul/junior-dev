@@ -104,6 +104,13 @@
       <!-- Section block. -->
       <section class="section">
         <h1 class="section__title">Learner's Blog</h1>
+        <!-- Blog Nav block (also Collapsible Drawer). -->
+        <nav class="blog-nav collapsible-drawer collapsible-drawer--collapsed">
+          <button class="collapsible-drawer__toggle">Posts</button>
+          <ul class="blog-nav__list collapsible-drawer__content">
+            {nav-entries}
+          </ul>
+        </nav>
         <!-- Blog Search block. -->
         <form class="blog-search" {hide-search}>
           <input class="blog-search__search-bar" type="search" placeholder="Search" value="{search-text}">
@@ -123,6 +130,20 @@
           <!-- Formatted post templates inserted here. -->
         </div>
       </section>
+    </script>
+
+    <!-- Blog Nav Entry template. -->
+    <script type="text/html" id="blog-nav-entry-template">
+      <li class="blog-nav__list-entry">
+        <!-- Collapsible List block. -->
+        <div class="collapsible-list">
+          <button class="collapsible-list__toggle">{date}</button>
+          <ul class="collapsible-list__list">
+            <!-- (Each post has class blog-nav__link and page-link.) -->
+            {posts}
+          </ul>
+        </div>
+      </li>
     </script>
 
     <!-- Post template. -->

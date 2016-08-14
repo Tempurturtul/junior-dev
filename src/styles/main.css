@@ -230,6 +230,118 @@ body {
 }
 
 /**************************************
+  Blog Nav
+**************************************/
+
+.blog-nav {
+ margin: 10px auto;
+ max-width: 300px;
+ padding: 0 8px;
+}
+
+.blog-nav__toggle {
+
+}
+
+.blog-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.blog-nav__list-entry {
+
+}
+
+.blog-nav__link {
+
+}
+
+/**************************************
+  Collapsible Drawer
+**************************************/
+
+.collapsible-drawer {
+
+}
+
+.collapsible-drawer--collapsed {
+
+}
+
+.collapsible-drawer--collapsed > .collapsible-drawer__content {
+  display: none;
+}
+
+.collapsible-drawer--collapsed > .collapsible-drawer__toggle::after {
+  content: '»';
+}
+
+.collapsible-drawer--collapsed > .collapsible-drawer__toggle::before {
+  content: '«';
+}
+
+.collapsible-drawer__toggle {
+  display: flex;
+  font-size: 1em;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.collapsible-drawer__toggle::after {
+  content: '«';
+  display: inline-block;
+  transform: rotate(90deg);
+}
+
+.collapsible-drawer__toggle::before {
+  content: '»';
+  display: inline-block;
+  transform: rotate(-90deg);
+}
+
+.collapsible-drawer__content {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: dotted 1px rgba(0, 0, 0, 0.5);
+  border-top: none;
+  padding: 0 5px 5px;
+}
+
+/**************************************
+  Collapsible List
+**************************************/
+
+.collapsible-list {
+
+}
+
+.collapsible-list--collapsed {
+
+}
+
+.collapsible-list--collapsed > .collapsible-list__list {
+  display: none;
+}
+
+.collapsible-list__toggle {
+  background: none;
+  border: none;
+  border-bottom: solid 1px #222;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  font: inherit;
+  margin: 0 0 4px;
+  padding: 2px 5px;
+  text-align: left;
+  width: 100%;
+}
+
+.collapsible-list__list {
+
+}
+
+/**************************************
   Blog Posts
 **************************************/
 

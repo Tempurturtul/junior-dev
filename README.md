@@ -39,9 +39,11 @@ Includes a personal blog and portfolio.
 
 **Before going live:**
 
-- Add content.
-- Browse blog posts by title / date.
+- Add blog and portfolio-specific navs.
+  - Browse quickly to specific posts and portfolio pieces.
+- Collapsible blog posts.
 - Cross-browser styling.
+- Add content.
 
 **Wishlist features:**
 

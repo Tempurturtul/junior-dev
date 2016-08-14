@@ -16,6 +16,8 @@
     var containerElem = document.querySelector('.main');
     var blogTemplate = document.getElementById('blog-template').innerHTML;
     var postTemplate = document.getElementById('post-template').innerHTML;
+    var navEntryTemplate = document.getElementById('blog-nav-entry-template')
+                             .innerHTML;
     // Initialized on render.
     var postContainerElem;
 
@@ -38,6 +40,9 @@
     function render(opts) {
       // Get the post filters in order to properly initialize the search form.
       var postFilters = blogController.getPostFilters();
+      // Format nav entries for the blog nav.
+      var formattedNavEntries = formatNavEntries();
+
       // Format the blog template.
       var formattedBlogTemplate = blogTemplate
         .replace('{hide-search}', opts && opts.hideSearch ? 'hidden' : '')
@@ -51,7 +56,8 @@
         .replace('{search-all}', postFilters.maxAge === 'all' ?
           'selected' : '')
         .replace('{sort-oldest}', postFilters.sortOldest ?
-          'checked' : '');
+          'checked' : '')
+        .replace('{nav-entries}', formattedNavEntries);
 
       // Set the container element's inner HTML to the formatted blog template.
       containerElem.innerHTML = formattedBlogTemplate;
@@ -63,6 +69,9 @@
       var searchBar = document.querySelector('.blog-search__search-bar');
       var timeOptions = document.querySelector('.blog-search__time-options');
       var sortOldest = document.querySelector('.blog-search__sort-oldest');
+      var collapsibleDrawers = document.getElementsByClassName('collapsible-drawer');
+      var collapsibleLists = document.getElementsByClassName('collapsible-list');
+
       // Prevent form submission from reloading the page.
       searchForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -71,7 +80,23 @@
       searchBar.addEventListener('input', handleSearchBarInput);
       // Update post filters on time options change.
       timeOptions.addEventListener('change', handleTimeOptionsChange);
+      // Update post filters on sort oldest change.
       sortOldest.addEventListener('change', handleSortOldestChange);
+      // Toggle collapsed state on collapsibles.
+      var i;
+      var len = collapsibleDrawers.length;
+      var btn;
+      for (i = 0; i < len; i++) {
+        btn = collapsibleDrawers[i]
+          .querySelector('.collapsible-drawer__toggle');
+        btn.addEventListener('click', handleCollapsibleToggle);
+      }
+      len = collapsibleLists.length;
+      for (i = 0; i < len; i++) {
+        btn = collapsibleLists[i]
+          .querySelector('.collapsible-list__toggle');
+        btn.addEventListener('click', handleCollapsibleToggle);
+      }
 
       // Render posts.
       renderPosts();
@@ -120,6 +145,100 @@
      * Initializes the blog view.
      */
     function init() {}
+
+    /**
+     * Formats a nav entry template for each month containing at least one post.
+     * @return {string} - The formatted nav entry templates.
+     */
+    function formatNavEntries() {
+      // Get all posts sorted newest to oldest.
+      var allPosts = blogController.getPosts({getAll: true, sortOldest: false});
+
+      // Group posts by month.
+      allPosts = allPosts
+        .reduce(function(acc, curr) {
+          // The latest accumulated group.
+          var group = acc.length ? acc[acc.length - 1] : null;
+          // The latest accumulated group's month and year.
+          var groupMonthYear = [];
+          // The current post's month and year.
+          var currMonthYear = [
+            curr.created ? curr.created.getMonth() : null,
+            curr.created ? curr.created.getFullYear() : null
+          ];
+
+          // If there is an accumulated group, set its month and year.
+          if (group) {
+            groupMonthYear = [
+              group[0].created ? group[0].created.getMonth() : null,
+              group[0].created ? group[0].created.getFullYear() : null
+            ];
+          }
+
+          // Check if the current post belongs in the latest group, or a new
+          // one.
+          if (groupMonthYear[0] === currMonthYear[0] &&
+              groupMonthYear[1] === currMonthYear[1]) {
+            group.push(curr);
+          } else {
+            acc.push([curr]);
+          }
+
+          return acc;
+        }, []);
+
+      // Convert all groups into formatted nav entry templates, then join and
+      // return them.
+      return allPosts
+        .map(function(group) {
+          return navEntryTemplate
+            .replace('{date}', formatNavEntryDate(group))
+            .replace('{posts}', formatNavEntryPosts(group));
+        })
+        .join('');
+    }
+
+    /**
+     * Formats a nav entry template's date.
+     * @param {Post[]} group - A group of posts.
+     * @return {string} - The formatted date string.
+     */
+    function formatNavEntryDate(group) {
+      var months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ];
+
+      return group[0].created ?
+             months[group[0].created.getMonth()] + ' ' +
+             group[0].created.getFullYear() :
+             'undated';
+    }
+
+    /**
+     * Formats a nav entry template's posts.
+     * @param {Post[]} group - A group of posts.
+     * @return {string} - The formatted posts strings.
+     */
+    function formatNavEntryPosts(group) {
+      return group
+        .map(function(post) {
+          return '<li><a class="blog-nav__link page-link" href="#/blog/' +
+                 blogController.getPostID(post) + '">' +
+                 (post.title || 'untitled') + '</a></li>';
+        })
+        .join('');
+    }
 
     /**
      * Formats a post template with data from a post.
@@ -199,6 +318,21 @@
      */
     function handleSortOldestChange(e) {
       blogController.updatePostFilters({sortOldest: e.target.checked});
+    }
+
+    /**
+     * Handles collapsible toggle click event by toggling the --collapsed
+     * modifier on the toggle button's parent collapsible element.
+     * @param {Event} e - The click event.
+     */
+    function handleCollapsibleToggle(e) {
+      var elem = e.target.parentElement;
+
+      if (elem.classList.contains('collapsible-drawer')) {
+        elem.classList.toggle('collapsible-drawer--collapsed');
+      } else if(elem.classList.contains('collapsible-list')) {
+        elem.classList.toggle('collapsible-list--collapsed');
+      }
     }
   }
 })();

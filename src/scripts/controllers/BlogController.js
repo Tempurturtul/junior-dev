@@ -57,9 +57,15 @@
 
     /**
      * Gets blog posts.
+     * @param {object} [opts] - Options.
+     * @param {bool} [opts.getAll] - Get all blog posts. (Overrides filters.)
+     * @param {bool} [opts.oldestFirst] - Sort by oldest first (or by
+     * youngest first, if false). (Overrides filters.)
      * @return {Post[]} - An array of blog posts.
      */
-    function getPosts() {
+    function getPosts(opts) {
+      opts = opts || {};
+
       // Get raw data.
       var posts = mainController.getStoredData('blogPosts');
 
@@ -69,11 +75,15 @@
           return new app.models.Post(post);
         });
 
-      // Filter posts.
-      posts = filterPosts(posts, postFilters);
+      // Filter posts if not ignoring filters.
+      posts = opts.getAll ? posts : filterPosts(posts, postFilters);
 
       // Sort posts.
-      posts = sortPosts(posts, postFilters.sortOldest);
+      if (opts.hasOwnProperty('oldestFirst')) {
+        posts = sortPosts(posts, opts.oldestFirst);
+      } else {
+        posts = sortPosts(posts, postFilters.sortOldest);
+      }
 
       return posts;
     }
