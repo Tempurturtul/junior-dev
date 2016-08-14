@@ -69,8 +69,10 @@
       var searchBar = document.querySelector('.blog-search__search-bar');
       var timeOptions = document.querySelector('.blog-search__time-options');
       var sortOldest = document.querySelector('.blog-search__sort-oldest');
-      var collapsibleDrawers = document.getElementsByClassName('collapsible-drawer');
-      var collapsibleLists = document.getElementsByClassName('collapsible-list');
+      var collapsibleDrawers = document
+        .getElementsByClassName('collapsible-drawer');
+      var collapsibleLists = document
+        .getElementsByClassName('collapsible-list');
 
       // Prevent form submission from reloading the page.
       searchForm.addEventListener('submit', function(e) {
@@ -330,7 +332,7 @@
 
       if (elem.classList.contains('collapsible-drawer')) {
         elem.classList.toggle('collapsible-drawer--collapsed');
-      } else if(elem.classList.contains('collapsible-list')) {
+      } else if (elem.classList.contains('collapsible-list')) {
         elem.classList.toggle('collapsible-list--collapsed');
       }
     }
