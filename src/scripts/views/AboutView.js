@@ -13,7 +13,7 @@
    */
   function AboutView(aboutController) {
     var self = this;
-    var containerElem = document.querySelector('.main');
+    var containerElem = document.getElementById('main');
     var aboutTemplate = document.getElementById('about-template').innerHTML;
 
     self.render = render;

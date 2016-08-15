@@ -13,7 +13,7 @@
    */
   function BlogView(blogController) {
     var self = this;
-    var containerElem = document.querySelector('.main');
+    var containerElem = document.getElementById('main');
     var blogTemplate = document.getElementById('blog-template').innerHTML;
     var postTemplate = document.getElementById('post-template').innerHTML;
     var navEntryTemplate = document.getElementById('blog-nav-entry-template')

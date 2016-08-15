@@ -13,7 +13,7 @@
    */
   function PortfolioView(portfolioController) {
     var self = this;
-    var containerElem = document.querySelector('.main');
+    var containerElem = document.getElementById('main');
     var portfolioTemplate = document.getElementById('portfolio-template')
                               .innerHTML;
     var pieceTemplate = document.getElementById('portfolio-piece-template')

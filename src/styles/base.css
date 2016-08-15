@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: #f5f5f5;
+  color: #222;
+  font-family: sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #c33;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #8a244e;
+}
+
+p {
+  line-height: 1.4;
+  text-indent: 3em;
+}

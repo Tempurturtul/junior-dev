@@ -1,0 +1,240 @@
+/************************************************
+  Shell
+************************************************/
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.shell__primary-content {
+  flex: 1 0 auto;
+}
+
+.shell__secondary-content {
+  flex: 0 0 auto;
+}
+
+/************************************************
+  Page Header
+************************************************/
+
+.page-header {
+  align-items: center;
+  background-color: #222;
+  color: #f5f5f5;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.page-header__title {
+  flex: 0 0 auto;
+  margin: 0 10px;
+}
+
+.page-header__nav {
+  flex: 1 0 auto;
+  font-size: 0.9em;
+  font-variant: small-caps;
+  font-weight: bold;
+  /* Prevent overflow caused by flex-size: auto. */
+  max-width: 100%;
+}
+
+.page-header__list {
+  text-align: center;
+}
+
+.page-header__link {
+  display: block;
+  padding: 5px;
+}
+
+.page-header__link:hover {
+  color: #f5f5f5;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.page-header__link:visited {
+  color: inherit;
+}
+
+/************************************************
+  Page Footer
+************************************************/
+
+.page-footer {
+  background-color: #222;
+  color: #f5f5f5;
+  font-size: 0.8em;
+  padding: 10px;
+  text-align: right;
+}
+
+.page-footer__link {
+
+}
+
+/************************************************
+  Title Link
+************************************************/
+
+.title-link {
+  color: inherit;
+}
+
+.title-link:hover {
+  text-decoration: none;
+}
+
+.title-link:visited {
+  color: inherit;
+}
+
+/************************************************
+  Inline List
+************************************************/
+
+.inline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.inline-list__entry {
+  display: inline-block;
+  padding: 0 5px;
+}
+
+/************************************************
+  Section
+************************************************/
+
+.section {
+  margin: 0 10px;
+}
+
+.section__title {
+  font-size: 2em;
+  text-align: center;
+}
+
+/************************************************
+  Card
+************************************************/
+
+.card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  margin: 20px 8px;
+  padding: 10px;
+  position: relative;
+}
+
+/************************************************
+  Footer
+************************************************/
+
+.footer {
+  border-top: solid 1px #222;
+  font-size: 0.9em;
+  margin: 5px 0;
+  padding-top: 5px;
+  width: 100%;
+}
+
+/************************************************
+  Tags
+************************************************/
+
+.tags {
+  padding: 0 10px;
+  text-align: center;
+}
+
+/************************************************
+  Tag
+************************************************/
+
+.tag {
+  font-variant: small-caps;
+  white-space: nowrap;
+}
+
+.tag:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.tag--active {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/************************************************
+  Tag Filters
+************************************************/
+
+.tag-filters {}
+
+.tag-filters__title {}
+
+.tag-filters__label {
+  display: block;
+  font-variant: small-caps;
+  padding: 1px 0;
+}
+
+.tag-filters__checkbox {
+  vertical-align: middle
+}
+
+/************************************************
+  Portfolio Piece
+************************************************/
+
+.portfolio-piece {}
+
+.portfolio-piece__title {
+  font-size: 1.8em;
+  font-weight: normal;
+  margin: 5px 0;
+}
+
+.portfolio-piece__title-link {}
+
+.portofolio-piece__date {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.portfolio-piece__image {
+  border: solid 2px #555;
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* Change image's border color on hover only if a live-link is present. */
+.portfolio-piece__live-link:hover > .portfolio-piece__image {
+  border-color: #c33;
+}
+
+/* Change image's border color on hover only if a live-link is present. */
+.portfolio-piece__live-link:visited:hover > .portfolio-piece__image {
+  border-color: #8a244e;
+}
+
+.portfolio-piece__source-link {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.portfolio-piece__description {}
+
+.portfolio-piece__tag {}

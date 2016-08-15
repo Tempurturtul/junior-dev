@@ -37,21 +37,14 @@ Includes a personal blog and portfolio.
 
 ## TODO
 
-**Before going live:**
-
-- Add blog and portfolio-specific navs.
-  - Browse quickly to specific posts and portfolio pieces.
-- Collapsible blog posts.
-- Cross-browser styling.
-- Add content.
-
-**Wishlist features:**
-
-- Indicate current page in nav.
-- Sticky nav.
-- Tag pool.
-  - Toggle button: All / Any.
-  - Multi-select input for tags.
-- Implement stickied blog posts.
-- Move blog posts and portfolio pieces to a database.
-- Add missing tests.
+- Finish styling refactor.
+  - Including rework of blog and portfolio.
+- Add landing page and change default route.
+- Add contact page (formspree).
+- Gracefully degrade for those with JavaScript disabled.
+  - SPA to multi-page.
+  - Hide JS-dependent blog controls.
+  - Test contact page functionality; warn user if non-functional.
+  - Consider disabling tag:hover styling.
+- Test in most popular browsers.
+- Finish adding content.

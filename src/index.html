@@ -3,15 +3,17 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Tempurturtul's home page.">
+    <meta name="description" content="A junior software developer's blog, portfolio, and general homepage.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Low Level Dev</title>
+    <title>Junior Dev</title>
 
     <!-- Apply Color to Mobile Status Bar -->
     <meta name="theme-color" content="#222">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/modules.css">
 
     <!-- Scripts -->
     <script async src="scripts/utils/past.js"></script>
@@ -46,34 +48,29 @@
     <!-- Shell block. -->
     <div class="shell">
       <div class="shell__secondary-content">
-        <!-- Header block. -->
-        <header class="header">
-          <h1 class="header__title">Low Level Dev</h1>
-          <!-- Nav block. -->
-          <nav class="nav">
-            <ul class="nav__list">
-              <li class="nav__list-entry"><a class="nav__link page-link" href="#/about">About</a></li>
-              <li class="nav__list-entry"><a class="nav__link page-link" href="#/blog">Blog</a></li>
-              <li class="nav__list-entry"><a class="nav__link page-link" href="#/portfolio">Portfolio</a></li>
+        <!-- Page Header block. -->
+        <header class="page-header">
+          <h1 class="page-header__title">
+            <a class="title-link" href="#/">Junior Dev</a>
+          </h1>
+          <nav class="page-header__nav">
+            <ul class="page-header__list inline-list">
+              <li class="inline-list__entry"><a class="page-header__link" href="#/about">About</a></li>
+              <li class="inline-list__entry"><a class="page-header__link" href="#/blog">Blog</a></li>
+              <li class="inline-list__entry"><a class="page-header__link" href="#/portfolio">Portfolio</a></li>
+              <li class="inline-list__entry"><a class="page-header__link" href="#/contact">Contact</a></li>
             </ul>
           </nav>
         </header>
       </div>
-
       <div class="shell__primary-content">
-        <!-- Main block. -->
-        <main class="main">
+        <main id="main">
         </main>
       </div>
-
       <div class="shell__secondary-content">
-        <!-- Footer block. -->
-        <footer class="footer align-right">
-          <!-- Low Emphasis block. -->
-          <small class="low-emphasis">
-            <!-- Link block. -->
-            <a class="link" href="https://github.com/Tempurturtul/home" target="_blank">Hosted on GitHub.</a>
-          </small>
+        <!-- Page Footer block. -->
+        <footer class="page-footer">
+          <a class="page-footer__link" href="https://github.com/Tempurturtul/home">Hosted on GitHub.</a>
         </footer>
       </div>
     </div>
@@ -82,20 +79,17 @@
     <script type="text/html" id="about-template">
       <!-- Section block. -->
       <section class="section">
-        <h1 class="section__title">A Dev's Story</h1>
-        <!-- About block. -->
-        <div class="about">
-          <p>My name's Matt. In 2011 I graduated from a small school with a B.Sc. degree in Homeland Security Management. I thought I wanted to be a police officer until I reached the last stretch of my degree and interned at a local department. It wasn't until then that the responsibility of carrying a gun and potentially having to use it on someone really sank in, along with the idea of enforcing laws I disagreed with and immersing myself in an environment that I knew could produce some horrible biases.</p>
-          <p>I decided instead to pursue a career as a background investigator with the federal government, but found that I was unqualified due to lack of experience. So I took a low-paying job as an unarmed airport security officer. I had to put in two years before I would be qualified for the job I wanted. Luckily I found myself with a good amount of free time to pursue other interests.</p>
-          <p>I have always loved computers, and I had always been afraid to pursue programming because I thought it would make me enjoy computers less if I wasn't very good at it. I finally got my feet wet with Zed Shaw's <a class="about__link link" href="http://learnpythonthehardway.org/book/">Learn Python the Hard Way</a> in 2013. I enjoyed the book immensely, gained a lot of confidence, and enthusiastically dove into the field. Like most fledgling programmers (I assume), I had a strong interest in creating games. I used Python in attempts to recreate simple arcade games for a while before discovering the <a class="about__link link" href="http://unity3d.com/">Unity</a> game engine. I used Unity to learn Unity's variant of JavaScript, and then to learn C#.</p>
-          <p>I learned a lot about object-oriented programming and separation of concerns while working through numerous Unity tutorials, and also dabbled briefly in web development by taking Bob Tabor's <a class="about__link link" href="https://channel9.msdn.com/Series/HTML5-CSS3-Fundamentals-Development-for-Absolute-Beginners">HTML5 and CSS3 Fundamentals</a> course. By far the most valuable learning experience for me though, came from Dan Grossman's <a class="about__link link" href="http://courses.cs.washington.edu/courses/cse341/13sp/">Programming Languages</a> course, offered via the University of Washington and Coursera. During the course, Professor Grossman focused on teaching and comparing SML, Racket, and Ruby; SML and Racket being examples of statically and dynamically typed functional languages, and Ruby being an example of a dynamically typed object-oriented language. The course was perfectly challenging and introduced me to a variety of new concepts that stoked my interest in the field even further.</p>
-          <p>As my love for programming grew, my satisfaction with the idea of a career doing something else plummeted. I researched careers in game development and found an intimidating field for someone of my extremely limited experience. So I did some more research and settled on web development as a possible career I could switch to within the near future.</p>
-          <p>I settled down at my current job, no longer interested in pursuing anything other than a career in software development, and focused on learning web development. I worked through <a class="about__link link" href="https://www.freecodecamp.com/">FreeCodeCamp's</a> front-end content, then completed a <a class="about__link link" href="https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001">Front-End Web Developer Nanodegree</a> program from Udacity. (See my <a class="about__link link" href="#/blog/reviewing-fend">review of the program</a> if you're interested.)</p>
-          <p>In July of 2016 I applied and got accepted to <a class="about__link link" href="http://www.hackreactor.com/">Hack Reactor</a>, a coding bootcamp focusing on web development with JavaScript. It looked like my goal of switching to a career in web development was nearing completion. Unfortunately, circumstances in my personal life changed during the month between application and acceptance, resulting in my inability to move from my current rural location for the next two years. As a result, I had to decline the offer to attend.</p>
-          <p>I'm now pursuing a second B.Sc. degree in Computer Science from Oregon State University via their fully online <a class="about__link link" href="http://eecs.oregonstate.edu/online-cs-students">post-baccalaureate program</a>. I hope to complete the program during the two years I'm unable to relocate, providing myself with more opportunities outside web development, and finally completing my transition to a career as a software engineer in 2018.</p>
-          <p>In addition to pursuing the CS degree, I'm currently keeping busy with learning Haskell and with personal web development projects intended to help me retain and grow my existing knowledge.</p>
-          <p>If you'd like to contact me for any reason, I can be reached at <a class="about__link link" href="mailto:tempurturtul@gmail.com">tempurturtul@gmail.com</a>.</p>
-        </div>
+        <h1 class="section__title">A Junior Developer's Story</h1>
+        <p>My name's Matt. In 2011 I graduated from a small school with a B.Sc. degree in Homeland Security Management. I thought I wanted to be a police officer until I reached the last stretch of my degree and interned at a local department. It wasn't until then that the responsibility of carrying a gun and potentially having to use it on someone really sank in, along with the idea of enforcing laws I disagreed with and immersing myself in an environment that I knew could produce some horrible biases.</p>
+        <p>I decided instead to pursue a career as a background investigator with the federal government, but found that I was unqualified due to lack of experience. So I took a low-paying job as an unarmed airport security officer. I had to put in two years before I would be qualified for the job I wanted. Luckily I found myself with a good amount of free time to pursue other interests.</p>
+        <p>I have always loved computers, and I had always been afraid to pursue programming because I thought it would make me enjoy computers less if I wasn't very good at it. I finally got my feet wet with Zed Shaw's <a href="http://learnpythonthehardway.org/book/">Learn Python the Hard Way</a> in 2013. I enjoyed the book immensely, gained a lot of confidence, and enthusiastically dove into the field. Like most fledgling programmers (I assume), I had a strong interest in creating games. I used Python in attempts to recreate simple arcade games for a while before discovering the <a href="http://unity3d.com/">Unity</a> game engine. I used Unity to learn Unity's variant of JavaScript, and then to learn C#.</p>
+        <p>I learned a lot about object-oriented programming and separation of concerns while working through numerous Unity tutorials, and also dabbled briefly in web development by taking Bob Tabor's <a href="https://channel9.msdn.com/Series/HTML5-CSS3-Fundamentals-Development-for-Absolute-Beginners">HTML5 and CSS3 Fundamentals</a> course. By far the most valuable learning experience for me though, came from Dan Grossman's <a href="http://courses.cs.washington.edu/courses/cse341/13sp/">Programming Languages</a> course, offered via the University of Washington and Coursera. During the course, Professor Grossman focused on teaching and comparing SML, Racket, and Ruby; SML and Racket being examples of statically and dynamically typed functional languages, and Ruby being an example of a dynamically typed object-oriented language. The course was perfectly challenging and introduced me to a variety of new concepts that stoked my interest in the field even further.</p>
+        <p>As my love for programming grew, my satisfaction with the idea of a career doing something else plummeted. I researched careers in game development and found an intimidating field for someone of my extremely limited experience. So I did some more research and settled on web development as a possible career I could switch to within the near future.</p>
+        <p>I settled down at my current job, no longer interested in pursuing anything other than a career in software development, and focused on learning web development. I worked through <a href="https://www.freecodecamp.com/">FreeCodeCamp's</a> front-end content, then completed a <a href="https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001">Front-End Web Developer Nanodegree</a> program from Udacity. (See my <a href="#/blog/reviewing-fend">review of the program</a> if you're interested.)</p>
+        <p>In July of 2016 I applied and got accepted to <a href="http://www.hackreactor.com/">Hack Reactor</a>, a coding bootcamp focusing on web development with JavaScript. It looked like my goal of switching to a career in web development was nearing completion. Unfortunately, circumstances in my personal life changed during the month between application and acceptance, resulting in my inability to move from my current rural location for the next two years. As a result, I had to decline the offer to attend.</p>
+        <p>I'm now pursuing a second B.Sc. degree in Computer Science from Oregon State University via their fully online <a href="http://eecs.oregonstate.edu/online-cs-students">post-baccalaureate program</a>. I hope to complete the program during the two years I'm unable to relocate, providing myself with more opportunities outside web development, and finally completing my transition to a career as a software engineer in 2018.</p>
+        <p>In addition to pursuing the CS degree, I'm currently keeping busy with learning Haskell and with personal web development projects intended to help me retain and grow my existing knowledge.</p>
+        <p>If you'd like to contact me for any reason, I can be reached at <a href="mailto:tempurturtul@gmail.com">tempurturtul@gmail.com</a>.</p>
       </section>
     </script>
 
@@ -174,19 +168,44 @@
       <!-- Section block. -->
       <section class="section">
         <h1 class="section__title">Featured Projects</h1>
+
+        <fieldset class="tag-filters">
+          <legend class="tag-filters__title">Filtered Tags</legend>
+          <div class="l-h-100px-s">
+            <!-- Formatted tag filters inserted here. -->
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">single-page application</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">js</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">single-page application</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">css</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">html</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">{tag}</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">single-page application</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">js</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">single-page application</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">css</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">html</label>
+            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">{tag}</label>
+          </div>
+        </fieldset>
+
         <!-- Portfolio Pieces block. -->
-        <div class="portfolio-pieces">
+        <div class="portfolio-pieces l-row-cw">
           <!-- Formatted portfolio piece templates inserted here. -->
         </div>
       </section>
     </script>
 
+    <!-- Tag Filter template. -->
+    <script type="text/html" id="tag-filter-template">
+      <label class="tag-filters__filter-label"><input class="tag-filters__filter-checkbox" type="checkbox" value="{tag-value}">{tag}</label>
+    </script>
+
     <!-- Portfolio Piece template. -->
     <script type="text/html" id="portfolio-piece-template">
       <!-- Card block. -->
-      <div class="card">
+      <div class="card l-w-300px">
         <!-- Portfolio Piece block. -->
-        <article class="portfolio-piece">
+        <article class="portfolio-piece l-col-c">
           <!-- Title may also have class portfolio-piece__title-link and link. -->
           <h1 class="portfolio-piece__title">{title}</h1>
           <time class="portofolio-piece__date" datetime="{iso-date}">{date}</time>
