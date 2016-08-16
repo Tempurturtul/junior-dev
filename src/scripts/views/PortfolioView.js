@@ -162,10 +162,10 @@
     function formatPieceTitle(title, sourceURL, liveURL) {
       // Prefer to wrap in live URL.
       if (liveURL) {
-        title = '<a class="portfolio-piece__title-link link" ' +
+        title = '<a class="portfolio-piece__title-link" ' +
                     'href="' + liveURL + '">' + title + '</a>';
       } else if (sourceURL) {
-        title = '<a class="portfolio-piece__title-link link" ' +
+        title = '<a class="portfolio-piece__title-link" ' +
                     'href="' + sourceURL + '">' + title + '</a>';
       }
 
