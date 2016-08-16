@@ -169,22 +169,10 @@
       <section class="section">
         <h1 class="section__title">Featured Projects</h1>
 
-        <fieldset class="tag-filters">
+        <fieldset class="tag-filters l-mw-300px l-center-hm">
           <legend class="tag-filters__title">Filtered Tags</legend>
-          <div class="l-h-100px-s">
+          <div class="tag-filters__filters l-mh-100px-s">
             <!-- Formatted tag filters inserted here. -->
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">single-page application</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">js</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">single-page application</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">css</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">html</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">{tag}</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">single-page application</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">js</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">single-page application</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">css</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">html</label>
-            <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}">{tag}</label>
           </div>
         </fieldset>
 
@@ -197,7 +185,7 @@
 
     <!-- Tag Filter template. -->
     <script type="text/html" id="tag-filter-template">
-      <label class="tag-filters__filter-label"><input class="tag-filters__filter-checkbox" type="checkbox" value="{tag-value}">{tag}</label>
+      <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}" {checked}>{tag}</label>
     </script>
 
     <!-- Portfolio Piece template. -->
@@ -218,11 +206,14 @@
           <p class="portfolio-piece__description">{description}</p>
           <footer class="footer">
             <!-- Tags block. -->
-            <!-- (Each tag has class portfolio-piece__tag and tag.) -->
             <div class="tags">{tags}</div>
           </footer>
         </article>
       </div>
+    </script>
+
+    <script type="text/html" id="portfolio-piece-tag-template">
+      <span class="portfolio-piece__tag {active} tag">{tag}</span>
     </script>
 
   </body>

@@ -16,7 +16,7 @@
 /* Centered */
 .l-col-c {
   align-items: center;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -30,11 +30,29 @@
 }
 
 /************************************************
-  Height
+  Max Width
+************************************************/
+
+/* 300px */
+.l-mw-300px {
+  max-width: 300px;
+}
+
+/************************************************
+  Max Height
 ************************************************/
 
 /* 100px, Scrollable */
-.l-h-100px-s {
-  height: 100px;
+.l-mh-100px-s {
+  max-height: 100px;
   overflow: auto;
+}
+
+/************************************************
+  Centering
+************************************************/
+
+/* horizontal, margin */
+.l-center-hm {
+  margin: 0 auto;
 }

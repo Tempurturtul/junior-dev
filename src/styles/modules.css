@@ -39,6 +39,7 @@
   font-size: 0.9em;
   font-variant: small-caps;
   font-weight: bold;
+
   /* Prevent overflow caused by flex-size: auto. */
   max-width: 100%;
 }
@@ -48,12 +49,14 @@
 }
 
 .page-header__link {
+  color: #f5f5f5;
   display: block;
   padding: 5px;
 }
 
-.page-header__link:hover {
-  color: #f5f5f5;
+.page-header__link:hover,
+.page-header__link:visited:hover {
+  color: #c33;
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -75,7 +78,11 @@
 }
 
 .page-footer__link {
+  color: inherit;
+}
 
+.page-footer__link:visited {
+  color: inherit;
 }
 
 /************************************************
@@ -183,6 +190,8 @@
 
 .tag-filters__title {}
 
+.tag-filters__filters {}
+
 .tag-filters__label {
   display: block;
   font-variant: small-caps;
@@ -190,7 +199,7 @@
 }
 
 .tag-filters__checkbox {
-  vertical-align: middle
+  vertical-align: middle;
 }
 
 /************************************************
@@ -226,7 +235,7 @@
 
 /* Change image's border color on hover only if a live-link is present. */
 .portfolio-piece__live-link:visited:hover > .portfolio-piece__image {
-  border-color: #8a244e;
+  border-color: #b92292;
 }
 
 .portfolio-piece__source-link {

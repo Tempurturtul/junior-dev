@@ -18,10 +18,16 @@
                               .innerHTML;
     var pieceTemplate = document.getElementById('portfolio-piece-template')
                           .innerHTML;
+    var tagTemplate = document.getElementById('portfolio-piece-tag-template')
+                        .innerHTML;
+    var tagFilterTemplate = document.getElementById('tag-filter-template')
+                              .innerHTML;
     // Initialized on render.
     var pieceContainerElem;
+    var tagFilterContainerElem;
 
     self.render = render;
+    self.renderTagFilters = renderTagFilters;
     self.renderPieces = renderPieces;
 
     init();
@@ -38,7 +44,41 @@
     function render() {
       containerElem.innerHTML = portfolioTemplate;
       pieceContainerElem = document.querySelector('.portfolio-pieces');
+      tagFilterContainerElem = document.querySelector('.tag-filters__filters');
+      renderTagFilters();
       renderPieces();
+    }
+
+    /**
+     * Renders tag filters.
+     */
+    function renderTagFilters() {
+      // Get all tags.
+      var tags = portfolioController.getAllTags();
+      // Get filtered tags.
+      var filtered = portfolioController.getFilteredTags();
+
+      // Convert tags to a single string of formatted tag filter templates.
+      tags = tags.map(function(tag) {
+        return tagFilterTemplate
+          .replace('{tag-value}', tag)
+          .replace('{tag}', tag)
+          .replace('{checked}', filtered.indexOf(tag) === -1 ?
+                                '' :
+                                'checked');
+      })
+      .join('');
+
+      tagFilterContainerElem.innerHTML = tags;
+
+      // Add event listeners.
+      var checkboxes = document.getElementsByClassName('tag-filters__checkbox');
+      var len = checkboxes.length;
+      // For each checkbox...
+      for (var i = 0; i < len; i++) {
+        // Add the handleTagFilterChange event listener.
+        checkboxes[i].addEventListener('change', handleTagFilterChange);
+      }
     }
 
     /**
@@ -50,7 +90,7 @@
 
       // Convert pieces to a single string of formatted piece templates.
       pieces = pieces.map(function(piece) {
-        return formatPieceTemplate(piece);
+        return formatPieceTemplate(piece, filteredTags);
       }).join('');
 
       pieceContainerElem.innerHTML = pieces;
@@ -62,11 +102,6 @@
       for (var i = 0; i < len; i++) {
         // Add the handleTagClick event listener.
         tags[i].addEventListener('click', handleTagClick);
-        // Add the --active modifier if the tag is present in the filtered
-        // tags.
-        if (filteredTags.indexOf(tags[i].textContent) !== -1) {
-          tags[i].classList.add('tag--active');
-        }
       }
     }
 
@@ -85,9 +120,10 @@
      * Formats a piece template with data from a portfolio piece.
      * @param {PortfolioPiece} piece - The portfolio piece used to format
      * the template.
+     * @param {string[]} activeTags - The currently active tags.
      * @return {string} - The formatted template.
      */
-    function formatPieceTemplate(piece) {
+    function formatPieceTemplate(piece, activeTags) {
       var placeholderImgURL = 'images/placeholder-300.png';
       var placeholderImgAlt = 'Image unavailable.';
 
@@ -122,10 +158,8 @@
                                       piece.image.description :
                                       placeholderImgAlt)
         .replace('{tags}', piece.tags ?
-          piece.tags.map(function(tag) {
-            return '<span class="portfolio-piece__tag tag">' + tag + '</span>';
-          }).join(', ') :
-          '');
+                           formatTagTemplates(piece.tags, activeTags) :
+                           '');
 
       return formattedPieceTemplate;
     }
@@ -199,6 +233,25 @@
     }
 
     /**
+    * Formats a tag template for each tag.
+    * @param {string[]} tags - The tags.
+    * @param {string[]} activeTags - Array of active tags.
+    * @return {string} - The formatted tag templates as a single HTML string.
+    */
+    function formatTagTemplates(tags, activeTags) {
+      console.log(activeTags);
+      return tags
+        .map(function(tag) {
+          return tagTemplate
+            .replace('{tag}', tag)
+            .replace('{active}', activeTags.indexOf(tag) === -1 ?
+                                 '' :
+                                 'tag--active');
+        })
+        .join('');
+    }
+
+    /**
      * Handles tag click event by updating the portfolio controller's
      * filtered tags.
      * @param {Event} e - The click event.
@@ -212,6 +265,26 @@
         filteredTags.push(clickedTag);
       } else {
         filteredTags.splice(filteredTags.indexOf(clickedTag), 1);
+      }
+      // Update the filtered tags.
+      portfolioController.setFilteredTags(filteredTags);
+    }
+
+    /**
+     * Handles tag filter change event by updating the portfolio controller's
+     * filtered tags.
+     * @param {Event} e - The change event.
+     */
+    function handleTagFilterChange(e) {
+      var tag = e.target.value;
+      var checked = e.target.checked;
+      // Get filtered tags.
+      var filteredTags = portfolioController.getFilteredTags();
+      // Add or remove the clicked tag from the filtered tags.
+      if (checked && filteredTags.indexOf(tag) === -1) {
+        filteredTags.push(tag);
+      } else if (!checked && filteredTags.indexOf(tag) !== -1) {
+        filteredTags.splice(filteredTags.indexOf(tag), 1);
       }
       // Update the filtered tags.
       portfolioController.setFilteredTags(filteredTags);
