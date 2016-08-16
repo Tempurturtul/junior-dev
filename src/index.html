@@ -12,7 +12,6 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules.css">
 
     <!-- Scripts -->
@@ -105,6 +104,7 @@
             {nav-entries}
           </ul>
         </nav>
+
         <!-- Blog Search block. -->
         <form class="blog-search" {hide-search}>
           <input class="blog-search__search-bar" type="search" placeholder="Search" value="{search-text}">
@@ -119,6 +119,7 @@
             Sort Oldest First
           </label>
         </form>
+
         <!-- Blog Posts block. -->
         <div class="blog-posts">
           <!-- Formatted post templates inserted here. -->
@@ -169,16 +170,16 @@
       <section class="section">
         <h1 class="section__title">Featured Projects</h1>
 
-        <fieldset class="tag-filters l-mw-300px l-center-hm">
+        <fieldset class="tag-filters">
           <legend class="tag-filters__title">Filtered Tags</legend>
-          <div class="tag-filters__filters l-mh-100px-s">
+          <div class="tag-filters__filters">
             <!-- Formatted tag filters inserted here. -->
           </div>
-          <button class="tag-filters__reset-btn l-center-hm">Reset</button>
+          <button class="tag-filters__reset-btn">Reset</button>
         </fieldset>
 
         <!-- Portfolio Pieces block. -->
-        <div class="portfolio-pieces l-row-cw">
+        <div class="portfolio-pieces">
           <!-- Formatted portfolio piece templates inserted here. -->
         </div>
       </section>
@@ -192,9 +193,9 @@
     <!-- Portfolio Piece template. -->
     <script type="text/html" id="portfolio-piece-template">
       <!-- Card block. -->
-      <div class="card l-w-300px">
+      <div class="card">
         <!-- Portfolio Piece block. -->
-        <article class="portfolio-piece l-col-c">
+        <article class="portfolio-piece">
           <!-- Title may also have class portfolio-piece__title-link and link. -->
           <h1 class="portfolio-piece__title">{title}</h1>
           <time class="portofolio-piece__date" datetime="{iso-date}">{date}</time>

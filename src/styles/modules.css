@@ -139,6 +139,7 @@
   margin: 20px 8px;
   padding: 10px;
   position: relative;
+  width: 300px;
 }
 
 /************************************************
@@ -186,11 +187,17 @@
   Tag Filters
 ************************************************/
 
-.tag-filters {}
+.tag-filters {
+  margin: 0 auto;
+  max-width: 300px;
+}
 
 .tag-filters__title {}
 
-.tag-filters__filters {}
+.tag-filters__filters {
+  max-height: 100px;
+  overflow: auto;
+}
 
 .tag-filters__label {
   display: block;
@@ -203,14 +210,45 @@
 }
 
 .tag-filters__reset-btn {
+  display: block;
+  margin: auto;
   margin-top: 10px;
+}
+
+@media (min-width: 700px) {
+  .tag-filters {
+    max-width: 600px;
+  }
+
+  .tag-filters__filters {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag-filters__label {
+    flex: 1 1 200px;
+  }
+}
+
+/************************************************
+  Portfolio Pieces
+************************************************/
+
+.portfolio-pieces {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /************************************************
   Portfolio Piece
 ************************************************/
 
-.portfolio-piece {}
+.portfolio-piece {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
 
 .portfolio-piece__title {
   font-size: 1.8em;
