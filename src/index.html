@@ -197,12 +197,8 @@
           <!-- Title may also have class portfolio-piece__title-link and link. -->
           <h1 class="portfolio-piece__title">{title}</h1>
           <time class="portofolio-piece__date" datetime="{iso-date}">{date}</time>
-          <!-- live-url-open has class portfolio-piece__live-link and link -->
-          {live-url-open}
-          <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
-          {live-url-close}
-          <!-- source-url has class portfolio-piece__source-link and link -->
-          {source-url}
+          {preview}
+          {source}
           <p class="portfolio-piece__description">{description}</p>
           <footer class="footer">
             <!-- Tags block. -->
@@ -210,6 +206,17 @@
           </footer>
         </article>
       </div>
+    </script>
+
+    <script type="text/html" id="portfolio-piece-preview-template">
+      <!-- If live-url is present, it has class portfolio-piece__live-link. -->
+      {live-url-open}
+      <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
+      {live-url-close}
+    </script>
+
+    <script type="text/html" id="portfolio-piece-source-template">
+      <a class="portfolio-piece__source-link" href="{url}">GitHub</a>
     </script>
 
     <script type="text/html" id="portfolio-piece-tag-template">

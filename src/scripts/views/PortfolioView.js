@@ -18,6 +18,10 @@
                               .innerHTML;
     var pieceTemplate = document.getElementById('portfolio-piece-template')
                           .innerHTML;
+    var previewTemplate = document
+      .getElementById('portfolio-piece-preview-template').innerHTML;
+    var sourceTemplate = document
+      .getElementById('portfolio-piece-source-template').innerHTML;
     var tagTemplate = document.getElementById('portfolio-piece-tag-template')
                         .innerHTML;
     var tagFilterTemplate = document.getElementById('tag-filter-template')
@@ -124,9 +128,6 @@
      * @return {string} - The formatted template.
      */
     function formatPieceTemplate(piece, activeTags) {
-      var placeholderImgURL = 'images/placeholder-300.png';
-      var placeholderImgAlt = 'Image unavailable.';
-
       // Formate piece template.
       var formattedPieceTemplate = pieceTemplate
         .replace('{title}', formatPieceTitle(piece.title,
@@ -135,28 +136,10 @@
         .replace('{date}', piece.date ? formatPieceDate(piece.date) : '')
         .replace('{iso-date}', piece.date ? piece.date.toISOString() : '')
         .replace('{description}', piece.description || '')
-        .replace('{source-url}', piece.sourceURL ?
-                                 '<a ' +
-                                 'class="portfolio-piece__source-link link" ' +
-                                 'href="' + piece.sourceURL + '">GitHub</a>' :
-                                 '')
-        .replace('{live-url-open}', piece.liveURL ?
-                                    '<a ' +
-                                        'class="portfolio-piece__live-link" ' +
-                                        'href="' + piece.liveURL + '">' :
-                                    '')
-        .replace('{live-url-close}', piece.liveURL ?
-                                     '</a>' :
-                                     '')
-        .replace('{img-src}', piece.image && piece.image.static ?
-                              piece.image.static :
-                              placeholderImgURL)
-        .replace('{img-srcset}', piece.image && piece.image.responsive ?
-                                 formatImgSrcset(piece.image.responsive) :
-                                 '')
-        .replace('{img-description}', piece.image && piece.image.description ?
-                                      piece.image.description :
-                                      placeholderImgAlt)
+        .replace('{preview}', formatPreviewTemplate(piece))
+        .replace('{source}', piece.sourceURL ?
+                             sourceTemplate.replace('{url}', piece.sourceURL) :
+                             '')
         .replace('{tags}', piece.tags ?
                            formatTagTemplates(piece.tags, activeTags) :
                            '');
@@ -212,6 +195,35 @@
     }
 
     /**
+     * Formats a portfolio piece preview tempate.
+     * @param {Piece} piece - A portfolio piece.
+     * @return {string} - The formatted template as an HTML string.
+     */
+    function formatPreviewTemplate(piece) {
+      var placeholderImgURL = 'images/placeholder-300.png';
+      var placeholderImgAlt = 'Image unavailable.';
+
+      return previewTemplate
+        .replace('{live-url-open}', piece.liveURL ?
+                                    '<a ' +
+                                        'class="portfolio-piece__live-link" ' +
+                                        'href="' + piece.liveURL + '">' :
+                                    '')
+        .replace('{live-url-close}', piece.liveURL ?
+                                     '</a>' :
+                                     '')
+        .replace('{img-src}', piece.image && piece.image.static ?
+                              piece.image.static :
+                              placeholderImgURL)
+        .replace('{img-srcset}', piece.image && piece.image.responsive ?
+                                 formatImgSrcset(piece.image.responsive) :
+                                 '')
+        .replace('{img-description}', piece.image && piece.image.description ?
+                                      piece.image.description :
+                                      placeholderImgAlt);
+    }
+
+    /**
      * Formats an object with image data into a srcset string.
      * @param {object[]} data - The image data.
      * @param {string} data.url - The URL for one of the images.
@@ -239,7 +251,6 @@
     * @return {string} - The formatted tag templates as a single HTML string.
     */
     function formatTagTemplates(tags, activeTags) {
-      console.log(activeTags);
       return tags
         .map(function(tag) {
           return tagTemplate
