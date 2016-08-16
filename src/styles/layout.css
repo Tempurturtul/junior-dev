@@ -54,5 +54,6 @@
 
 /* horizontal, margin */
 .l-center-hm {
+  display: block;
   margin: 0 auto;
 }

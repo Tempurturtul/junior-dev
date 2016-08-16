@@ -83,6 +83,9 @@
         // Add the handleTagFilterChange event listener.
         checkboxes[i].addEventListener('change', handleTagFilterChange);
       }
+      var filtersResetBtn = document
+        .querySelector('.tag-filters__reset-btn');
+      filtersResetBtn.addEventListener('click', handleFiltersResetClick);
     }
 
     /**
@@ -299,6 +302,20 @@
       }
       // Update the filtered tags.
       portfolioController.setFilteredTags(filteredTags);
+    }
+
+    /**
+     * Handles the filters reset click event by clearing all filtered tags.
+     * @param {Event} e - The click event.
+     */
+    function handleFiltersResetClick(e) {
+      var filteredTags = portfolioController.getFilteredTags();
+
+      // Only do something if there are filtered tags.
+      if (filteredTags.length) {
+        // Set the filtered tags to an empty array.
+        portfolioController.setFilteredTags([]);
+      }
     }
   }
 })();
