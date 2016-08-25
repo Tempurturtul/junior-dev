@@ -202,8 +202,7 @@
       <div class="card">
         <!-- Portfolio Piece block. -->
         <article class="portfolio-piece">
-          <!-- Title may also have class portfolio-piece__title-link. -->
-          <h1 class="portfolio-piece__title">{title}</h1>
+          {title}
           <time class="portofolio-piece__date" datetime="{iso-date}">{date}</time>
           {preview}
           {source}
@@ -216,11 +215,25 @@
       </div>
     </script>
 
+    <script type="text/html" id="portfolio-piece-title-template">
+      <h1 class="portfolio-piece__title">
+        <!-- Live link is preferred if available, source link is used otherwise. -->
+        <a class="portfolio-piece__title-link" href="{url}">{title}</a>
+      </h1>
+    </script>
+
+    <script type="text/html" id="portfolio-piece-title-sans-link-template">
+      <h1 class="portfolio-piece__title">{title}</h1>
+    </script>
+
     <script type="text/html" id="portfolio-piece-preview-template">
-      <!-- If live-url is present, it has class portfolio-piece__live-link. -->
-      {live-url-open}
+      <a class="portfolio-piece__live-link" href="{live-url}">
+        <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
+      </a>
+    </script>
+
+    <script type="text/html" id="portfolio-piece-preview-sans-link-template">
       <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
-      {live-url-close}
     </script>
 
     <script type="text/html" id="portfolio-piece-source-template">

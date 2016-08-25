@@ -15,17 +15,23 @@
     var self = this;
     var containerElem = document.getElementById('main');
     var portfolioTemplate = document.getElementById('portfolio-template')
-                              .innerHTML;
+      .innerHTML;
     var pieceTemplate = document.getElementById('portfolio-piece-template')
-                          .innerHTML;
+      .innerHTML;
+    var titleTemplate = document
+      .getElementById('portfolio-piece-title-template').innerHTML;
+    var titleSansLinkTemplate = document
+      .getElementById('portfolio-piece-title-sans-link-template').innerHTML;
     var previewTemplate = document
       .getElementById('portfolio-piece-preview-template').innerHTML;
+    var previewSansLinkTemplate = document
+      .getElementById('portfolio-piece-preview-sans-link-template').innerHTML;
     var sourceTemplate = document
       .getElementById('portfolio-piece-source-template').innerHTML;
     var tagTemplate = document.getElementById('portfolio-piece-tag-template')
-                        .innerHTML;
+      .innerHTML;
     var tagFilterTemplate = document.getElementById('tag-filter-template')
-                              .innerHTML;
+      .innerHTML;
     // Initialized on render.
     var pieceContainerElem;
     var tagFilterContainerElem;
@@ -133,10 +139,8 @@
     function formatPieceTemplate(piece, activeTags) {
       // Formate piece template.
       var formattedPieceTemplate = pieceTemplate
-        .replace('{title}', formatPieceTitle(piece.title,
-                                             piece.sourceURL,
-                                             piece.liveURL))
-        .replace('{date}', piece.date ? formatPieceDate(piece.date) : '')
+        .replace('{title}', formatPieceTitle(piece))
+        .replace('{date}', piece.date ? formatPieceDate(piece) : '')
         .replace('{iso-date}', piece.date ? piece.date.toISOString() : '')
         .replace('{description}', piece.description || '')
         .replace('{preview}', formatPreviewTemplate(piece))
@@ -151,34 +155,46 @@
     }
 
     /**
-     * Formats a portfolio piece title by returning the title wrapped in
-     * a link if one of sourceURL or liveURL is defined. If both are
-     * defined, the title is wrapped in the live URL.
-     * @param {string} title - The portfolio piece title.
-     * @param {string} sourceURL - The portfolio piece source URL.
-     * @param {string} liveURL - The portfolio piece live URL.
-     * @return {string} - The formatted title.
+     * Formats a portfolio piece title template.
+     * @param {Piece} piece - The portfolio piece.
+     * @return {string} - The formatted title template.
      */
-    function formatPieceTitle(title, sourceURL, liveURL) {
-      // Prefer to wrap in live URL.
-      if (liveURL) {
-        title = '<a class="portfolio-piece__title-link" ' +
-                    'href="' + liveURL + '">' + title + '</a>';
-      } else if (sourceURL) {
-        title = '<a class="portfolio-piece__title-link" ' +
-                    'href="' + sourceURL + '">' + title + '</a>';
+    function formatPieceTitle(piece) {
+      // The template may be sans link.
+      var template;
+
+      if (piece.liveURL || piece.sourceURL) {
+        // The url may be either live or source (prefer live).
+        var url;
+
+        // Set the template.
+        template = titleTemplate;
+
+        // Determine which url to use.
+        if (piece.liveURL) {
+          url = piece.liveURL;
+        } else {
+          url = piece.sourceURL;
+        }
+
+        // Format the link portion.
+        template = template.replace('{url}', url);
+      } else {
+        // Set the template.
+        template = titleSansLinkTemplate;
       }
 
-      return title;
+      // Format the common title portion and return.
+      return template.replace('{title}', piece.title);
     }
 
     /**
      * Formats a portfolio piece date by returning the returning the month
      * and year as a string. (For example: "January 2015")
-     * @param {Date} date - The portfolio piece date.
+     * @param {Piece} piece - The portfolio piece.
      * @return {string} - The formatted date.
      */
-    function formatPieceDate(date) {
+    function formatPieceDate(piece) {
       var months = [
         'January',
         'February',
@@ -194,7 +210,7 @@
         'December'
       ];
 
-      return months[date.getMonth()] + ' ' + date.getFullYear();
+      return months[piece.date.getMonth()] + ' ' + piece.date.getFullYear();
     }
 
     /**
@@ -206,15 +222,20 @@
       var placeholderImgURL = 'images/placeholder-300.png';
       var placeholderImgAlt = 'Image unavailable.';
 
-      return previewTemplate
-        .replace('{live-url-open}', piece.liveURL ?
-                                    '<a ' +
-                                        'class="portfolio-piece__live-link" ' +
-                                        'href="' + piece.liveURL + '">' :
-                                    '')
-        .replace('{live-url-close}', piece.liveURL ?
-                                     '</a>' :
-                                     '')
+      // The template may be sans link.
+      var template;
+
+      // If the piece has a live URL, use the full preview template.
+      // Otherwise, use the sans link template.
+      if (piece.liveURL) {
+        template = previewTemplate;
+        template = template.replace('{live-url}', piece.liveURL);
+      } else {
+        template = previewSansLinkTemplate;
+      }
+
+      // Format the remainder of the template and return.
+      return template
         .replace('{img-src}', piece.image && piece.image.static ?
                               piece.image.static :
                               placeholderImgURL)
