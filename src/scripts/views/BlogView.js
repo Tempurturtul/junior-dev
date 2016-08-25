@@ -15,9 +15,13 @@
     var self = this;
     var containerElem = document.getElementById('main');
     var blogTemplate = document.getElementById('blog-template').innerHTML;
-    var postTemplate = document.getElementById('post-template').innerHTML;
-    var navEntryTemplate = document.getElementById('blog-nav-entry-template')
-                             .innerHTML;
+    var postTemplate = document.getElementById('blog-post-template').innerHTML;
+    var navGroupTemplate = document.getElementById('blog-nav-group-template')
+      .innerHTML;
+    var navPostTemplate = document.getElementById('blog-nav-post-template')
+      .innerHTML;
+    var postTagTemplate = document.getElementById('blog-post-tag-template')
+      .innerHTML;
     // Initialized on render.
     var postContainerElem;
 
@@ -40,8 +44,8 @@
     function render(opts) {
       // Get the post filters in order to properly initialize the search form.
       var postFilters = blogController.getPostFilters();
-      // Format nav entries for the blog nav.
-      var formattedNavEntries = formatNavEntries();
+      // Format nav groups for the blog nav.
+      var formattedNavGroups = formatNavGroups();
 
       // Format the blog template.
       var formattedBlogTemplate = blogTemplate
@@ -57,7 +61,7 @@
           'selected' : '')
         .replace('{sort-oldest}', postFilters.sortOldest ?
           'checked' : '')
-        .replace('{nav-entries}', formattedNavEntries);
+        .replace('{nav-groups}', formattedNavGroups);
 
       // Set the container element's inner HTML to the formatted blog template.
       containerElem.innerHTML = formattedBlogTemplate;
@@ -149,10 +153,25 @@
     function init() {}
 
     /**
-     * Formats a nav entry template for each month containing at least one post.
-     * @return {string} - The formatted nav entry templates.
+     * Formats a nav group template for each month containing at least one post.
+     * @return {string} - The formatted nav group templates.
      */
-    function formatNavEntries() {
+    function formatNavGroups() {
+      var months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ];
+
       // Get all posts sorted newest to oldest.
       var allPosts = blogController.getPosts({getAll: true, sortOldest: false});
 
@@ -189,55 +208,31 @@
           return acc;
         }, []);
 
-      // Convert all groups into formatted nav entry templates, then join and
+      // Convert all groups into formatted nav group templates, then join and
       // return them.
       return allPosts
         .map(function(group) {
-          return navEntryTemplate
-            .replace('{date}', formatNavEntryDate(group))
-            .replace('{posts}', formatNavEntryPosts(group));
+          return navGroupTemplate
+            .replace('{date}', group.length && group[0].created ?
+                               months[group[0].created.getMonth()] + ' ' +
+                               group[0].created.getFullYear() :
+                               'undated')
+            .replace('{nav-posts}', formatNavPosts(group));
         })
         .join('');
     }
 
     /**
-     * Formats a nav entry template's date.
+     * Formats a nav post template each post in a group.
      * @param {Post[]} group - A group of posts.
-     * @return {string} - The formatted date string.
+     * @return {string} - The formatted nav posts strings.
      */
-    function formatNavEntryDate(group) {
-      var months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-      ];
-
-      return group[0].created ?
-             months[group[0].created.getMonth()] + ' ' +
-             group[0].created.getFullYear() :
-             'undated';
-    }
-
-    /**
-     * Formats a nav entry template's posts.
-     * @param {Post[]} group - A group of posts.
-     * @return {string} - The formatted posts strings.
-     */
-    function formatNavEntryPosts(group) {
+    function formatNavPosts(group) {
       return group
         .map(function(post) {
-          return '<li><a class="blog-nav__link page-link" href="#/blog/' +
-                 blogController.getPostID(post) + '">' +
-                 (post.title || 'untitled') + '</a></li>';
+          return navPostTemplate
+            .replace('{post-id}', blogController.getPostID(post))
+            .replace('{post-title}', post.title || 'untitled');
         })
         .join('');
     }
@@ -268,12 +263,30 @@
           '')
         .replace('{subtitle}', post.subtitle || '')
         .replace('{tags}', post.tags ?
-          post.tags.map(function(tag) {
-            return '<span class="post__tag tag">' + tag + '</span>';
-          }).join(', ') :
+          formatPostTags(post) :
           '');
 
       return formattedPostTemplate;
+    }
+
+    /**
+     * Formats a post tag template for each tag on the given post.
+     * @param {Post} post - A post.
+     * @return {string} - Formatted post tag templates as a single HTML string.
+     */
+    function formatPostTags(post) {
+      // Get the tags count in order to add a comma ',' to all but the last tag.
+      var count = post.tags.length;
+
+      return post.tags
+        .map(function(tag, index) {
+          return postTagTemplate
+            .replace('{tag}', tag)
+            .replace('{comma}', index + 1 === count ?
+              '' :
+              ',');
+        })
+        .join('');
     }
 
     /**

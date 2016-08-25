@@ -27,7 +27,6 @@
     <script async src="scripts/controllers/PortfolioController.js"></script>
     <script async src="scripts/controllers/MainController.js"></script>
     <script async src="scripts/app.js"></script>
-
     <script src="scripts/store/portfolioPieces.json"></script>
     <script src="scripts/store/posts.json"></script>
     <script src="scripts/store/store.js"></script>
@@ -74,7 +73,8 @@
       </div>
     </div>
 
-    <!-- About template. -->
+    <!-- Templates. -->
+
     <script type="text/html" id="about-template">
       <!-- Section block. -->
       <section class="section">
@@ -92,7 +92,6 @@
       </section>
     </script>
 
-    <!-- Blog template. -->
     <script type="text/html" id="blog-template">
       <!-- Section block. -->
       <section class="section">
@@ -100,8 +99,8 @@
         <!-- Blog Nav block (also Collapsible Drawer). -->
         <nav class="blog-nav collapsible-drawer collapsible-drawer--collapsed">
           <button class="collapsible-drawer__toggle">Posts</button>
-          <ul class="blog-nav__list collapsible-drawer__content">
-            {nav-entries}
+          <ul class="blog-nav__group-list collapsible-drawer__content">
+            {nav-groups}
           </ul>
         </nav>
 
@@ -122,27 +121,32 @@
 
         <!-- Blog Posts block. -->
         <div class="blog-posts">
-          <!-- Formatted post templates inserted here. -->
+          <!-- Formatted blog post templates inserted here. -->
         </div>
       </section>
     </script>
 
-    <!-- Blog Nav Entry template. -->
-    <script type="text/html" id="blog-nav-entry-template">
-      <li class="blog-nav__list-entry">
+    <script type="text/html" id="blog-nav-group-template">
+      <li class="blog-nav__group-entry">
         <!-- Collapsible List block. -->
         <div class="collapsible-list">
           <button class="collapsible-list__toggle">{date}</button>
-          <ul class="collapsible-list__list">
-            <!-- (Each post has class blog-nav__link and page-link.) -->
-            {posts}
+          <ul class="blog-nav__post-list collapsible-list__list">
+            {nav-posts}
           </ul>
         </div>
       </li>
     </script>
 
-    <!-- Post template. -->
-    <script type="text/html" id="post-template">
+    <script type="text/html" id="blog-nav-post-template">
+      <li class="blog-nav__post-entry">
+        <a class="blog-nav__link" href="#/blog/{post-id}">
+          {post-title}
+        </a>
+      </li>
+    </script>
+
+    <script type="text/html" id="blog-post-template">
       <!-- Card block. -->
       <div class="card">
         <!-- Post block. -->
@@ -157,14 +161,18 @@
           <!-- Footer block. -->
           <footer class="footer">
             <!-- Tags block. -->
-            <!-- (Each tag has class post__tag and tag.) -->
-            <div class="tags">{tags}</div>
+            <div class="tags">
+              {tags}
+            </div>
           </footer>
         </article>
       </div>
     </script>
 
-    <!-- Portfolio template. -->
+    <script type="text/html" id="blog-post-tag-template">
+      <span class="post__tag tag">{tag}</span>{comma}
+    </script>
+
     <script type="text/html" id="portfolio-template">
       <!-- Section block. -->
       <section class="section">
@@ -185,12 +193,10 @@
       </section>
     </script>
 
-    <!-- Tag Filter template. -->
     <script type="text/html" id="tag-filter-template">
       <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}" {checked}>{tag}</label>
     </script>
 
-    <!-- Portfolio Piece template. -->
     <script type="text/html" id="portfolio-piece-template">
       <!-- Card block. -->
       <div class="card">
