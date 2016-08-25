@@ -275,13 +275,19 @@
     * @return {string} - The formatted tag templates as a single HTML string.
     */
     function formatTagTemplates(tags, activeTags) {
+      // Get the tags count in order to add a comma ',' to all but the last tag.
+      var count = tags.length;
+
       return tags
-        .map(function(tag) {
+        .map(function(tag, index) {
           return tagTemplate
             .replace('{tag}', tag)
             .replace('{active}', activeTags.indexOf(tag) === -1 ?
-                                 '' :
-                                 'tag--active');
+              '' :
+              'tag--active')
+            .replace('{comma}', index + 1 === count ?
+              '' :
+              ',');
         })
         .join('');
     }

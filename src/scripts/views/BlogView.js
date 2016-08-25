@@ -243,6 +243,9 @@
      * @return {string} - The formatted template.
      */
     function formatPostTemplate(post) {
+      // Get filters to determine active tags.
+      var postFilters = blogController.getPostFilters();
+
       // Format post template.
       var formattedPostTemplate = postTemplate
         .replace('{post-id}', blogController.getPostID(post))
@@ -263,7 +266,7 @@
           '')
         .replace('{subtitle}', post.subtitle || '')
         .replace('{tags}', post.tags ?
-          formatPostTags(post) :
+          formatTagTemplates(post, postFilters.tags) :
           '');
 
       return formattedPostTemplate;
@@ -272,9 +275,10 @@
     /**
      * Formats a post tag template for each tag on the given post.
      * @param {Post} post - A post.
+     * @param {string[]} activeTags - Array of active tags.
      * @return {string} - Formatted post tag templates as a single HTML string.
      */
-    function formatPostTags(post) {
+    function formatTagTemplates(post, activeTags) {
       // Get the tags count in order to add a comma ',' to all but the last tag.
       var count = post.tags.length;
 
@@ -282,6 +286,9 @@
         .map(function(tag, index) {
           return postTagTemplate
             .replace('{tag}', tag)
+            .replace('{active}', activeTags.indexOf(tag) === -1 ?
+              '' :
+              'tag--active')
             .replace('{comma}', index + 1 === count ?
               '' :
               ',');
