@@ -34,7 +34,7 @@
       .innerHTML;
     // Initialized on render.
     var pieceContainerElem;
-    var tagFilterContainerElem;
+    var tagFiltersContainerElem;
 
     self.render = render;
     self.renderTagFilters = renderTagFilters;
@@ -54,7 +54,7 @@
     function render() {
       containerElem.innerHTML = portfolioTemplate;
       pieceContainerElem = document.querySelector('.portfolio-pieces');
-      tagFilterContainerElem = document.querySelector('.tag-filters__filters');
+      tagFiltersContainerElem = document.querySelector('.tag-filters__filters');
       renderTagFilters();
       renderPieces();
     }
@@ -79,7 +79,7 @@
       })
       .join('');
 
-      tagFilterContainerElem.innerHTML = tags;
+      tagFiltersContainerElem.innerHTML = tags;
 
       // Add event listeners.
       var checkboxes = document.getElementsByClassName('tag-filters__checkbox');

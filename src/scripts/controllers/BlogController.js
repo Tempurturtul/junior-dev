@@ -15,6 +15,7 @@
     var self = this;
     // Assigned during initialization.
     var blogView;
+    var allTags;
     var postFilters = {
       post: null,
       text: '',
@@ -23,6 +24,7 @@
       tags: []
     };
 
+    self.getAllTags = getAllTags;
     self.getPostFilters = getPostFilters;
     self.getPostID = getPostID;
     self.getPosts = getPosts;
@@ -39,10 +41,18 @@
     */
 
     /**
+     * Gets all blog post tags.
+     */
+    function getAllTags() {
+      return allTags.slice(0);
+    }
+
+    /**
      * Gets the current post filters.
      * @return {object} - The post filters.
      */
     function getPostFilters() {
+      // TODO Return a clone of the object?
       return postFilters;
     }
 
@@ -132,6 +142,8 @@
       }
 
       if (render) {
+        blogView.renderTagFilters();
+        blogView.renderNavGroups();
         blogView.renderPost();
       }
     }
@@ -147,6 +159,17 @@
      */
     function init() {
       blogView = new app.views.BlogView(self);
+
+      allTags = getPosts({getAll: true})
+        .reduce(function(acc, curr) {
+          curr.tags.forEach(function(tag) {
+            if (acc.indexOf(tag) === -1) {
+              acc.push(tag);
+            }
+          });
+
+          return acc;
+        }, []);
     }
 
     /**

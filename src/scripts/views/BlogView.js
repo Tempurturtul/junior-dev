@@ -22,10 +22,16 @@
       .innerHTML;
     var postTagTemplate = document.getElementById('blog-post-tag-template')
       .innerHTML;
+    var tagFilterTemplate = document.getElementById('tag-filter-template')
+      .innerHTML;
     // Initialized on render.
     var postContainerElem;
+    var tagFiltersContainerElem;
+    var navGroupContainerElem;
 
     self.render = render;
+    self.renderTagFilters = renderTagFilters;
+    self.renderNavGroups = renderNavGroups;
     self.renderPost = renderPost;
 
     init();
@@ -40,48 +46,99 @@
      * Renders HTML to the document.
      */
     function render() {
-      // Get the post filters in order to properly initialize the blog nav.
-      var postFilters = blogController.getPostFilters();
-      // Format nav groups for the blog nav.
-      var formattedNavGroups = formatNavGroups();
-
       // Format the blog template.
       var formattedBlogTemplate = blogTemplate
-        .replace('{search-text}', postFilters.text)
-        .replace('{nav-groups}', formattedNavGroups);
+        .replace('{search-text}', blogController.getPostFilters().text);
 
       // Set the container element's inner HTML to the formatted blog template.
       containerElem.innerHTML = formattedBlogTemplate;
-      // Get a reference to the blog post's container element.
+
+      // Get references to the sub-container elements.
+      tagFiltersContainerElem = document.querySelector('.tag-filters__filters');
+      navGroupContainerElem = document.querySelector('.blog-nav__group-list');
       postContainerElem = document.querySelector('.blog-post-container');
 
-      // Add event listeners.
+      // Add search bar event listener.
       var searchBar = document.querySelector('.blog-nav__search');
-      var collapsibleDrawers = document
-        .getElementsByClassName('collapsible-drawer');
-      var collapsibleLists = document
-        .getElementsByClassName('collapsible-list');
-
-      // Update post filters on search bar input.
       searchBar.addEventListener('input', handleSearchBarInput);
-      // Toggle collapsed state on collapsibles.
+
+      // Add collapsible listeners.
+      addCollapsibleListeners(containerElem);
+
+      // Render dynamic content.
+      renderTagFilters();
+      renderNavGroups();
+      renderPost();
+    }
+
+    /**
+     * Adds event listeners to collapsible components that are children of the
+     * specified parent element.
+     * @param {Element} parent - The parent element.
+     */
+    function addCollapsibleListeners(parent) {
+      var drawers = parent.getElementsByClassName('collapsible-drawer');
+      var lists = parent.getElementsByClassName('collapsible-list');
+
       var i;
-      var len = collapsibleDrawers.length;
+      var len;
       var btn;
-      for (i = 0; i < len; i++) {
-        btn = collapsibleDrawers[i]
-          .querySelector('.collapsible-drawer__toggle');
-        btn.addEventListener('click', handleCollapsibleToggle);
-      }
-      len = collapsibleLists.length;
-      for (i = 0; i < len; i++) {
-        btn = collapsibleLists[i]
-          .querySelector('.collapsible-list__toggle');
+
+      // For each collapsible drawer...
+      for (i = 0, len = drawers.length; i < len; i++) {
+        btn = drawers[i].querySelector('.collapsible-drawer__toggle');
         btn.addEventListener('click', handleCollapsibleToggle);
       }
 
-      // Render post.
-      renderPost();
+      // For each collapsible list...
+      for (i = 0, len = lists.length; i < len; i++) {
+        btn = lists[i].querySelector('.collapsible-list__toggle');
+        btn.addEventListener('click', handleCollapsibleToggle);
+      }
+    }
+
+    /**
+     * Renders tag filters.
+     */
+    function renderTagFilters() {
+      // Get all tags.
+      var tags = blogController.getAllTags();
+      // Get filtered tags.
+      var filtered = blogController.getPostFilters().tags;
+
+      // Convert tags to a single string of formatted tag filter templates.
+      tags = tags.map(function(tag) {
+        return tagFilterTemplate
+          .replace('{tag-value}', tag)
+          .replace('{tag}', tag)
+          .replace('{checked}', filtered.indexOf(tag) === -1 ?
+                                '' :
+                                'checked');
+      })
+      .join('');
+
+      tagFiltersContainerElem.innerHTML = tags;
+
+      // Add event listeners.
+      var checkboxes = document.getElementsByClassName('tag-filters__checkbox');
+      var len = checkboxes.length;
+      // For each checkbox...
+      for (var i = 0; i < len; i++) {
+        // Add the handleTagFilterChange event listener.
+        checkboxes[i].addEventListener('change', handleTagFilterChange);
+      }
+      var filtersResetBtn = document
+        .querySelector('.tag-filters__reset-btn');
+      filtersResetBtn.addEventListener('click', handleFiltersResetClick);
+    }
+
+    /**
+     * Renders nav groups.
+     */
+    function renderNavGroups() {
+      navGroupContainerElem.innerHTML = formatNavGroups();
+
+      addCollapsibleListeners(navGroupContainerElem);
     }
 
     /**
@@ -104,7 +161,7 @@
         postContainerElem.innerHTML = post;
 
         // Add event listeners.
-        var tags = document.getElementsByClassName('post__tag');
+        var tags = document.getElementsByClassName('blog-post__tag');
         var len = tags.length;
         // For each tag...
         for (var i = 0; i < len; i++) {
@@ -152,11 +209,11 @@
         'December'
       ];
 
-      // Get all posts sorted newest to oldest.
-      var allPosts = blogController.getPosts({getAll: true, sortOldest: false});
+      // Get filtered posts sorted newest to oldest.
+      var posts = blogController.getPosts({sortOldest: false}) || [];
 
       // Group posts by month.
-      allPosts = allPosts
+      posts = posts
         .reduce(function(acc, curr) {
           // The latest accumulated group.
           var group = acc.length ? acc[acc.length - 1] : null;
@@ -190,7 +247,7 @@
 
       // Convert all groups into formatted nav group templates, then join and
       // return them.
-      return allPosts
+      return posts
         .map(function(group) {
           return navGroupTemplate
             .replace('{date}', group.length && group[0].created ?
@@ -302,6 +359,40 @@
       }
       // Update the post filters.
       blogController.updatePostFilters({tags: tags});
+    }
+
+    /**
+     * Handles tag filter change event by updating the controller's filtered
+     * tags.
+     * @param {Event} e - The change event.
+     */
+    function handleTagFilterChange(e) {
+      var tag = e.target.value;
+      var checked = e.target.checked;
+      // Get filtered tags.
+      var filteredTags = blogController.getPostFilters().tags;
+      // Add or remove the clicked tag from the filtered tags.
+      if (checked && filteredTags.indexOf(tag) === -1) {
+        filteredTags.push(tag);
+      } else if (!checked && filteredTags.indexOf(tag) !== -1) {
+        filteredTags.splice(filteredTags.indexOf(tag), 1);
+      }
+      // Update the filtered tags.
+      blogController.updatePostFilters({tags: filteredTags});
+    }
+
+    /**
+     * Handles the filters reset click event by clearing all filtered tags.
+     * @param {Event} e - The click event.
+     */
+    function handleFiltersResetClick(e) {
+      var filteredTags = blogController.getPostFilters().tags;
+
+      // Only do something if there are filtered tags.
+      if (filteredTags.length) {
+        // Set the filtered tags to an empty array.
+        blogController.updatePostFilters({tags: []});
+      }
     }
 
     /**
