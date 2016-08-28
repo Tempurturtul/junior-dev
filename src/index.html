@@ -149,13 +149,13 @@
     <script type="text/html" id="blog-post-template">
       <!-- Card block. -->
       <div class="card">
-        <!-- Post block. -->
-        <article class="post">
-          <h1 class="post__title"><a class="post__title-link page-link" href="#/blog/{post-id}">{title}</a></h1>
-          <p class="post__subtitle">{subtitle}</p>
-          <p class="post__created"><time datetime="{created-iso}">{created}</time></p>
-          <p class="post__modified" {hide-modified}>Last modified: <time datetime="{modified-iso}">{modified}</time></p>
-          <div class="post__content">
+        <!-- Blog Post block. -->
+        <article class="blog-post">
+          <h1 class="blog-post__title"><a class="blog-post__title-link" href="#/blog/{post-id}">{title}</a></h1>
+          <p class="blog-post__subtitle">{subtitle}</p>
+          <p class="blog-post__created"><time datetime="{created-iso}">{created}</time></p>
+          <p class="blog-post__modified" {hide-modified}>Last modified: <time datetime="{modified-iso}">{modified}</time></p>
+          <div class="blog-post__content">
             {content}
           </div>
           <!-- Footer block. -->
@@ -170,7 +170,7 @@
     </script>
 
     <script type="text/html" id="blog-post-tag-template">
-      <span class="post__tag tag">{tag}</span>{comma}
+      <span class="blog-post__tag tag">{tag}</span>{comma}
     </script>
 
     <script type="text/html" id="portfolio-template">

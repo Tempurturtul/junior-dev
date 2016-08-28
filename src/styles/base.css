@@ -29,3 +29,8 @@ p {
   line-height: 1.4;
   text-indent: 3em;
 }
+
+li > p {
+  margin: 0;
+  text-indent: 0;
+}

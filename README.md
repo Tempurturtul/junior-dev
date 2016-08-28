@@ -37,8 +37,6 @@ Includes a personal blog and portfolio.
 
 ## TODO
 
-- Normalize template use.
-  - Don't mix HTML declaration inconsistently between templates and views. Move all HTML currently in views to templates, then organize.
 - Finish styling refactor.
   - Including rework of blog and portfolio.
 - Add landing page and change default route.
