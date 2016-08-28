@@ -44,10 +44,16 @@
 
     /**
      * Renders HTML to the document.
+     * @param {object} [opts] - Rendering options.
+     * @param {string} [opts.post] - A specific post to display.
      */
-    function render() {
+    function render(opts) {
+      // Ensure opts isn't undefined.
+      opts = opts || {};
+
       // Format the blog template.
       var formattedBlogTemplate = blogTemplate
+        .replace('{hide-top}', opts.post ? 'hidden' : '')
         .replace('{search-text}', blogController.getPostFilters().text);
 
       // Set the container element's inner HTML to the formatted blog template.

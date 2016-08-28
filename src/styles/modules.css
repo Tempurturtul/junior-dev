@@ -365,6 +365,12 @@
   justify-content: center;
 }
 
+@media (min-width: 900px) {
+  .blog-post-container {
+    margin: 20px 5%;
+  }
+}
+
 /************************************************
   Blog Post
 ************************************************/

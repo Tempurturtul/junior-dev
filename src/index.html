@@ -95,31 +95,33 @@
     <script type="text/html" id="blog-template">
       <!-- Section block. -->
       <section class="section">
-        <h1 class="section__title">Learner's Blog</h1>
-        <!-- Blog Nav block (also Collapsible Drawer). -->
-        <nav class="blog-nav collapsible-drawer collapsible-drawer--collapsed">
-          <button class="collapsible-drawer__toggle">Blog Posts</button>
-          <div class="collapsible-drawer__content">
-            <!-- Search Bar block. -->
-            <input class="blog-nav__search search-bar" type="search" placeholder="Search" value="{search-text}">
-            <!-- Collapsible Drawer block. -->
-            <div class="collapsible-drawer collapsible-drawer--collapsed">
-              <button class="collapsible-drawer__toggle">Filtered Tags</button>
-              <div class="collapsible-drawer__content">
-                <!-- Tag Filters block. -->
-                <fieldset class="tag-filters">
-                  <div class="tag-filters__filters">
-                    <!-- Formatted tag filters inserted here. -->
-                  </div>
-                  <button class="tag-filters__reset-btn">Reset</button>
-                </fieldset>
+        <div {hide-top}>
+          <h1 class="section__title">Learner's Blog</h1>
+          <!-- Blog Nav block (also Collapsible Drawer). -->
+          <nav class="blog-nav collapsible-drawer collapsible-drawer--collapsed">
+            <button class="collapsible-drawer__toggle">Blog Posts</button>
+            <div class="collapsible-drawer__content">
+              <!-- Search Bar block. -->
+              <input class="blog-nav__search search-bar" type="search" placeholder="Search" value="{search-text}">
+              <!-- Collapsible Drawer block. -->
+              <div class="collapsible-drawer collapsible-drawer--collapsed">
+                <button class="collapsible-drawer__toggle">Filtered Tags</button>
+                <div class="collapsible-drawer__content">
+                  <!-- Tag Filters block. -->
+                  <fieldset class="tag-filters">
+                    <div class="tag-filters__filters">
+                      <!-- Formatted tag filters inserted here. -->
+                    </div>
+                    <button class="tag-filters__reset-btn">Reset</button>
+                  </fieldset>
+                </div>
               </div>
+              <ul class="blog-nav__group-list">
+                <!-- Formatted blog nav group templates inserted here. -->
+              </ul>
             </div>
-            <ul class="blog-nav__group-list">
-              <!-- Formatted blog nav group templates inserted here. -->
-            </ul>
-          </div>
-        </nav>
+          </nav>
+        </div>
 
         <!-- Blog Post Container block (also Card). -->
         <div class="card blog-post-container">

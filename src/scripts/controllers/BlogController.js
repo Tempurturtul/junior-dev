@@ -42,6 +42,7 @@
 
     /**
      * Gets all blog post tags.
+     * @return {string[]} - All blog post tags.
      */
     function getAllTags() {
       return allTags.slice(0);
@@ -52,7 +53,6 @@
      * @return {object} - The post filters.
      */
     function getPostFilters() {
-      // TODO Return a clone of the object?
       return postFilters;
     }
 
@@ -121,7 +121,7 @@
 
       updatePostFilters(params, false);
 
-      blogView.render();
+      blogView.render(params);
     }
 
     /**
