@@ -26,6 +26,7 @@
     self.getPostFilters = getPostFilters;
     self.getPostID = getPostID;
     self.getPosts = getPosts;
+    self.getPost = getPost;
     self.setView = setView;
     self.updatePostFilters = updatePostFilters;
 
@@ -89,6 +90,16 @@
     }
 
     /**
+     * Gets the active blog post. (That is: the first post in the sorted,
+     * filtered list.)
+     * @return {Post} - The current blog post.
+     */
+    function getPost() {
+      var posts = getPosts();
+      return posts.length ? posts[0] : null;
+    }
+
+    /**
      * Sets the view.
      * @param {object} params - Parameters from a query string and/or
      * parameterized route.
@@ -100,13 +111,7 @@
 
       updatePostFilters(params, false);
 
-      var opts = {};
-      // Handle post param (indicating viewing of a single specific post).
-      if (params.post) {
-        opts.hideSearch = true;
-      }
-
-      blogView.render(opts);
+      blogView.render();
     }
 
     /**
@@ -127,7 +132,7 @@
       }
 
       if (render) {
-        blogView.renderPosts();
+        blogView.renderPost();
       }
     }
 

@@ -26,7 +26,7 @@
     var postContainerElem;
 
     self.render = render;
-    self.renderPosts = renderPosts;
+    self.renderPost = renderPost;
 
     init();
 
@@ -38,56 +38,32 @@
 
     /**
      * Renders HTML to the document.
-     * @param {object} [opts] - Rendering options.
-     * @param {bool} [opts.hideSearch] - Hides the search form.
      */
-    function render(opts) {
-      // Get the post filters in order to properly initialize the search form.
+    function render() {
+      // Get the post filters in order to properly initialize the blog nav.
       var postFilters = blogController.getPostFilters();
       // Format nav groups for the blog nav.
       var formattedNavGroups = formatNavGroups();
 
       // Format the blog template.
       var formattedBlogTemplate = blogTemplate
-        .replace('{hide-search}', opts && opts.hideSearch ? 'hidden' : '')
         .replace('{search-text}', postFilters.text)
-        .replace('{search-week}', postFilters.maxAge === 'week' ?
-          'selected' : '')
-        .replace('{search-month}', postFilters.maxAge === 'month' ?
-          'selected' : '')
-        .replace('{search-year}', postFilters.maxAge === 'year' ?
-          'selected' : '')
-        .replace('{search-all}', postFilters.maxAge === 'all' ?
-          'selected' : '')
-        .replace('{sort-oldest}', postFilters.sortOldest ?
-          'checked' : '')
         .replace('{nav-groups}', formattedNavGroups);
 
       // Set the container element's inner HTML to the formatted blog template.
       containerElem.innerHTML = formattedBlogTemplate;
       // Get a reference to the blog post's container element.
-      postContainerElem = document.querySelector('.blog-posts');
+      postContainerElem = document.querySelector('.blog-post-container');
 
       // Add event listeners.
-      var searchForm = document.querySelector('.blog-search');
-      var searchBar = document.querySelector('.blog-search__search-bar');
-      var timeOptions = document.querySelector('.blog-search__time-options');
-      var sortOldest = document.querySelector('.blog-search__sort-oldest');
+      var searchBar = document.querySelector('.blog-nav__search');
       var collapsibleDrawers = document
         .getElementsByClassName('collapsible-drawer');
       var collapsibleLists = document
         .getElementsByClassName('collapsible-list');
 
-      // Prevent form submission from reloading the page.
-      searchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-      });
       // Update post filters on search bar input.
       searchBar.addEventListener('input', handleSearchBarInput);
-      // Update post filters on time options change.
-      timeOptions.addEventListener('change', handleTimeOptionsChange);
-      // Update post filters on sort oldest change.
-      sortOldest.addEventListener('change', handleSortOldestChange);
       // Toggle collapsed state on collapsibles.
       var i;
       var len = collapsibleDrawers.length;
@@ -104,40 +80,44 @@
         btn.addEventListener('click', handleCollapsibleToggle);
       }
 
-      // Render posts.
-      renderPosts();
+      // Render post.
+      renderPost();
     }
 
     /**
-     * Renders posts.
+     * Renders a blog post.
      */
-    function renderPosts() {
-      // Get posts to be rendered.
-      var posts = blogController.getPosts();
-      // Get the post filters in order to properly initialize tags.
-      var postFilters = blogController.getPostFilters();
+    function renderPost() {
+      // Get post to be rendered.
+      var post = blogController.getPost();
 
-      // Convert posts into formatted post templates, then join them into a
-      // single HTML string.
-      posts = posts.map(function(post) {
-        return formatPostTemplate(post);
-      }).join('');
+      // If there's a post to be rendered...
+      if (post) {
+        // Get the post filters in order to properly initialize tags.
+        var postFilters = blogController.getPostFilters();
 
-      // Set the blog posts' container element's inner HTML to the formatted
-      // blog post templates.
-      postContainerElem.innerHTML = posts;
+        // Convert post into a formatted post template.
+        post = formatPostTemplate(post);
 
-      // Add event listeners.
-      var tags = document.getElementsByClassName('post__tag');
-      var len = tags.length;
-      // For each tag...
-      for (var i = 0; i < len; i++) {
-        // Add the handleTagClick event listener.
-        tags[i].addEventListener('click', handleTagClick);
-        // Add the --active modifier if the tag is present in the filters.
-        if (postFilters.tags.indexOf(tags[i].textContent) !== -1) {
-          tags[i].classList.add('tag--active');
+        // Set the blog post's container element's inner HTML to the formatted
+        // blog post template.
+        postContainerElem.innerHTML = post;
+
+        // Add event listeners.
+        var tags = document.getElementsByClassName('post__tag');
+        var len = tags.length;
+        // For each tag...
+        for (var i = 0; i < len; i++) {
+          // Add the handleTagClick event listener.
+          tags[i].addEventListener('click', handleTagClick);
+          // Add the --active modifier if the tag is present in the filters.
+          if (postFilters.tags.indexOf(tags[i].textContent) !== -1) {
+            tags[i].classList.add('tag--active');
+          }
         }
+      } else {
+        // Clear the post container element's inner HTML.
+        postContainerElem.innerHTML = '';
       }
     }
 
@@ -322,24 +302,6 @@
       }
       // Update the post filters.
       blogController.updatePostFilters({tags: tags});
-    }
-
-    /**
-     * Handles time options change event by updating blog controller's post
-     * filters using the newly selected time options value.
-     * @param {Event} e - The input event.
-     */
-    function handleTimeOptionsChange(e) {
-      blogController.updatePostFilters({maxAge: e.target.value});
-    }
-
-    /**
-     * Handles sort oldest change event by updating blog controller's post
-     * filters using the sort oldest input's checked value.
-     * @param {Event} e - The input event.
-     */
-    function handleSortOldestChange(e) {
-      blogController.updatePostFilters({sortOldest: e.target.checked});
     }
 
     /**

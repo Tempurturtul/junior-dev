@@ -157,6 +157,14 @@
   Collapsible Drawer
 ************************************************/
 
+.search-bar {
+
+}
+
+/************************************************
+  Collapsible Drawer
+************************************************/
+
 .collapsible-drawer {
 
 }
@@ -188,7 +196,7 @@
   background-color: rgba(255, 255, 255, 0.5);
   border: dotted 1px rgba(0, 0, 0, 0.5);
   border-top: none;
-  padding: 0 5px 5px;
+  padding: 5px;
 }
 
 .collapsible-drawer--collapsed > .collapsible-drawer__content {
@@ -319,6 +327,12 @@
   padding: 0 8px;
 }
 
+.blog-nav__search {
+  display: block;
+  margin: 2px auto 8px;
+  max-width: 100%;
+}
+
 .blog-nav__group-list {
   list-style: none;
   margin: 0;
@@ -342,43 +356,10 @@
 }
 
 /************************************************
-  Blog Search
+  Blog Post Container
 ************************************************/
 
-.blog-search {
-  margin: 10px 8px;
-  text-align: center;
-}
-
-.blog-search__search-bar {
-  margin: 2px;
-}
-
-.blog-search__time-options {
-  margin: 2px;
-}
-
-.blog-search__time-option {
-
-}
-
-.blog-search__sort-oldest-label {
-  display: block;
-  font-size: 0.9em;
-  margin: 2px auto;
-  max-width: 150px;
-  padding: 5px;
-}
-
-.blog-search__sort-oldest {
-  vertical-align: middle;
-}
-
-/************************************************
-  Blog Posts
-************************************************/
-
-.blog-posts {
+.blog-post-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

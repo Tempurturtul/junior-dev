@@ -98,30 +98,32 @@
         <h1 class="section__title">Learner's Blog</h1>
         <!-- Blog Nav block (also Collapsible Drawer). -->
         <nav class="blog-nav collapsible-drawer collapsible-drawer--collapsed">
-          <button class="collapsible-drawer__toggle">Posts</button>
-          <ul class="blog-nav__group-list collapsible-drawer__content">
-            {nav-groups}
-          </ul>
+          <button class="collapsible-drawer__toggle">Blog Posts</button>
+          <div class="collapsible-drawer__content">
+            <!-- Search Bar block. -->
+            <input class="blog-nav__search search-bar" type="search" placeholder="Search" value="{search-text}">
+            <!-- Collapsible Drawer block. -->
+            <div class="collapsible-drawer collapsible-drawer--collapsed">
+              <button class="collapsible-drawer__toggle">Filtered Tags</button>
+              <div class="collapsible-drawer__content">
+                <!-- Tag Filters block. -->
+                <fieldset class="tag-filters">
+                  <div class="tag-filters__filters">
+                    <!-- Formatted tag filters inserted here. -->
+                  </div>
+                  <button class="tag-filters__reset-btn">Reset</button>
+                </fieldset>
+              </div>
+            </div>
+            <ul class="blog-nav__group-list">
+              {nav-groups}
+            </ul>
+          </div>
         </nav>
 
-        <!-- Blog Search block. -->
-        <form class="blog-search" {hide-search}>
-          <input class="blog-search__search-bar" type="search" placeholder="Search" value="{search-text}">
-          <select class="blog-search__time-options">
-            <option class="blog-search__time-option" value="week" {search-week}>Last Week</option>
-            <option class="blog-search__time-option" value="month" {search-month}>Last Month</option>
-            <option class="blog-search__time-option" value="year" {search-year}>Last Year</option>
-            <option class="blog-search__time-option" value="all" {search-all}>All Time</option>
-          </select>
-          <label class="blog-search__sort-oldest-label">
-            <input class="blog-search__sort-oldest" type="checkbox" {sort-oldest}>
-            Sort Oldest First
-          </label>
-        </form>
-
-        <!-- Blog Posts block. -->
-        <div class="blog-posts">
-          <!-- Formatted blog post templates inserted here. -->
+        <!-- Blog Post Container block (also Card). -->
+        <div class="card blog-post-container">
+          <!-- Formatted blog post template inserted here. -->
         </div>
       </section>
     </script>
@@ -147,26 +149,23 @@
     </script>
 
     <script type="text/html" id="blog-post-template">
-      <!-- Card block. -->
-      <div class="card">
-        <!-- Blog Post block. -->
-        <article class="blog-post">
-          <h1 class="blog-post__title"><a class="blog-post__title-link" href="#/blog/{post-id}">{title}</a></h1>
-          <p class="blog-post__subtitle">{subtitle}</p>
-          <p class="blog-post__created"><time datetime="{created-iso}">{created}</time></p>
-          <p class="blog-post__modified" {hide-modified}>Last modified: <time datetime="{modified-iso}">{modified}</time></p>
-          <div class="blog-post__content">
-            {content}
+      <!-- Blog Post block. -->
+      <article class="blog-post">
+        <h1 class="blog-post__title"><a class="blog-post__title-link" href="#/blog/{post-id}">{title}</a></h1>
+        <p class="blog-post__subtitle">{subtitle}</p>
+        <p class="blog-post__created"><time datetime="{created-iso}">{created}</time></p>
+        <p class="blog-post__modified" {hide-modified}>Last modified: <time datetime="{modified-iso}">{modified}</time></p>
+        <div class="blog-post__content">
+          {content}
+        </div>
+        <!-- Footer block. -->
+        <footer class="footer">
+          <!-- Tags block. -->
+          <div class="tags">
+            {tags}
           </div>
-          <!-- Footer block. -->
-          <footer class="footer">
-            <!-- Tags block. -->
-            <div class="tags">
-              {tags}
-            </div>
-          </footer>
-        </article>
-      </div>
+        </footer>
+      </article>
     </script>
 
     <script type="text/html" id="blog-post-tag-template">
