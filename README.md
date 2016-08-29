@@ -37,7 +37,6 @@ Includes a personal blog and portfolio.
 
 ## TODO
 
-- Finish styling refactor.
 - Add landing page and change default route.
 - Add contact page (formspree).
 - Gracefully degrade for those with JavaScript disabled.
