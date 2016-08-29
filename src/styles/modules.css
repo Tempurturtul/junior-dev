@@ -318,6 +318,15 @@
 }
 
 /************************************************
+  About
+************************************************/
+
+.about {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+/************************************************
   Blog Nav
 ************************************************/
 
@@ -329,7 +338,7 @@
 
 .blog-nav__search {
   display: block;
-  margin: 2px auto 8px;
+  margin: 8px auto;
   max-width: 100%;
 }
 
@@ -340,7 +349,15 @@
 }
 
 .blog-nav__group-entry {
+  margin: 8px 0;
+}
 
+.blog-nav__group-date {
+  border-bottom: solid 1px #222;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+  padding-bottom: 2px;
 }
 
 .blog-nav__post-list {
@@ -365,17 +382,12 @@
   justify-content: center;
 }
 
-@media (min-width: 900px) {
-  .blog-post-container {
-    margin: 20px 5%;
-  }
-}
-
 /************************************************
   Blog Post
 ************************************************/
 
 .blog-post {
+  max-width: 900px;
   width: 100%;
 }
 

@@ -38,8 +38,6 @@ Includes a personal blog and portfolio.
 ## TODO
 
 - Finish styling refactor.
-  - Change blog nav posts list:
-    - Replace collapsible date range lists with lists that remain even when posts are all filtered out.
 - Add landing page and change default route.
 - Add contact page (formspree).
 - Gracefully degrade for those with JavaScript disabled.

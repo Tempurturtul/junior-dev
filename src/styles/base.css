@@ -27,7 +27,13 @@ a:visited {
 
 p {
   line-height: 1.4;
-  text-indent: 3em;
+  text-indent: 2em;
+}
+
+@media (min-width: 450px) {
+  p {
+    text-indent: 2.5em;
+  }
 }
 
 li > p {

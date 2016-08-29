@@ -78,32 +78,6 @@
     }
 
     /**
-     * Adds event listeners to collapsible components that are children of the
-     * specified parent element.
-     * @param {Element} parent - The parent element.
-     */
-    function addCollapsibleListeners(parent) {
-      var drawers = parent.getElementsByClassName('collapsible-drawer');
-      var lists = parent.getElementsByClassName('collapsible-list');
-
-      var i;
-      var len;
-      var btn;
-
-      // For each collapsible drawer...
-      for (i = 0, len = drawers.length; i < len; i++) {
-        btn = drawers[i].querySelector('.collapsible-drawer__toggle');
-        btn.addEventListener('click', handleCollapsibleToggle);
-      }
-
-      // For each collapsible list...
-      for (i = 0, len = lists.length; i < len; i++) {
-        btn = lists[i].querySelector('.collapsible-list__toggle');
-        btn.addEventListener('click', handleCollapsibleToggle);
-      }
-    }
-
-    /**
      * Renders tag filters.
      */
     function renderTagFilters() {
@@ -143,8 +117,6 @@
      */
     function renderNavGroups() {
       navGroupContainerElem.innerHTML = formatNavGroups();
-
-      addCollapsibleListeners(navGroupContainerElem);
     }
 
     /**
@@ -196,7 +168,34 @@
     function init() {}
 
     /**
-     * Formats a nav group template for each month containing at least one post.
+     * Adds event listeners to collapsible components that are children of the
+     * specified parent element.
+     * @param {Element} parent - The parent element.
+     */
+    function addCollapsibleListeners(parent) {
+      var drawers = parent.getElementsByClassName('collapsible-drawer');
+      var lists = parent.getElementsByClassName('collapsible-list');
+
+      var i;
+      var len;
+      var btn;
+
+      // For each collapsible drawer...
+      for (i = 0, len = drawers.length; i < len; i++) {
+        btn = drawers[i].querySelector('.collapsible-drawer__toggle');
+        btn.addEventListener('click', handleCollapsibleToggle);
+      }
+
+      // For each collapsible list...
+      for (i = 0, len = lists.length; i < len; i++) {
+        btn = lists[i].querySelector('.collapsible-list__toggle');
+        btn.addEventListener('click', handleCollapsibleToggle);
+      }
+    }
+
+    /**
+     * Formats a nav group template for each month for which at least one blog
+     * post exists.
      * @return {string} - The formatted nav group templates.
      */
     function formatNavGroups() {
@@ -215,11 +214,12 @@
         'December'
       ];
 
-      // Get filtered posts sorted newest to oldest.
-      var posts = blogController.getPosts({sortOldest: false}) || [];
+      // Get all posts and filtered posts, sorted newest to oldest.
+      var allPosts = blogController.getPosts({getAll: true, sortOldest: false});
+      var filteredPosts = blogController.getPosts({sortOldest: false});
 
-      // Group posts by month.
-      posts = posts
+      // Group all posts by month.
+      allPosts = allPosts
         .reduce(function(acc, curr) {
           // The latest accumulated group.
           var group = acc.length ? acc[acc.length - 1] : null;
@@ -253,25 +253,51 @@
 
       // Convert all groups into formatted nav group templates, then join and
       // return them.
-      return posts
+      var created;
+      return allPosts
         .map(function(group) {
+          // Get a created date from the group. (All entries have the same
+          // month and year, so any entry's created date will do.)
+          created = group.length ? group[0].created : null;
+
           return navGroupTemplate
-            .replace('{date}', group.length && group[0].created ?
-                               months[group[0].created.getMonth()] + ' ' +
-                               group[0].created.getFullYear() :
-                               'undated')
-            .replace('{nav-posts}', formatNavPosts(group));
+            .replace('{date-iso}', created ?
+              created.toISOString() :
+              '')
+            .replace('{date}', created ?
+              months[created.getMonth()] + ' ' + created.getFullYear() :
+              'undated')
+            .replace('{nav-posts}', formatNavPosts(group, filteredPosts));
         })
         .join('');
     }
 
     /**
-     * Formats a nav post template each post in a group.
+     * Formats a nav post template for each filtered post in the group.
      * @param {Post[]} group - A group of posts.
+     * @param {Post[]} filtered - All filtered posts.
      * @return {string} - The formatted nav posts strings.
      */
-    function formatNavPosts(group) {
+    function formatNavPosts(group, filtered) {
+      var i;
+      var len = filtered.length;
+      var postISO;
+
       return group
+        .filter(function(post) {
+          postISO = post.created.toISOString();
+
+          // For each filtered post...
+          for (i = 0; i < len; i++) {
+            // Check title and created date against group post to find matches.
+            if (filtered[i].title === post.title &&
+                filtered[i].created.toISOString() === postISO) {
+              return true;
+            }
+          }
+
+          return false;
+        })
         .map(function(post) {
           return navPostTemplate
             .replace('{post-id}', blogController.getPostID(post))
