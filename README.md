@@ -45,3 +45,4 @@ Includes a personal blog and portfolio.
   - Consider disabling tag:hover styling.
 - Test in most popular browsers.
 - Finish adding content.
+- Enable formspree submissions from tempurturtul.github.io/home after creating gh-pages branch.
