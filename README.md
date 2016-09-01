@@ -38,7 +38,6 @@ Includes a personal blog and portfolio.
 ## TODO
 
 - Add landing page and change default route.
-- Add contact page (formspree).
 - Gracefully degrade for those with JavaScript disabled.
   - SPA to multi-page.
   - Hide JS-dependent blog controls.
