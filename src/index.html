@@ -22,9 +22,11 @@
     <script async src="scripts/views/AboutView.js"></script>
     <script async src="scripts/views/BlogView.js"></script>
     <script async src="scripts/views/PortfolioView.js"></script>
+    <script async src="scripts/views/ContactView.js"></script>
     <script async src="scripts/controllers/AboutController.js"></script>
     <script async src="scripts/controllers/BlogController.js"></script>
     <script async src="scripts/controllers/PortfolioController.js"></script>
+    <script async src="scripts/controllers/ContactController.js"></script>
     <script async src="scripts/controllers/MainController.js"></script>
     <script async src="scripts/app.js"></script>
     <script src="scripts/store/portfolioPieces.json"></script>
@@ -242,5 +244,25 @@
       <span class="portfolio-piece__tag {active} tag">{tag}</span>{comma}
     </script>
 
+    <script type="text/html" id="contact-template">
+      <!-- Section block. -->
+      <section class="section">
+        <h1 class="section__title">Get In Touch</h1>
+        <div class="contact">
+          <ul class="contact-list">
+            <li class="contact-list__entry"><a class="contact-list__link" href="mailto:tempurturtul@gmail.com"><img class="contact-list__icon" src="images/icons/mail.svg" alt="An envelope."></a></li>
+            <li class="contact-list__entry"><a class="contact-list__link" href="https://github.com/Tempurturtul"><img class="contact-list__icon" src="images/icons/github.svg" alt="The GitHub icon."></a></li>
+            <li class="contact-list__entry"><a class="contact-list__link" href="https://linkedin.com/in/tempurturtul"><img class="contact-list__icon" src="images/icons/linkedin.svg" alt="The LinkedIn Icon."></a></li>
+          </ul>
+          <p class="contact__paragraph">Feel free to fill out the form below, I usually respond within 24 hours.</p>
+          <form class="contact-form" autocomplete="off" action="https://formspree.io/tempurturtul@gmail.com" method="POST">
+            <input class="contact-form__input" id="name" name="name" type="text" placeholder="Name" maxlength="100">
+            <input class="contact-form__input" id="email" name="email" type="email" placeholder="Email" maxlength="100">
+            <textarea class="contact-form__textarea" id="message" name="message" placeholder="Message" maxlength="9000" required></textarea>
+            <button class="contact-form__btn" type="submit">Send</button>
+          </form>
+        </div>
+      </section>
+    </script>
   </body>
 </html>

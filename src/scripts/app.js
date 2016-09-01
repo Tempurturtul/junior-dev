@@ -19,7 +19,8 @@
       {route: 'about', handler: mainController.setAboutView},
       {route: 'blog', handler: mainController.setBlogView},
       {route: 'blog/:post', handler: mainController.setBlogView},
-      {route: 'portfolio', handler: mainController.setPortfolioView}
+      {route: 'portfolio', handler: mainController.setPortfolioView},
+      {route: 'contact', handler: mainController.setContactView}
     ];
 
     // Register the routes.

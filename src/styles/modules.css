@@ -497,3 +497,75 @@
 .portfolio-piece__description {}
 
 .portfolio-piece__tag {}
+
+/************************************************
+  Contact
+************************************************/
+
+.contact {
+  margin: 0 auto;
+  max-width: 900px;
+  text-align: center;
+}
+
+.contact__paragraph {
+  text-indent: 0;
+}
+
+/************************************************
+  Contact List
+************************************************/
+
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.contact-list__entry {
+  margin: 0 3px;
+  padding: 5px;
+}
+
+.contact-list__icon {
+  height: 32px;
+  width: 32px;
+}
+
+.contact-list__link {
+
+}
+
+/************************************************
+  Contact Form
+************************************************/
+
+.contact-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.contact-form__input,
+.contact-form__textarea,
+.contact-form__btn {
+  margin: 5px 0;
+  max-width: 100%;
+  padding: 3px;
+}
+
+.contact-form__input {
+
+}
+
+.contact-form__textarea {
+  height: 8em;
+  width: 400px;
+}
+
+.contact-form__btn {
+  width: 100px;
+}
