@@ -174,21 +174,21 @@
 }
 
 .collapsible-drawer__toggle {
-  display: flex;
   font-size: 1em;
-  justify-content: space-around;
   width: 100%;
 }
 
 .collapsible-drawer__toggle::after {
   content: '«';
   display: inline-block;
+  margin-left: 10%;
   transform: rotate(90deg);
 }
 
 .collapsible-drawer__toggle::before {
   content: '»';
   display: inline-block;
+  margin-right: 10%;
   transform: rotate(-90deg);
 }
 
