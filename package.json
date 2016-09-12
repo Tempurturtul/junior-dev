@@ -6,6 +6,7 @@
     "eslint-config-google": "^0.6.0",
     "faucet": "0.0.1",
     "fs": "0.0.2",
+    "gh-pages": "^0.11.0",
     "jsdom": "^9.2.1",
     "showdown": "^1.4.2",
     "sinon": "^1.17.4",
@@ -25,7 +26,8 @@
     "start": "npm run lint:watch & npm run serve",
     "generate:portfolio": "node build/generatePortfolioPieces.js",
     "generate:blog": "node build/generateBlogPosts.js",
-    "generate": "npm run generate:portfolio & npm run generate:blog"
+    "generate": "npm run generate:portfolio & npm run generate:blog",
+    "deploy": "gh-pages -d src"
   },
   "eslintConfig": {
     "extends": "google",
