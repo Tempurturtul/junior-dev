@@ -72,9 +72,11 @@
 .page-footer {
   background-color: #222;
   color: #f5f5f5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   font-size: 0.8em;
   padding: 10px;
-  text-align: right;
 }
 
 .page-footer__link {
@@ -575,4 +577,18 @@
 
 .contact-form__btn {
   width: 100px;
+}
+
+/************************************************
+  Attributions List
+************************************************/
+
+.attributions-list {
+  list-style: circle;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.attributions-list__entry {
+  padding: 0 0 20px;
 }

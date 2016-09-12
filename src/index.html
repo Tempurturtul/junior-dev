@@ -23,10 +23,12 @@
     <script async src="scripts/views/BlogView.js"></script>
     <script async src="scripts/views/PortfolioView.js"></script>
     <script async src="scripts/views/ContactView.js"></script>
+    <script async src="scripts/views/AttributionsView.js"></script>
     <script async src="scripts/controllers/AboutController.js"></script>
     <script async src="scripts/controllers/BlogController.js"></script>
     <script async src="scripts/controllers/PortfolioController.js"></script>
     <script async src="scripts/controllers/ContactController.js"></script>
+    <script async src="scripts/controllers/AttributionsController.js"></script>
     <script async src="scripts/controllers/MainController.js"></script>
     <script async src="scripts/app.js"></script>
     <script src="scripts/store/portfolioPieces.json"></script>
@@ -70,6 +72,7 @@
       <div class="shell__secondary-content">
         <!-- Page Footer block. -->
         <footer class="page-footer">
+          <small><a class="page-footer__link" href="#/attributions">Attributions</a></small>
           <a class="page-footer__link" href="https://github.com/Tempurturtul/home">Hosted on GitHub.</a>
         </footer>
       </div>
@@ -256,6 +259,19 @@
             <button class="contact-form__btn" type="submit">Send</button>
           </form>
         </div>
+      </section>
+    </script>
+
+    <script type="text/html" id="attributions-template">
+      <!-- Section block. -->
+      <section class="section">
+        <h1 class="section__title">Attributions</h1>
+        <!-- Attributions List block. -->
+        <ul class="attributions-list">
+          <li class="attributions-list__entry">"Github Icon" by <a href="https://github.com">github</a> licensed under <a href="https://opensource.org/licenses/MIT">MIT</a>.</li>
+          <li class="attributions-list__entry">"LinkedIn Icon" by <a href="https://www.iconfinder.com/zohanimasi">Zohanimasi</a> licensed under <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons (Attribution 2.5 Generic)</a>.</li>
+          <li class="attributions-list__entry">"Envelope Icon" by <a href="https://www.iconfinder.com/andromina">Maria &amp; Guillem</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons (Attribution 3.0 Unported)</a>.</li>
+        </ul>
       </section>
     </script>
   </body>

@@ -18,12 +18,14 @@
     var blogController;
     var portfolioController;
     var contactController;
+    var attributionsController;
 
     self.getStoredData = getStoredData;
     self.setAboutView = setAboutView;
     self.setBlogView = setBlogView;
     self.setPortfolioView = setPortfolioView;
     self.setContactView = setContactView;
+    self.setAttributionsView = setAttributionsView;
 
     init();
 
@@ -83,6 +85,15 @@
       contactController.setView(params);
     }
 
+    /**
+     * Sets the attributions view.
+     * @param {object} params - Parameters from a query string and/or
+     * parameterized route.
+     */
+    function setAttributionsView(params) {
+      attributionsController.setView(params);
+    }
+
     /*
     ****************************************
     * Private methods.
@@ -97,6 +108,7 @@
       blogController = new app.controllers.BlogController(self);
       portfolioController = new app.controllers.PortfolioController(self);
       contactController = new app.controllers.ContactController(self);
+      attributionsController = new app.controllers.AttributionsController(self);
     }
   }
 })();
