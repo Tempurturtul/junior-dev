@@ -17,7 +17,7 @@
   "scripts": {
     "lint:js": "eslint \"src/**/*.js\"; exit 0",
     "lint:css": "stylelint \"src/**/*.css\"; exit 0",
-    "lint": "npm run lint:js && npm run lint:css",
+    "lint": "npm run lint:js & npm run lint:css",
     "lint:watch": "watch 'npm run lint' src",
     "serve": "browser-sync start --server 'src' --files 'src'",
     "test": "tape 'src/**/*.test.js' | faucet; exit 0",
@@ -25,7 +25,7 @@
     "start": "npm run lint:watch & npm run serve",
     "generate:portfolio": "node build/generatePortfolioPieces.js",
     "generate:blog": "node build/generateBlogPosts.js",
-    "generate": "npm run generate:portfolio && npm run generate:blog"
+    "generate": "npm run generate:portfolio & npm run generate:blog"
   },
   "eslintConfig": {
     "extends": "google",
