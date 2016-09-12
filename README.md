@@ -22,7 +22,7 @@ Includes a personal blog and portfolio.
   npm i
   ```
 
-- Use npm scripts to generate files, lint, serve, and test.
+- Use npm scripts to generate files, lint, serve, test, and deploy.
 
   ```
   # Generate JSON files for blog posts and portfolio pieces.
@@ -33,6 +33,9 @@ Includes a personal blog and portfolio.
 
   # Run tests.
   npm t
+
+  # Deploy to GitHub Pages.
+  npm run deploy
   ```
 
 ## TODO
@@ -44,4 +47,3 @@ Includes a personal blog and portfolio.
   - Test contact page functionality; warn user if non-functional.
   - Consider disabling tag:hover styling.
 - Test in most popular browsers.
-- Enable formspree submissions from tempurturtul.github.io/home after creating gh-pages branch.
