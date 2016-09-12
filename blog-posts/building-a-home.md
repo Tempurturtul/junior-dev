@@ -41,5 +41,7 @@ My `package.json` file includes scripts for the following:
     - using [tape](https://github.com/substack/tape) and [jsdom](https://github.com/tmpvar/jsdom)
   - generation of JSON files from markdown and from other JSON files
     - using [custom code](https://github.com/Tempurturtul/home/tree/master/build) and [showdown](https://github.com/showdownjs/showdown)
+  - automated deployment to GitHub Pages
+    - using [gh-pages](https://github.com/tschaub/gh-pages)
 
 *Tags: project*
