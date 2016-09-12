@@ -426,6 +426,7 @@
   font-size: 0.8em;
   font-style: italic;
   text-align: center;
+  text-indent: 0;
 }
 
 .blog-post__content {

@@ -70,6 +70,7 @@
      * Gets blog posts.
      * @param {object} [opts] - Options.
      * @param {bool} [opts.getAll] - Get all blog posts. (Overrides filters.)
+     * @param {bool} [opts.ignorePostFilter] - Ignore the post filter (for designating specific posts) when filtering.
      * @param {bool} [opts.oldestFirst] - Sort by oldest first (or by
      * youngest first, if false). (Overrides filters.)
      * @return {Post[]} - An array of blog posts.
@@ -86,8 +87,16 @@
           return new app.models.Post(post);
         });
 
+      // Get a deep copy of post filters (might modify it, but don't want to modify original).
+      var filters = JSON.parse(JSON.stringify(postFilters));
+
+      // Transform post filters.
+      if (opts.ignorePostFilter) {
+        filters.post = null;
+      }
+
       // Filter posts if not ignoring filters.
-      posts = opts.getAll ? posts : filterPosts(posts, postFilters);
+      posts = opts.getAll ? posts : filterPosts(posts, filters);
 
       // Sort posts.
       if (opts.hasOwnProperty('oldestFirst')) {
