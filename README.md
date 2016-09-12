@@ -44,5 +44,4 @@ Includes a personal blog and portfolio.
   - Test contact page functionality; warn user if non-functional.
   - Consider disabling tag:hover styling.
 - Test in most popular browsers.
-- Finish adding content.
 - Enable formspree submissions from tempurturtul.github.io/home after creating gh-pages branch.
