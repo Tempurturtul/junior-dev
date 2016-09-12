@@ -37,13 +37,3 @@ Includes a personal blog and portfolio.
   # Deploy to GitHub Pages.
   npm run deploy
   ```
-
-## TODO
-
-- Add landing page and change default route.
-- Gracefully degrade for those with JavaScript disabled.
-  - SPA to multi-page.
-  - Hide JS-dependent blog controls.
-  - Test contact page functionality; warn user if non-functional.
-  - Consider disabling tag:hover styling.
-- Test in most popular browsers.
