@@ -105,4 +105,4 @@ I was switching careers from a non-technical field and I needed the motivation (
 
 If you don't need motivation, direction, or additional confidence: I recommend free resources instead.
 
-*Tags: review, education, portfolio building*
+*Tags: review, education*

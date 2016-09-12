@@ -216,7 +216,9 @@
 
       // Get all posts and filtered posts, sorted newest to oldest.
       var allPosts = blogController.getPosts({getAll: true, sortOldest: false});
-      var filteredPosts = blogController.getPosts({ignorePostFilter: true, sortOldest: false});
+      var filteredPosts = blogController.getPosts({
+        ignorePostFilter: true, sortOldest: false
+      });
 
       // Group all posts by month.
       allPosts = allPosts
