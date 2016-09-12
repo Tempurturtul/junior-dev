@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A junior software developer's blog, portfolio, and general homepage.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Junior Dev</title>
+
+    <!-- Apply Color to Mobile Status Bar -->
+    <meta name="theme-color" content="#222">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/modules.css">
+
+    <!-- Scripts -->
+    <script async src="scripts/utils/past.js"></script>
+    <script async src="scripts/Router.js"></script>
+    <script async src="scripts/models/Post.js"></script>
+    <script async src="scripts/models/PortfolioPiece.js"></script>
+    <script async src="scripts/views/AboutView.js"></script>
+    <script async src="scripts/views/BlogView.js"></script>
+    <script async src="scripts/views/PortfolioView.js"></script>
+    <script async src="scripts/views/ContactView.js"></script>
+    <script async src="scripts/views/AttributionsView.js"></script>
+    <script async src="scripts/controllers/AboutController.js"></script>
+    <script async src="scripts/controllers/BlogController.js"></script>
+    <script async src="scripts/controllers/PortfolioController.js"></script>
+    <script async src="scripts/controllers/ContactController.js"></script>
+    <script async src="scripts/controllers/AttributionsController.js"></script>
+    <script async src="scripts/controllers/MainController.js"></script>
+    <script async src="scripts/app.js"></script>
+    <script src="scripts/store/portfolioPieces.json"></script>
+    <script src="scripts/store/posts.json"></script>
+    <script src="scripts/store/store.js"></script>
+
+    <!-- Google Analytics -->
+    <!--
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-XXXXX-Y', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    -->
+  </head>
+
+  <body>
+    <!-- Shell block. -->
+    <div class="shell">
+      <div class="shell__secondary-content">
+        <!-- Page Header block. -->
+        <header class="page-header">
+          <h1 class="page-header__title">
+            <a class="title-link" href="#/">Junior Dev</a>
+          </h1>
+          <nav class="page-header__nav">
+            <ul class="page-header__list inline-list">
+              <!-- Currently, the #/about page is identical to #/, which is accessible via the Page Header Title. -->
+              <!-- <li class="inline-list__entry"><a class="page-header__link" href="#/about">About</a></li> -->
+              <li class="inline-list__entry"><a class="page-header__link" href="#/blog">Blog</a></li>
+              <li class="inline-list__entry"><a class="page-header__link" href="#/portfolio">Portfolio</a></li>
+              <li class="inline-list__entry"><a class="page-header__link" href="#/contact">Contact</a></li>
+            </ul>
+          </nav>
+        </header>
+      </div>
+      <div class="shell__primary-content">
+        <main id="main">
+        </main>
+      </div>
+      <div class="shell__secondary-content">
+        <!-- Page Footer block. -->
+        <footer class="page-footer">
+          <small><a class="page-footer__link" href="#/attributions">Attributions</a></small>
+          <a class="page-footer__link" href="https://github.com/Tempurturtul/home">Hosted on GitHub.</a>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Templates. -->
+
+    <script type="text/html" id="about-template">
+      <!-- Section block. -->
+      <section class="section">
+        <h1 class="section__title">About This Site</h1>
+        <!-- About block. -->
+        <div class="about">
+          <p>This is a junior software developer's home page, where he shows off the things he's made, and talks about his journey and the things he's learned so far.</p>
+          <p>If you're looking for more information about the junior developer himself, see the <a href="#/blog/hello-world">Hello World</a> blog post.</p>
+          <p>If you're interested in how this site was built and the technologies used, the <a href="#/blog/building-a-home">Building a Home</a> blog post was written for you. The full project is also on <a href="https://github.com/Tempurturtul/home">GitHub</a>.</p>
+          <p>As the site title indicates, the content on this site does not come from an experienced developer. As a result, there will undoubtedly exist incorrect/bad information. If you notice some bad information, or something that's just very poorly explained, please inform the junior developer either via a <a href="https://github.com/Tempurturtul/home/issues">GitHub Issue</a> or the <a href="#/contact">contact page</a>. You'll not only be helping him, but you'll also be helping anyone who happens along after you. Thank you!</p>
+        </div>
+      </section>
+    </script>
+
+    <script type="text/html" id="blog-template">
+      <!-- Section block. -->
+      <section class="section">
+        <div {hide-top}>
+          <h1 class="section__title">Learner's Blog</h1>
+        </div>
+
+        <!-- Blog Nav block (also Collapsible Drawer). -->
+        <nav class="blog-nav collapsible-drawer collapsible-drawer--collapsed">
+          <button class="collapsible-drawer__toggle">Posts</button>
+          <div class="collapsible-drawer__content">
+            <!-- Search Bar block. -->
+            <input class="blog-nav__search search-bar" type="search" placeholder="Search" value="{search-text}">
+            <!-- Tag Filters block. -->
+            <fieldset class="tag-filters">
+              <legend class="tag-filters__title">Filtered Tags</legend>
+              <div class="tag-filters__filters">
+                <!-- Formatted tag filters inserted here. -->
+              </div>
+              <button class="tag-filters__reset-btn">Reset</button>
+            </fieldset>
+            <ul class="blog-nav__group-list">
+              <!-- Formatted blog nav group templates inserted here. -->
+            </ul>
+          </div>
+        </nav>
+
+        <!-- Blog Post Container block. -->
+        <div class="blog-post-container">
+          <!-- Formatted blog post template inserted here. -->
+        </div>
+      </section>
+    </script>
+
+    <script type="text/html" id="blog-nav-group-template">
+      <li class="blog-nav__group-entry">
+        <!-- Collapsible List block. -->
+        <time class="blog-nav__group-date" datetime="{date-iso}">{date}</time>
+        <ul class="blog-nav__post-list">
+          {nav-posts}
+        </ul>
+      </li>
+    </script>
+
+    <script type="text/html" id="blog-nav-post-template">
+      <li class="blog-nav__post-entry">
+        <a class="blog-nav__link" href="#/blog/{post-id}">
+          {post-title}
+        </a>
+      </li>
+    </script>
+
+    <script type="text/html" id="blog-post-template">
+      <!-- Blog Post block (also Card). -->
+      <article class="blog-post card">
+        <h1 class="blog-post__title"><a class="blog-post__title-link" href="#/blog/{post-id}">{title}</a></h1>
+        <p class="blog-post__subtitle">{subtitle}</p>
+        <p class="blog-post__created"><time datetime="{created-iso}">{created}</time></p>
+        <p class="blog-post__modified" {hide-modified}>Last modified: <time datetime="{modified-iso}">{modified}</time></p>
+        <div class="blog-post__content">
+          {content}
+        </div>
+        <!-- Footer block. -->
+        <footer class="footer">
+          <!-- Tags block. -->
+          <div class="tags">
+            {tags}
+          </div>
+        </footer>
+      </article>
+    </script>
+
+    <script type="text/html" id="blog-post-tag-template">
+      <span class="blog-post__tag tag">{tag}</span>{comma}
+    </script>
+
+    <script type="text/html" id="portfolio-template">
+      <!-- Section block. -->
+      <section class="section">
+        <h1 class="section__title">Featured Projects</h1>
+
+        <fieldset class="tag-filters">
+          <legend class="tag-filters__title">Filtered Tags</legend>
+          <div class="tag-filters__filters">
+            <!-- Formatted tag filters inserted here. -->
+          </div>
+          <button class="tag-filters__reset-btn">Reset</button>
+        </fieldset>
+
+        <!-- Portfolio Pieces block. -->
+        <div class="portfolio-pieces">
+          <!-- Formatted portfolio piece templates inserted here. -->
+        </div>
+      </section>
+    </script>
+
+    <script type="text/html" id="tag-filter-template">
+      <label class="tag-filters__label"><input class="tag-filters__checkbox" type="checkbox" value="{tag-value}" {checked}>{tag}</label>
+    </script>
+
+    <script type="text/html" id="portfolio-piece-template">
+      <!-- Card block. -->
+      <div class="card">
+        <!-- Portfolio Piece block. -->
+        <article class="portfolio-piece">
+          {title}
+          <time class="portofolio-piece__date" datetime="{iso-date}">{date}</time>
+          {preview}
+          {source}
+          <p class="portfolio-piece__description">{description}</p>
+          <footer class="footer">
+            <!-- Tags block. -->
+            <div class="tags">{tags}</div>
+          </footer>
+        </article>
+      </div>
+    </script>
+
+    <script type="text/html" id="portfolio-piece-title-template">
+      <h1 class="portfolio-piece__title">
+        <!-- Live link is preferred if available, source link is used otherwise. -->
+        <a class="portfolio-piece__title-link" href="{url}">{title}</a>
+      </h1>
+    </script>
+
+    <script type="text/html" id="portfolio-piece-title-sans-link-template">
+      <h1 class="portfolio-piece__title">{title}</h1>
+    </script>
+
+    <script type="text/html" id="portfolio-piece-preview-template">
+      <a class="portfolio-piece__live-link" href="{live-url}">
+        <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
+      </a>
+    </script>
+
+    <script type="text/html" id="portfolio-piece-preview-sans-link-template">
+      <img class="portfolio-piece__image" src="{img-src}" srcset="{img-srcset}" alt="{img-description}">
+    </script>
+
+    <script type="text/html" id="portfolio-piece-source-template">
+      <a class="portfolio-piece__source-link" href="{url}">GitHub</a>
+    </script>
+
+    <script type="text/html" id="portfolio-piece-tag-template">
+      <span class="portfolio-piece__tag {active} tag">{tag}</span>{comma}
+    </script>
+
+    <script type="text/html" id="contact-template">
+      <!-- Section block. -->
+      <section class="section">
+        <h1 class="section__title">Get In Touch</h1>
+        <div class="contact">
+          <ul class="contact-list">
+            <li class="contact-list__entry"><a class="contact-list__link" href="mailto:tempurturtul@gmail.com"><img class="contact-list__icon" src="images/icons/mail.svg" alt="An envelope."></a></li>
+            <li class="contact-list__entry"><a class="contact-list__link" href="https://github.com/Tempurturtul"><img class="contact-list__icon" src="images/icons/github.svg" alt="The GitHub icon."></a></li>
+            <li class="contact-list__entry"><a class="contact-list__link" href="https://linkedin.com/in/tempurturtul"><img class="contact-list__icon" src="images/icons/linkedin.svg" alt="The LinkedIn Icon."></a></li>
+          </ul>
+          <p class="contact__paragraph">For comments, questions, or most anything else: please feel free to use the form below. I'll typically respond within 24 hours.</p>
+          <form class="contact-form" autocomplete="off" action="https://formspree.io/tempurturtul@gmail.com" method="POST">
+            <input class="contact-form__input" id="name" name="name" type="text" placeholder="Name" maxlength="100">
+            <input class="contact-form__input" id="email" name="email" type="email" placeholder="Email" maxlength="100">
+            <textarea class="contact-form__textarea" id="message" name="message" placeholder="Message" maxlength="9000" required></textarea>
+            <button class="contact-form__btn" type="submit">Send</button>
+          </form>
+        </div>
+      </section>
+    </script>
+
+    <script type="text/html" id="attributions-template">
+      <!-- Section block. -->
+      <section class="section">
+        <h1 class="section__title">Attributions</h1>
+        <!-- Attributions List block. -->
+        <ul class="attributions-list">
+          <li class="attributions-list__entry">"Github Icon" by <a href="https://github.com">github</a> licensed under <a href="https://opensource.org/licenses/MIT">MIT</a>.</li>
+          <li class="attributions-list__entry">"LinkedIn Icon" by <a href="https://www.iconfinder.com/zohanimasi">Zohanimasi</a> licensed under <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons (Attribution 2.5 Generic)</a>.</li>
+          <li class="attributions-list__entry">"Envelope Icon" by <a href="https://www.iconfinder.com/andromina">Maria &amp; Guillem</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons (Attribution 3.0 Unported)</a>.</li>
+        </ul>
+      </section>
+    </script>
+  </body>
+</html>
