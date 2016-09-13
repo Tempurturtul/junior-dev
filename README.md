@@ -1,6 +1,4 @@
-# [Home](https://tempurturtul.github.io/home/)
-
-***A work in progress.***
+# [Junior Dev](https://tempurturtul.github.io/junior-dev/)
 
 Home page built with vanilla HTML, CSS, and JavaScript.
 
@@ -12,7 +10,7 @@ Includes a personal blog and portfolio.
 - Clone this repository and navigate to it.
 
   ```
-  git clone https://github.com/Tempurturtul/home.git
+  git clone https://github.com/Tempurturtul/junior-dev.git
   cd home/
   ```
 
