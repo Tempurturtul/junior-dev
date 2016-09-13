@@ -13,9 +13,7 @@
    */
   function BlogController(mainController) {
     var self = this;
-    // Assigned during initialization.
     var blogView;
-    var allTags;
     var postFilters = {
       post: null,
       text: '',
@@ -45,7 +43,16 @@
      * @return {string[]} - All blog post tags.
      */
     function getAllTags() {
-      return allTags.slice(0);
+      return getPosts({getAll: true})
+        .reduce(function(acc, curr) {
+          curr.tags.forEach(function(tag) {
+            if (acc.indexOf(tag) === -1) {
+              acc.push(tag);
+            }
+          });
+
+          return acc;
+        }, []);
     }
 
     /**
@@ -168,17 +175,6 @@
      */
     function init() {
       blogView = new app.views.BlogView(self);
-
-      allTags = getPosts({getAll: true})
-        .reduce(function(acc, curr) {
-          curr.tags.forEach(function(tag) {
-            if (acc.indexOf(tag) === -1) {
-              acc.push(tag);
-            }
-          });
-
-          return acc;
-        }, []);
     }
 
     /**
