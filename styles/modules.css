@@ -79,6 +79,10 @@
   padding: 10px;
 }
 
+.page-footer__small {
+  opacity: 0.7;
+}
+
 .page-footer__link {
   color: inherit;
 }
