@@ -3,15 +3,62 @@
   'use strict';
 
   var app = window.app = window.app || {};
+  var dataList = [
+    {
+      url: 'scripts/store/portfolioPieces.json',
+      key: 'portfolioPieces'
+    },
+    {
+      url: 'scripts/store/posts.json',
+      key: 'blogPosts'
+    }
+  ];
+  // The number of data entries from dataList that have been retrieved and added to the store.
+  var ready = 0;
+
   app._store = {
-    portfolioPieces: [],
-    blogPosts: []
+    ready: false
   };
 
-  // Get JSON data for portfolio pieces and pass to updatePortfolioPieces.
-  getFile('scripts/store/portfolioPieces.json', updatePortfolioPieces);
-  // Get JSON data for blog posts and pass to updateBlogPosts.
-  getFile('scripts/store/posts.json', updateBlogPosts);
+  // Get JSON data from each url and pass to updateStore along with the related key.
+  dataList.forEach(function(entry) {
+    getFile(entry.url, storeUpdaterFor(entry.key));
+  });
+
+  /**
+   * Wrapper function for the updateStore method that passes along the given
+   * key argument.
+   * @param {string} key - The key to pass to the updateStore method.
+   * @return {function} - An anonymous wrapper function for the updateStore
+   * method that takes the data argument for use in said function.
+   */
+  function storeUpdaterFor(key) {
+    return function(data) {
+      updateStore(key, data);
+    };
+  }
+
+  /**
+   * Updates the store with the new data and updates the store's ready state.
+   * @param {string} key - The key under which to store the data.
+   * @param {string|null} data - Collection of data as a JSON string, or null
+   * if no data was retrieved.
+   */
+  function updateStore(key, data) {
+    // Do nothing if there is no data.
+    if (!data) {
+      return;
+    }
+
+    data = JSON.parse(data);
+    app._store[key] = data;
+
+    ready++;
+
+    if (ready === dataList.length) {
+      app._store.ready = true;
+    }
+  }
 
   /**
    * Requests the file at the given url and passes the response as text to
@@ -36,36 +83,5 @@
         done(xhr.responseText);
       }
     }
-  }
-
-  /**
-   * Updates the store to contain the new portfolio piece data.
-   * @callback getFileCallback
-   * @param {string|null} data - Collection of portfolio piece data as a JSON
-   * string, or null if no data was retrieved.
-   */
-  function updatePortfolioPieces(data) {
-    if (!data) {
-      return;
-    }
-
-    data = JSON.parse(data);
-    app._store.portfolioPieces = data;
-  }
-
-  /**
-   * Updates the store to contain the new blog post data.
-   * @callback getFileCallback
-   * @param {string|null} data - Collection of blog post data as a JSON
-   * string, or null if no data was retrieved.
-   */
-  function updateBlogPosts(data) {
-    if (!data) {
-      return;
-    }
-
-    data = JSON.parse(data);
-
-    app._store.blogPosts = data;
   }
 })();
