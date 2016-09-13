@@ -15,8 +15,6 @@
     var self = this;
     // Assigned during initialization.
     var portfolioView;
-    // Assigned during initialization.
-    var allTags;
     var filteredTags = [];
 
     self.getAllTags = getAllTags;
@@ -38,7 +36,16 @@
      * @return {string[]} - All tags.
      */
     function getAllTags() {
-      return allTags.slice(0);
+      return getPortfolioPieces({getAll: true})
+        .reduce(function(acc, curr) {
+          curr.tags.forEach(function(tag) {
+            if (acc.indexOf(tag) === -1) {
+              acc.push(tag);
+            }
+          });
+
+          return acc;
+        }, []);
     }
 
     /**
@@ -102,17 +109,6 @@
      */
     function init() {
       portfolioView = new app.views.PortfolioView(self);
-
-      allTags = getPortfolioPieces({getAll: true})
-        .reduce(function(acc, curr) {
-          curr.tags.forEach(function(tag) {
-            if (acc.indexOf(tag) === -1) {
-              acc.push(tag);
-            }
-          });
-
-          return acc;
-        }, []);
     }
 
     /**

@@ -68,12 +68,6 @@
       // Get filtered tags.
       var filtered = portfolioController.getFilteredTags();
 
-      // DEBUGGING.
-      console.log('\n--------------------\n\n');
-      console.log('all portfolio piece tags:\n\n', tags);
-      console.log('\n--------------------\n\n');
-      console.log('tagFiltersContainerElem:\n\n', tagFiltersContainerElem);
-
       // Convert tags to a single string of formatted tag filter templates.
       tags = tags.map(function(tag) {
         return tagFilterTemplate
@@ -84,10 +78,6 @@
                                 'checked');
       })
       .join('');
-
-      // DEBUGGING.
-      console.log('\n--------------------\n\n');
-      console.log('intended innerHTML for tagFiltersContainerElem:\n\n', tags);
 
       tagFiltersContainerElem.innerHTML = tags;
 
