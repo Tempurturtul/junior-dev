@@ -27,6 +27,7 @@
     "generate:portfolio": "node build/generatePortfolioPieces.js",
     "generate:blog": "node build/generateBlogPosts.js",
     "generate": "npm run generate:portfolio & npm run generate:blog",
+    "predeploy": "npm run generate",
     "deploy": "gh-pages -d src"
   },
   "eslintConfig": {
