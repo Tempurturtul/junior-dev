@@ -9,10 +9,10 @@
   /**
    * Creates a new Main Controller.
    * @constructor
+   * @param {Object} store - The data store.
    */
-  function MainController() {
+  function MainController(store) {
     var self = this;
-    var store = app._store;
     // Child controllers. (Assigned during initialization.)
     var aboutController;
     var blogController;
