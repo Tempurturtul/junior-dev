@@ -14,9 +14,10 @@
     }
   ];
   // The number of data entries from dataList that have been retrieved and added to the store.
-  var ready = 0;
+  var stored = 0;
 
   app._store = {
+    onready: null,
     ready: false
   };
 
@@ -45,18 +46,18 @@
    * if no data was retrieved.
    */
   function updateStore(key, data) {
-    // Do nothing if there is no data.
-    if (!data) {
-      return;
-    }
-
     data = JSON.parse(data);
     app._store[key] = data;
 
-    ready++;
-
-    if (ready === dataList.length) {
+    // Increment the number of stored data entries and check against total entries.
+    if (++stored === dataList.length) {
+      // The store is ready.
       app._store.ready = true;
+
+      // Call onready if defined.
+      if (app._store.onready) {
+        app._store.onready();
+      }
     }
   }
 
