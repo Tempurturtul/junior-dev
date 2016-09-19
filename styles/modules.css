@@ -395,6 +395,8 @@
 .blog-footer {
   display: flex;
   justify-content: space-between;
+  margin: 0 auto;
+  max-width: 900px;
 }
 
 .blog-footer__prev-btn {
