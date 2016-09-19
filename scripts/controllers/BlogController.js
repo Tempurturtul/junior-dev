@@ -116,12 +116,15 @@
     }
 
     /**
-     * Gets the active blog post. (That is: the first post in the sorted,
-     * filtered list.)
+     * Gets the active blog post. (That is: the post indicated by
+     * postFilters.post, or the first post in the sorted, unfiltered list.)
      * @return {Post} - The current blog post.
      */
     function getPost() {
-      var posts = getPosts();
+      var posts = postFilters.post ?
+        getPosts() :
+        getPosts({getAll: true});
+
       return posts.length ? posts[0] : null;
     }
 

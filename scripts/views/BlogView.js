@@ -52,9 +52,9 @@
       opts = opts || {};
 
       // Format the blog template.
-      var formattedBlogTemplate = blogTemplate
-        .replace('{hide-top}', opts.post ? 'hidden' : '')
-        .replace('{search-text}', blogController.getPostFilters().text);
+      var post = blogController.getPost();
+      var posts = blogController.getPosts({getAll: true, oldestFirst: true});
+      var formattedBlogTemplate = formatBlogTemplate(post, posts);
 
       // Set the container element's inner HTML to the formatted blog template.
       containerElem.innerHTML = formattedBlogTemplate;
@@ -67,6 +67,12 @@
       // Add search bar event listener.
       var searchBar = document.querySelector('.blog-nav__search');
       searchBar.addEventListener('input', handleSearchBarInput);
+
+      // Add prev/next button event listerners.
+      var prevBtn = document.querySelector('.blog-footer__prev-btn');
+      prevBtn.addEventListener('click', handlePrevClick);
+      var nextBtn = document.querySelector('.blog-footer__next-btn');
+      nextBtn.addEventListener('click', handleNextClick);
 
       // Add collapsible listeners.
       addCollapsibleListeners(containerElem);
@@ -194,6 +200,31 @@
     }
 
     /**
+     * Formats the blog template.
+     * @param {Post} post - The current post.
+     * @param {Post[]} posts - All posts.
+     * @return {string} - The formatted template.
+     */
+    function formatBlogTemplate(post, posts) {
+      // Get a list of post IDs for the posts.
+      var postID = blogController.getPostID(post);
+      var postIDs = posts.map(blogController.getPostID);
+
+      // Get the index of the current post in the list of posts.
+      var i = postIDs.indexOf(postID);
+      // Determine previous and next posts.
+      var prev = postIDs[i - 1] || null;
+      var next = postIDs[i + 1] || null;
+
+      return blogTemplate
+        .replace('{search-text}', blogController.getPostFilters().text)
+        .replace('{prev-disabled}', prev ? '' : 'disabled')
+        .replace('{next-disabled}', next ? '' : 'disabled')
+        .replace('{prev-link}', prev ? '#/blog/' + prev : '')
+        .replace('{next-link}', next ? '#/blog/' + next : '');
+    }
+
+    /**
      * Formats a nav group template for each month for which at least one blog
      * post exists.
      * @return {string} - The formatted nav group templates.
@@ -215,9 +246,10 @@
       ];
 
       // Get all posts and filtered posts, sorted newest to oldest.
-      var allPosts = blogController.getPosts({getAll: true, sortOldest: false});
+      var allPosts = blogController
+        .getPosts({getAll: true, oldestFirst: false});
       var filteredPosts = blogController.getPosts({
-        ignorePostFilter: true, sortOldest: false
+        ignorePostFilter: true, oldestFirst: false
       });
 
       // Group all posts by month.
@@ -442,6 +474,26 @@
       } else if (elem.classList.contains('collapsible-list')) {
         elem.classList.toggle('collapsible-list--collapsed');
       }
+    }
+
+    /**
+     * Handles previous button click event by navigating to the previous
+     * blog post.
+     * @param {Event} e - The click event.
+     */
+    function handlePrevClick(e) {
+      document.querySelector('.blog-footer__prev-link').click();
+      document.body.scrollTop = 0;
+    }
+
+    /**
+     * Handles next button click event by navigating to the next
+     * blog post.
+     * @param {Event} e - The click event.
+     */
+    function handleNextClick(e) {
+      document.querySelector('.blog-footer__next-link').click();
+      document.body.scrollTop = 0;
     }
   }
 })();
