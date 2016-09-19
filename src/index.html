@@ -96,7 +96,7 @@
     <script type="text/html" id="blog-template">
       <!-- Section block. -->
       <section class="section">
-        <div {hide-top}>
+        <div>
           <h1 class="section__title">Learner's Blog</h1>
         </div>
 
@@ -124,6 +124,15 @@
         <div class="blog-post-container">
           <!-- Formatted blog post template inserted here. -->
         </div>
+
+        <!-- Blog Footer block. -->
+        <footer class="blog-footer">
+          <button class="blog-footer__prev-btn" {prev-disabled}>Previous</button>
+          <button class="blog-footer__next-btn" {next-disabled}>Next</button>
+          <!-- Hidden links for use with buttons. -->
+          <a class="blog-footer__prev-link" href="{prev-link}" style="display:none"></a>
+          <a class="blog-footer__next-link" href="{next-link}" style="display:none"></a>
+        </footer>
       </section>
     </script>
 
