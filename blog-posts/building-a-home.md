@@ -26,7 +26,7 @@ In place of a database, the data for the site is at time of writing stored in tw
 
 ## Router
 
-I built a [hash-based router](/scripts/Router.js) for Junior Dev that's capable of parsing query strings, accepting parameterized routes, and suspending operation; along with other commonly expected functionality. It utilizes the same design pattern as the rest of the site's JavaScript, meaning that the router is only exposed under the `window.app` object. I've written [thorough tests](https://github.com/Tempurturtul/junior-dev/blob/master/src/scripts/Router.test.js) for the router, and fully documented it with JSDoc style comments. It should be ready to port to other projects without issue.
+I built a [hash-based router](https://github.com/Tempurturtul/junior-dev/blob/master/src/scripts/Router.js) for Junior Dev that's capable of parsing query strings, accepting parameterized routes, and suspending operation; along with other commonly expected functionality. It utilizes the same design pattern as the rest of the site's JavaScript, meaning that the router is only exposed under the `window.app` object. I've written [thorough tests](https://github.com/Tempurturtul/junior-dev/blob/master/src/scripts/Router.test.js) for the router, and fully documented it with JSDoc style comments. It should be ready to port to other projects without issue.
 
 ## Development Tools
 
