@@ -19,6 +19,14 @@
     var portfolioController;
     var contactController;
     var attributionsController;
+    // Pages used to update page header.
+    var pages = {
+      ABOUT: 'about',
+      BLOG: 'blog',
+      PORTFOLIO: 'portfolio',
+      CONTACT: 'contact',
+      ATTRIBUTIONS: 'attributions'
+    };
 
     self.getStoredData = getStoredData;
     self.setAboutView = setAboutView;
@@ -55,6 +63,7 @@
      * parameterized route.
      */
     function setAboutView(params) {
+      updatePageHeader(pages.ABOUT);
       aboutController.setView(params);
     }
 
@@ -64,6 +73,7 @@
      * parameterized route.
      */
     function setBlogView(params) {
+      updatePageHeader(pages.BLOG);
       blogController.setView(params);
     }
 
@@ -73,6 +83,7 @@
      * parameterized route.
      */
     function setPortfolioView(params) {
+      updatePageHeader(pages.PORTFOLIO);
       portfolioController.setView(params);
     }
 
@@ -82,6 +93,7 @@
      * parameterized route.
      */
     function setContactView(params) {
+      updatePageHeader(pages.CONTACT);
       contactController.setView(params);
     }
 
@@ -91,6 +103,7 @@
      * parameterized route.
      */
     function setAttributionsView(params) {
+      updatePageHeader(pages.ATTRIBUTIONS);
       attributionsController.setView(params);
     }
 
@@ -109,6 +122,28 @@
       portfolioController = new app.controllers.PortfolioController(self);
       contactController = new app.controllers.ContactController(self);
       attributionsController = new app.controllers.AttributionsController(self);
+    }
+
+    /**
+     * Updates the page header.
+     * @param {string} page - The current page.
+     */
+    function updatePageHeader(page) {
+      // Update links to reflect current page.
+
+      var links = document.getElementsByClassName('page-header__link');
+      var i;
+      // For each link...
+      for (i = 0; i < links.length; i++) {
+        // If the link points to the current page...
+        if (links[i].href.split('#')[1] === '/' + page) {
+          // Add the --current css modifier.
+          links[i].classList.add('page-header__link--current');
+        } else {
+          // Remove the --current css modifier if present.
+          links[i].classList.remove('page-header__link--current');
+        }
+      }
     }
   }
 })();

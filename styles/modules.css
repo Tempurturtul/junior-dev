@@ -49,6 +49,7 @@
 }
 
 .page-header__link {
+  border: solid 2px rgba(0, 0, 0, 0);
   color: #f5f5f5;
   display: block;
   padding: 5px;
@@ -63,6 +64,10 @@
 
 .page-header__link:visited {
   color: inherit;
+}
+
+.page-header__link--current {
+  border-bottom: solid 2px #c33;
 }
 
 /************************************************
@@ -80,7 +85,7 @@
 }
 
 .page-footer__small {
-  opacity: 0.7;
+
 }
 
 .page-footer__link {
