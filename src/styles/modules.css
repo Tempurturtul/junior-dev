@@ -32,7 +32,6 @@
 .page-header__title {
   flex: 0 0 auto;
   margin: 0 10px;
-  /*padding-right: 10px;*/
 }
 
 .page-header__nav {
@@ -40,7 +39,6 @@
   font-size: 1.1em;
   font-variant: small-caps;
   font-weight: bold;
-  /*margin: 10px;*/
 
   /* Prevent overflow caused by flex-size: auto. */
   max-width: 100%;
