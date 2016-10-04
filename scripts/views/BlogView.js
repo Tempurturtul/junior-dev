@@ -483,7 +483,11 @@
      */
     function handlePrevClick(e) {
       document.querySelector('.blog-footer__prev-link').click();
+
+      // Chrome
       document.body.scrollTop = 0;
+      // Firefox
+      document.documentElement.scrollTop = 0;
     }
 
     /**
@@ -493,7 +497,11 @@
      */
     function handleNextClick(e) {
       document.querySelector('.blog-footer__next-link').click();
+
+      // Chrome
       document.body.scrollTop = 0;
+      // Firefox
+      document.documentElement.scrollTop = 0;
     }
   }
 })();
