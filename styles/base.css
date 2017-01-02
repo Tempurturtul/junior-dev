@@ -4,9 +4,9 @@
 
 html,
 body {
-  background-color: #f5f5f5;
-  color: #222;
-  font-family: sans-serif;
+  background-color: #fff;
+  color: #000;
+  font-family: Ubuntu, Tahoma, Verdana, Helvetica, sans-serif;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -27,13 +27,6 @@ a:visited {
 
 p {
   line-height: 1.8;
-  text-indent: 2em;
-}
-
-@media (min-width: 450px) {
-  p {
-    text-indent: 2.5em;
-  }
 }
 
 li {
@@ -42,5 +35,4 @@ li {
 
 li > p {
   margin: 0;
-  text-indent: 0;
 }
