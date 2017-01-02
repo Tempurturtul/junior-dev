@@ -180,7 +180,6 @@
      */
     function addCollapsibleListeners(parent) {
       var drawers = parent.getElementsByClassName('collapsible-drawer');
-      var lists = parent.getElementsByClassName('collapsible-list');
 
       var i;
       var len;
@@ -189,12 +188,6 @@
       // For each collapsible drawer...
       for (i = 0, len = drawers.length; i < len; i++) {
         btn = drawers[i].querySelector('.collapsible-drawer__toggle');
-        btn.addEventListener('click', handleCollapsibleToggle);
-      }
-
-      // For each collapsible list...
-      for (i = 0, len = lists.length; i < len; i++) {
-        btn = lists[i].querySelector('.collapsible-list__toggle');
         btn.addEventListener('click', handleCollapsibleToggle);
       }
     }
@@ -471,8 +464,6 @@
 
       if (elem.classList.contains('collapsible-drawer')) {
         elem.classList.toggle('collapsible-drawer--collapsed');
-      } else if (elem.classList.contains('collapsible-list')) {
-        elem.classList.toggle('collapsible-list--collapsed');
       }
     }
 
