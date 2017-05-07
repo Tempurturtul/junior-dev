@@ -1,0 +1,13 @@
+{
+  "title": "URL Shortener Microservice",
+  "date": "January 1, 2017",
+  "description": "A microservice hosted on Heroku for shortening URLs. Built with Node.js and Express.js, with a PostgreSQL database.",
+  "tags": [
+    "js",
+    "node.js",
+    "express.js",
+    "postgresql"
+  ],
+  "sourceURL": "https://github.com/Tempurturtul/fcc-projects/tree/master/back-end/api-projects/url-shortener-microservice",
+  "liveURL": "https://tfusms.herokuapp.com/"
+}
