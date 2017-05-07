@@ -2,7 +2,7 @@
 
 *Created: July 19, 2016*
 
-*Last modified: October 6, 2016*
+*Last modified: May 7, 2017*
 
 My name's Matt. In 2011 I graduated from a small college with a B.S. degree in Homeland Security Management. After entering the field it wasn't long before I began to feel like I'd made a mistake. I've loved working with computers since I was young, but I had always been afraid to base my career around them because I didn't want to risk corrupting my passion by making it my work.
 
@@ -20,6 +20,6 @@ I'm now pursuing a second B.S. degree, this time in Computer Science from Oregon
 
 In addition to pursuing the CS degree, I'm keeping busy with [learning Haskell](https://github.com/Tempurturtul/learning/tree/master/haskell) and with personal web development projects (like Junior Dev!) intended to help me retain and grow my existing knowledge.
 
-If you'd like to contact me for any reason, I can be reached at [tempurturtul@gmail.com](mailto:tempurturtul@gmail.com). Additional contact options are available on the [contact page](#/contact).
+If you'd like to contact me for any reason, I can be reached at [feidtmb@gmail.com](mailto:feidtmb@gmail.com). Additional contact options are available on the [contact page](#/contact).
 
 *Tags: personal*
