@@ -9,8 +9,8 @@
     "jquery",
     "polymer",
     "google maps api",
-    "npm",
-    "gulp",
+    "node.js",
+    "gulp.js",
     "bower",
     "mvc"
   ],

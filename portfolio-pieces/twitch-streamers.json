@@ -7,8 +7,8 @@
     "css",
     "html",
     "angular.js",
-    "npm",
-    "gulp"
+    "node.js",
+    "gulp.js"
   ],
   "sourceURL": "https://github.com/Tempurturtul/fcc-twitch-streamers/tree/angular-refactor"
 }

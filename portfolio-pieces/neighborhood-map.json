@@ -9,8 +9,8 @@
     "jquery",
     "knockout.js",
     "google maps api",
-    "npm",
-    "gulp",
+    "node.js",
+    "gulp.js",
     "bower",
     "mvc",
     "single-page application"

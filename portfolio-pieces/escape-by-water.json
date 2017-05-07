@@ -7,8 +7,8 @@
     "prototypal inheritance",
     "canvas api",
     "web audio api",
-    "npm",
-    "gulp"
+    "node.js",
+    "gulp.js"
   ],
   "sourceURL": "https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-frogger",
   "liveURL": "https://tempurturtul.github.io/udacity-fend-projects/projects/fend-frogger/",

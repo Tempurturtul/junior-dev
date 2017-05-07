@@ -9,7 +9,7 @@
     "testing",
     "tape",
     "jsdom",
-    "npm",
+    "node.js",
     "bem",
     "mvc",
     "single-page application",
