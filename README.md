@@ -9,29 +9,29 @@ Includes a personal blog and portfolio.
 - Install [Node](https://nodejs.org/en/).
 - Clone this repository and navigate to it.
 
-  ```
-  git clone https://github.com/Tempurturtul/junior-dev.git
-  cd home/
-  ```
+```
+git clone https://github.com/Tempurturtul/junior-dev.git
+cd home/
+```
 
 - Install dependencies.
 
-  ```
-  npm i
-  ```
+```
+npm i
+```
 
 - Use npm scripts to generate files, lint, serve, test, and deploy.
 
-  ```
-  # Generate JSON files for blog posts and portfolio pieces.
-  npm run generate
+```
+# Generate JSON files for blog posts and portfolio pieces.
+npm run generate
 
-  # Lint, serve, and watch for changes.
-  npm start
+# Lint, serve, and watch for changes.
+npm start
 
-  # Run tests.
-  npm t
+# Run tests.
+npm t
 
-  # Deploy to GitHub Pages.
-  npm run deploy
-  ```
+# Deploy to GitHub Pages.
+npm run deploy
+```
