@@ -39,25 +39,25 @@ Udacity has added projects since I graduated, but when I enrolled there were **6
 Here they are in order, with links to my completed versions:
 
 - [Portfolio](https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-portfolio)
-  - Basics.
+	- Basics.
 
 - [Resume](https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-resume)
-  - Content from JSON.
+	- Content from JSON.
 
 - [Frogger Clone](https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-frogger)
-  - OOP, Canvas
+	- OOP, Canvas
 
 - [Optimization](https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-optimization) (of an existing app)
-  - Critical rendering path, build tools
+	- Critical rendering path, build tools
 
 - [Neighborhood Map](https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-neighborhood-map)
-  - Knockout.js framework, APIs
+	- Knockout.js framework, APIs
 
 - [Testing](https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-feed-reader) (of an existing app)
-  - Jasmine
+	- Jasmine
 
 - *Bonus:* [Cat Clicker](https://github.com/Tempurturtul/udacity-fend-projects/tree/master/fend-design-patterns/cat-clicker-v2)
-  - MV* design patterns exercise, not graded or reviewed.
+	- MV* design patterns exercise, not graded or reviewed.
 
 When I enrolled there were two passing grades: Meets Specs and Exceeds Specs, but they've since moved to a simple **pass/fail grading system**. Extra credit sort of things are still listed in their own section of the rubric in case you feel like doing them.
 

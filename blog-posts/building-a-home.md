@@ -33,15 +33,16 @@ I built a [hash-based router](https://github.com/Tempurturtul/junior-dev/blob/ma
 I use [Node.js](https://nodejs.org/en/) during development, and utilize [npm](https://www.npmjs.com/) as my build tool and task runner.
 
 My `package.json` file includes scripts for the following:
-  - error and style checking
-    - using [eslint](https://github.com/eslint/eslint) and [stylelint](https://github.com/stylelint/stylelint)
-  - local hosting and automatic refreshing of the project
-    - using [browser-sync](https://github.com/BrowserSync/browser-sync)
-  - testing, optionally in a browser environment
-    - using [tape](https://github.com/substack/tape) and [jsdom](https://github.com/tmpvar/jsdom)
-  - generation of JSON files from markdown and from other JSON files
-    - using [custom code](https://github.com/Tempurturtul/junior-dev/tree/master/build) and [showdown](https://github.com/showdownjs/showdown)
-  - automated deployment to GitHub Pages
-    - using [gh-pages](https://github.com/tschaub/gh-pages)
+
+- error and style checking
+	- using [eslint](https://github.com/eslint/eslint) and [stylelint](https://github.com/stylelint/stylelint)
+- local hosting and automatic refreshing of the project
+	- using [browser-sync](https://github.com/BrowserSync/browser-sync)
+- testing, optionally in a browser environment
+	- using [tape](https://github.com/substack/tape) and [jsdom](https://github.com/tmpvar/jsdom)
+- generation of JSON files from markdown and from other JSON files
+	- using [custom code](https://github.com/Tempurturtul/junior-dev/tree/master/build) and [showdown](https://github.com/showdownjs/showdown)
+- automated deployment to GitHub Pages
+	- using [gh-pages](https://github.com/tschaub/gh-pages)
 
 *Tags: project*
