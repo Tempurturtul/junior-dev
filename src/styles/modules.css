@@ -311,6 +311,28 @@
 }
 
 /************************************************
+  Big Page Link
+************************************************/
+
+.big-page-link {
+  font-size: 2em;
+  display: block;
+  min-width: 200px;
+  color: #c33;
+  margin: 10px 0;
+  box-shadow: 0 1px 3px 1px #999;
+}
+
+.big-page-link:hover {
+  text-decoration: none;
+  background-color: #eee;
+}
+
+.big-page-link:visited {
+  color: #c33;
+}
+
+/************************************************
   Blog Nav
 ************************************************/
 
