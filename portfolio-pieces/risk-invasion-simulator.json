@@ -1,0 +1,9 @@
+{
+  "title": "Risk Invasion Simulator",
+  "date": "February 9, 2017",
+  "description": "Simulates invasion attempts in the Risk board game and predicts their probability of success. Uses advanced aspects of the Haskell language such as monads, monad combinators, and applicative functors.",
+  "tags": [
+    "haskell"
+  ],
+  "sourceURL": "https://github.com/Tempurturtul/learning/blob/master/haskell/cis194-intro-to-haskell/12-monads/homework/Risk.hs"
+}
