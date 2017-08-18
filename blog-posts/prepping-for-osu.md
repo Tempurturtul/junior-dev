@@ -12,6 +12,6 @@ I decided to satisfy the prereq by taking precalculus at my local community coll
 
 I should finish the course in December, and be set to attend OSU's program in January.
 
-I feel very good about this. I'll finally have a degree for the field I want to be in, and from a well-known, respectable school. The degree will also be, according to the program's [future students page](http://eecs.oregonstate.edu/online-cs-students/future-students), identical to the one earned by on-campus students. So if I feel unsure about an employer's opinion on online degrees, I can just refrain from mentioning the online part. The degree will simply read "B.S. in Computer Science", so unless they specifically ask, they'll never even know.
+I feel very good about this. I'll finally have a degree for the field I want to be in, and from a well-known, respectable school. The degree will also be, according to the program's [future students page](http://eecs.oregonstate.edu/online-cs-students/future-students), identical to the one earned by on-campus students.
 
 *Tags: education*
