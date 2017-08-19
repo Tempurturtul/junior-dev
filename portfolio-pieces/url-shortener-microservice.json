@@ -9,5 +9,18 @@
     "postgresql"
   ],
   "sourceURL": "https://github.com/Tempurturtul/fcc-projects/tree/master/back-end/api-projects/url-shortener-microservice",
-  "liveURL": "https://tfusms.herokuapp.com/"
+  "liveURL": "https://tfusms.herokuapp.com/",
+  "image": {
+    "static": "images/url-shortener-microservice-600.png",
+    "responsive": [
+      {
+        "url": "images/url-shortener-microservice-600.png",
+        "width": "600"
+      },
+      {
+        "url": "images/url-shortener-microservice-300.png",
+        "width": "300"
+      }
+    ]
+  }
 }
